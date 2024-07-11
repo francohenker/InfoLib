@@ -1,10 +1,13 @@
 package modules;
 
+import jakarta.persistence.Entity;
+
 import java.util.HashSet;
 import java.util.Set;
 
 
 
+@Entity
 public class Libro {
     // IMPLEMENTAR EL ID CON LA BD
     private Integer id;
@@ -15,9 +18,8 @@ public class Libro {
     private String tematica;
     private String idioma;
     private double precio;
-    
-    
-    
+
+
     // constructor sin argumentos
     public Libro(){
     }
