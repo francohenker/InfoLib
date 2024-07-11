@@ -1,4 +1,4 @@
-package modules;
+package modelo;
 
 import jakarta.persistence.Entity;
 
@@ -7,7 +7,7 @@ import java.util.Set;
 
 
 
-@Entity
+//@Entity
 public class Libro {
     // IMPLEMENTAR EL ID CON LA BD
     private Integer id;

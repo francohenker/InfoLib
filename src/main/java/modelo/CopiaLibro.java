@@ -1,4 +1,4 @@
-package modules;
+package modelo;
 
 public class CopiaLibro {
     // IMPLEMENTAR EL ID CON LA BD

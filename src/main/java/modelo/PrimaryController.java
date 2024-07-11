@@ -1,4 +1,4 @@
-package modules;
+package modelo;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
