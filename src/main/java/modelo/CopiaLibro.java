@@ -17,22 +17,43 @@ public class CopiaLibro {
     @Column(name = "estado", nullable = false)
     @Enumerated(EnumType.STRING)
     private EstadoLibro estado = EstadoLibro.DISPONIBLE;
+    @Column(name = "precio", nullable = false)
+    private double precio;
     private boolean copiaReferencia = false; // por defecto es una copia normal
+
 
     // protected para que no se puedan crear copias vacias
     protected CopiaLibro(){   }
 
     // Con este constructor se puede crear una copia normal o una copia de referencia
-    public CopiaLibro(TipoLibro tipo, Libro libro, EstadoLibro estado, boolean copiaReferencia){
+    public CopiaLibro(TipoLibro tipo, Libro libro, EstadoLibro estado, double precio, boolean copiaReferencia){
+        try {
+            updatePrecio(precio);
+        }catch(Exception e){
+            throw new IllegalArgumentException("Precio negativo");
+        }
         this.tipo = tipo;
         this.libro = libro;
         this.estado = estado;
         this.copiaReferencia = copiaReferencia;
     }
 
-    
+    public void updatePrecio(double precio){
+        if(precio < 0){
+            throw new RuntimeException("Precio negativo");
+        }
+        this.precio = precio;
+    }
+    public void setEstado(EstadoLibro estado){
+        this.estado = estado;
+    }
+
     public void updateEstado(EstadoLibro estado){
         this.estado = estado;
+    }
+
+    public double getPrecio(){
+        return this.precio;
     }
 
     // ver si se muestra esto en algun lado
@@ -42,7 +63,7 @@ public class CopiaLibro {
 
     @Override
     public String toString(){
-        return this.libro.toString() + ". " + this.tipo + ". " + this.estado;
+        return this.libro.toString() + ". " + this.tipo + ". " + this.estado + ". " + this.precio;
     }
     
 }
