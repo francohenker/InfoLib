@@ -1,9 +1,6 @@
 package modelo;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +11,7 @@ import java.util.Set;
 public class Libro {
     @Id
     private Integer id;
+    @Column(name = "isbn", length = 13, nullable = false)
     private Integer ISBN;
     private String titulo;
     private Set<String> autores = new HashSet<>();
@@ -23,9 +21,8 @@ public class Libro {
     private double precio;
 
 
-    // constructor sin argumentos
-    public Libro(){
-    }
+    // constructor sin argumentos, protected para no crear un libro sin atributos
+    protected Libro(){    }
     
     // constructor con argumentos, en caso de recibir un precio negativo se arroja una nueva excepcion indicando que no se puede 
     public Libro(Integer ISBN, String titulo, Set<String> autores, String editorial, String tematica, String idioma, double precio) throws IllegalArgumentException{ 
@@ -33,6 +30,9 @@ public class Libro {
             updatePrecio(precio);
         }catch (Exception e){
             throw new IllegalArgumentException("Precio negativo");
+        }
+        if(ISBN != 13 && ISBN != 10){
+            throw new RuntimeException("ISBN no válido");
         }
         this.ISBN = ISBN;
         this.titulo = titulo;

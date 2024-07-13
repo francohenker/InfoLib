@@ -1,17 +1,23 @@
 package modelo;
 
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 
 public class Rack {
-    // IMPLEMENTAR EL ID CON LA BD
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "descripcion", length = 255, nullable = true)
     private String descripcion;
+//    @ManytoMany
     private ArrayList<CopiaLibro> libros;
 
-    public Rack(){
+    public Rack(){    }
 
+    public Rack(String descripcion){
+        this.descripcion = descripcion;
     }
-
     // IMPLEMENTAR DESPUES EN CASO DE SER NECESARIO
         
     public void addLibro(CopiaLibro libro){

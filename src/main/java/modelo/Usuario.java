@@ -6,23 +6,24 @@ import java.util.ArrayList;
 
 
 @Entity
-@Table(name = "usuario", schema = "public")
+@Table(name = "usuario")
 public class Usuario implements Miembro {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dni", unique = true, nullable = false)
     private String dni;
+    @Column(name = "nombre", length = 30, nullable = false)
     private String nombre;
+    @Column(name = "apellido", length = 50, nullable = false)
     private String apellido;
     private EstadoMiembro estado = EstadoMiembro.ALTA;
 
-    public Usuario(){
+    protected Usuario(){
 
     }
     public Usuario(String dni, String nombre, String apellido){
         this.dni = dni;
-        this.nombre = nombre;
-        this.apellido = apellido;
+        this.nombre = nombre.toUpperCase();
+        this.apellido = apellido.toUpperCase();
     }
 
     public String getDni(){
