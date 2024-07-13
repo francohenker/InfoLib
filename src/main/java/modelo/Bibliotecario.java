@@ -34,6 +34,7 @@ public class Bibliotecario implements Miembro {
         Matcher matcher = pattern.matcher(dni);
         return matcher.matches();
     }
+
     // IMPLEMENTAR DESPUES
     public ArrayList<Libro> buscarTitulo(String titulo){
         return new ArrayList<>();

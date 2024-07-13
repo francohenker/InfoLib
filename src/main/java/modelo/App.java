@@ -49,6 +49,9 @@ public class App extends Application {
         Conexion.crearEntityManagerFactory();
         launch();
 
+        var n = new Usuario("43.123.121", "franco", "henker");
+
+
     }
 
 }

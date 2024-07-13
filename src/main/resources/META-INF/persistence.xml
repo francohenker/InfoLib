@@ -8,8 +8,10 @@
 <!--        cambiar con los modelos del sistema -->
 
         <class>modelo.Usuario</class>
+        <class>modelo.Bibliotecario</class>
         <class>modelo.Libro</class>
         <class>modelo.CopiaLibro</class>
+        <class>modelo.Rack</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/java"/>

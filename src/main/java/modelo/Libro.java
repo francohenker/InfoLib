@@ -10,14 +10,20 @@ import java.util.Set;
 @Table(name = "libro")
 public class Libro {
     @Id
-    private Integer id;
-    @Column(name = "isbn", length = 13, nullable = false)
+    private Long id;
+    @Column(name = "isbn", nullable = false)
     private Integer ISBN;
+    @Column(name = "titulo", length = 255, nullable = false)
     private String titulo;
+
     private Set<String> autores = new HashSet<>();
+    @Column(name = "editorial", length = 50, nullable = false)
     private String editorial;
+    @Column(name = "tematica", length = 50, nullable = false)
     private String tematica;
+    @Column(name = "idioma", length = 50, nullable = false)
     private String idioma;
+    @Column(name = "precio", nullable = false)
     private double precio;
 
 
@@ -61,7 +67,7 @@ public class Libro {
 
     @Override
     public String toString(){
-        var a = this.titulo + ". " + this.ISBN + ". " + this.autores + ". " + this.editorial + ". " + this.tematica + ". " + this.idioma + " " + this.precio;
+        var a = this.ISBN + ". " + this.titulo + ". " + this.autores + ". " + this.editorial + ". " + this.tematica + ". " + this.idioma + " " + this.precio;
         var b = a.replace("[", "");
         return b.replace("]", ""); //provisorio
     }

@@ -3,15 +3,19 @@ package modelo;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
+@Entity
+@Table(name = "rack")
 public class Rack {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     @Column(name = "descripcion", length = 255, nullable = true)
     private String descripcion;
-//    @ManytoMany
-    private ArrayList<CopiaLibro> libros;
+    @OneToMany
+    private List<CopiaLibro> libros = new ArrayList<>();
+
 
     public Rack(){    }
 
@@ -40,7 +44,6 @@ public class Rack {
         return this.descripcion;
     }
 
-    // public boolean isLibro(Libro libro){
     // no se sabe si lo implementamos
-    // }
+    // public boolean isLibro(Libro libro) { }
 }

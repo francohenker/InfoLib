@@ -7,9 +7,14 @@ import jakarta.persistence.*;
 public class CopiaLibro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
+    @Column(name = "tipolibro", nullable = false)
     private TipoLibro tipo;
+    @ManyToOne
+    @JoinColumn(name = "libro_id", nullable = false)
     private Libro libro;
+    @Column(name = "estado", nullable = false)
+    @Enumerated(EnumType.STRING)
     private EstadoLibro estado = EstadoLibro.DISPONIBLE;
     private boolean copiaReferencia = false; // por defecto es una copia normal
 
