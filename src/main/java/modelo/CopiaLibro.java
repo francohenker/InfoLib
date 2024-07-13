@@ -9,6 +9,7 @@ public class CopiaLibro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "tipolibro", nullable = false)
+    @Enumerated(EnumType.STRING)
     private TipoLibro tipo;
     @ManyToOne
     @JoinColumn(name = "libro_id", nullable = false)

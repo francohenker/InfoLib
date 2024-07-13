@@ -5,8 +5,6 @@
     <persistence-unit name="InfoLib" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-<!--        cambiar con los modelos del sistema -->
-
         <class>modelo.Usuario</class>
         <class>modelo.Bibliotecario</class>
         <class>modelo.Libro</class>

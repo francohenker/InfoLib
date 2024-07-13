@@ -11,12 +11,14 @@ import java.util.ArrayList;
 @Table(name = "usuario")
 public class Usuario implements Miembro {
     @Id
-    @Column(name = "dni", unique = true, nullable = false)
+    @Column(name = "dni", unique = true, nullable = false, length = 20)
     private String dni;
     @Column(name = "nombre", length = 30, nullable = false)
     private String nombre;
     @Column(name = "apellido", length = 50, nullable = false)
     private String apellido;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado", length = 4, nullable = false)
     private EstadoMiembro estado = EstadoMiembro.ALTA;
 
     protected Usuario(){

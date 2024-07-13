@@ -5,15 +5,18 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import jakarta.persistence.*;
-
+@Entity
+@Table(name = "bibliotecario")
 public class Bibliotecario implements Miembro {
     @Id
-    @Column(name = "dni", unique = true, nullable = false)
+    @Column(name = "dni", unique = true, nullable = false, length = 20)
     private String dni;
     @Column(name = "nombre", length = 30, nullable = false)
     private String nombre;
     @Column(name = "apellido", length = 50, nullable = false)
     private String apellido;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado", length =4, nullable = false)
     private EstadoMiembro estado = EstadoMiembro.ALTA;
 
 
