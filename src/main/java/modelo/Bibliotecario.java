@@ -1,6 +1,9 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import jakarta.persistence.*;
 
 public class Bibliotecario implements Miembro {
@@ -17,9 +20,19 @@ public class Bibliotecario implements Miembro {
     protected Bibliotecario(){    }
 
     public Bibliotecario(String dni, String nombre, String apellido){
+        if(!isValid(dni)){
+            throw new RuntimeException("DNI invalido");
+        }
         this.dni = dni;
         this.nombre = nombre.toUpperCase();
         this.apellido = apellido.toUpperCase();
+    }
+
+    private boolean isValid(String dni){
+        String dniRegex = "^\\d{2}\\.\\d{3}\\.\\d{3}$";
+        Pattern pattern = Pattern.compile(dniRegex);
+        Matcher matcher = pattern.matcher(dni);
+        return matcher.matches();
     }
     // IMPLEMENTAR DESPUES
     public ArrayList<Libro> buscarTitulo(String titulo){
