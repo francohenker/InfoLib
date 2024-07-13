@@ -6,6 +6,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 <!--        cambiar con los modelos del sistema -->
+
         <!--        <class>modelo.Producto</class>-->
 <!--        <class>modelo.ProductoVencible</class>-->
 <!--        <class>modelo.ProductoAutorizable</class>-->
@@ -17,7 +18,7 @@
             <property name="jakarta.persistence.jdbc.user" value="postgres" />
             <property name="jakarta.persistence.jdbc.password" value="postgres" />
             <property name="hibenate.hbm2ddl.auto" value="drop-and-create-tables"/>
-            <!-- <property name="eclipselink.logging.level" value="FINEST" /> -->
+
         </properties>
     </persistence-unit>
 </persistence>

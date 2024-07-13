@@ -1,15 +1,18 @@
 package modelo;
 
+import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 import java.util.HashSet;
 import java.util.Set;
 
 
 
-//@Entity
+@Entity
+@Table(name = "libro")
 public class Libro {
-    // IMPLEMENTAR EL ID CON LA BD
+    @Id
     private Integer id;
     private Integer ISBN;
     private String titulo;
