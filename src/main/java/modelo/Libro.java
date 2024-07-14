@@ -10,9 +10,10 @@ import java.util.Set;
 @Table(name = "libro")
 public class Libro {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "isbn", nullable = false)
-    private Integer ISBN;
+    private String ISBN;
     @Column(name = "titulo", length = 255, nullable = false)
     private String titulo;
 
@@ -30,8 +31,8 @@ public class Libro {
     protected Libro(){    }
     
     // constructor con argumentos, en caso de recibir un precio negativo se arroja una nueva excepcion indicando que no se puede 
-    public Libro(Integer ISBN, String titulo, Set<String> autores, String editorial, String tematica, String idioma) throws IllegalArgumentException{
-        if(ISBN != 13 && ISBN != 10){
+    public Libro(String ISBN, String titulo, Set<String> autores, String editorial, String tematica, String idioma) throws IllegalArgumentException{
+        if(ISBN.length() != 13 && ISBN.length() != 10){
             throw new RuntimeException("ISBN no válido");
         }
         this.ISBN = ISBN;

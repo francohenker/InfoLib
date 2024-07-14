@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
+//add relationship
+
 @Entity
 @Table(name = "prestamo")
 public class Prestamo {
@@ -13,8 +15,8 @@ public class Prestamo {
     @OneToOne
     @JoinColumn(name = "copialibro_id", nullable = false)
     private CopiaLibro copiaLibro;
+    @Column(name = "multa")
     private double multa = 0;
-
     private LocalDateTime fechaPrestamo = LocalDateTime.now();
     private LocalDateTime fechaDevolucion;
 
@@ -32,7 +34,11 @@ public class Prestamo {
         this.fechaDevolucion = LocalDateTime.now();
         if(fechaDevolucion.isAfter(fechaPrestamo) ){
             Duration diferencia = Duration.between(fechaPrestamo, fechaDevolucion);
-            this.multa = diferencia.toMinutes() * (copiaLibro.getPrecio() / 24);
+            this.multa = diferencia.toHours() * (copiaLibro.getPrecio() / 24);
         }
+    }
+
+    public double getMulta(){
+        return this.multa;
     }
 }
