@@ -17,14 +17,19 @@ public class Prestamo {
     private CopiaLibro copiaLibro;
     @Column(name = "multa")
     private double multa = 0;
+    @Column(name = "fechaprestamo", nullable = false)
     private LocalDateTime fechaPrestamo = LocalDateTime.now();
     private LocalDateTime fechaDevolucion;
+    @ManyToOne
+    @JoinColumn(name = "miembro_id", nullable = false)
+    private Usuario miembro;
 
-//    private Miembro solicitante;
+
     // no se puede crear un prestamo vacio desde afuera
     protected Prestamo() {}
 
-    public Prestamo(CopiaLibro copiaLibro){
+    public Prestamo(CopiaLibro copiaLibro, Usuario miembro) {
+        this.miembro = miembro;
         this.copiaLibro = copiaLibro;
         this.copiaLibro.setEstado(EstadoLibro.PRESTADO);
     }

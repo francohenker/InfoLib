@@ -28,22 +28,27 @@ public class App extends Application {
 //        scene = new Scene(loadFXML("primary"), 640, 480);
 //        stage.setScene(scene);
 //        stage.show();
-//        HashSet<String> hash = new HashSet<String>();
-//        hash.add("a");
-//        var libro = new Libro("1234567891", "tit00", hash , "a", "cine", "español");
-//        var l = new CopiaLibro(TipoLibro.LIBRO_ELECTRONICO, libro, EstadoLibro.DISPONIBLE, 10, false);
-//        var a = new Prestamo(l);
-//        a.devolverLibro();
-//
-//        emf = Persistence.createEntityManagerFactory("InfoLib");
-//        EntityManager em = emf.createEntityManager();
-//        em.getTransaction().begin();
-//        em.persist(libro);
-//        em.persist(l);
-//        em.persist(a);
-//        em.getTransaction().commit();
+// ----------------------------------------------------------------
+// PRUEBAS
+        HashSet<String> hash = new HashSet<String>();
+        hash.add("a");
+        var user = new Bibliotecario("45.539.868", "asd", "Henkear");
 
+        var libro = new Libro("1234567891", "tit00", hash , "a", "cine", "español");
+        var l = new CopiaLibro(TipoLibro.LIBRO_ELECTRONICO, libro, EstadoLibro.DISPONIBLE, 10, false);
+        var a = new Prestamo(l, user);
+        a.devolverLibro();
+        emf = Persistence.createEntityManagerFactory("InfoLib");
+        EntityManager em = emf.createEntityManager();
 
+        em.getTransaction().begin();
+        em.persist(user);
+        em.persist(libro);
+        em.persist(l);
+        em.persist(a);
+        em.getTransaction().commit();
+
+//--------------------------------------------------------------
     }
 
     static void setRoot(String fxml) throws IOException {
@@ -66,8 +71,6 @@ public class App extends Application {
     public static void main(String[] args) throws Exception {
         Conexion.crearEntityManagerFactory();
         launch();
-
-
 
     }
 

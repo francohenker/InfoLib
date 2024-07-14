@@ -7,6 +7,7 @@
 
         <class>modelo.Usuario</class>
         <class>modelo.Bibliotecario</class>
+        <class>modelo.Miembro</class>
         <class>modelo.Libro</class>
         <class>modelo.CopiaLibro</class>
         <class>modelo.Rack</class>
@@ -17,7 +18,7 @@
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver" />
             <property name="jakarta.persistence.jdbc.user" value="postgres" />
             <property name="jakarta.persistence.jdbc.password" value="postgres" />
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
 
         </properties>
     </persistence-unit>

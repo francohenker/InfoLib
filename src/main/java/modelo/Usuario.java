@@ -8,9 +8,13 @@ import java.util.ArrayList;
 
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "usuario")
-public class Usuario implements Miembro {
+
+public class Usuario {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(name = "dni", unique = true, nullable = false, length = 20)
     private String dni;
     @Column(name = "nombre", length = 30, nullable = false)
@@ -21,9 +25,8 @@ public class Usuario implements Miembro {
     @Column(name = "estado", length = 4, nullable = false)
     private EstadoMiembro estado = EstadoMiembro.ALTA;
 
-    protected Usuario(){
+    protected Usuario(){    }
 
-    }
     public Usuario(String dni, String nombre, String apellido){
         if(!isValid(dni)){
             throw new RuntimeException("Dni invalido");
@@ -33,6 +36,7 @@ public class Usuario implements Miembro {
         this.apellido = apellido.toUpperCase();
     }
 
+    // ver si esto no seria private
     private boolean isValid(String dni){
         String dniRegex = "^\\d{2}\\.\\d{3}\\.\\d{3}$";
         Pattern pattern = Pattern.compile(dniRegex);
@@ -71,11 +75,4 @@ public class Usuario implements Miembro {
         return new ArrayList<>();
 
     }
-
-
-    
-
-
-
-
 }
