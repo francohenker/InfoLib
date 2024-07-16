@@ -7,7 +7,6 @@
 
         <class>modelo.Usuario</class>
         <class>modelo.Bibliotecario</class>
-        <class>modelo.Miembro</class>
         <class>modelo.Libro</class>
         <class>modelo.CopiaLibro</class>
         <class>modelo.Rack</class>

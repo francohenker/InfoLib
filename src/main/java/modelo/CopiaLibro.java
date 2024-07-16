@@ -22,6 +22,8 @@ public class CopiaLibro {
     private boolean copiaReferencia = false; // por defecto es una copia normal
 
 
+
+
     // protected para que no se puedan crear copias vacias
     protected CopiaLibro(){   }
 
