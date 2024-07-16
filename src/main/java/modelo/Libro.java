@@ -12,7 +12,7 @@ public class Libro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "isbn", nullable = false)
+    @Column(name = "isbn", nullable = false, length = 13)
     private String ISBN;
     @Column(name = "titulo", length = 255, nullable = false)
     private String titulo;
@@ -24,8 +24,8 @@ public class Libro {
     private String tematica;
     @Column(name = "idioma", length = 50, nullable = false)
     private String idioma;
-
-
+    @OneToMany(mappedBy = "libro")
+    private Set<CopiaLibro> copias = new HashSet<>();
 
     // constructor sin argumentos, protected para no crear un libro sin atributos
     protected Libro(){    }
@@ -52,7 +52,9 @@ public class Libro {
     // public void removeCopia(Libro libro){
 
     // }
-
+    public String getIsbn(){
+        return this.ISBN;
+    }
     @Override
     public String toString(){
         var a = this.ISBN + ". " + this.titulo + ". " + this.autores + ". " + this.editorial + ". " + this.tematica + ". " + this.idioma;

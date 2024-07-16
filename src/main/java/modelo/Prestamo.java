@@ -29,6 +29,9 @@ public class Prestamo {
     protected Prestamo() {}
 
     public Prestamo(CopiaLibro copiaLibro, Usuario miembro) {
+        if(!this.miembro.isAlta()){
+            throw new RuntimeException("El miembro no se encuentra activo");
+        }
         this.miembro = miembro;
         this.copiaLibro = copiaLibro;
         this.copiaLibro.setEstado(EstadoLibro.PRESTADO);

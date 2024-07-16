@@ -60,19 +60,10 @@ public class Usuario {
         return this.estado;
     }
 
-
-    //IMPLEMENTAR DESPUES
-    public ArrayList<Libro> buscarTitulo(String titulo){
-        return new ArrayList<>();
-
+    public boolean isAlta(){
+        return (this.estado == EstadoMiembro.ALTA);
     }
 
-    public ArrayList<Libro> buscarAutor(String autor){
-        return new ArrayList<>();
-    }
 
-    public ArrayList<Libro> buscarTematica(String tematica){
-        return new ArrayList<>();
 
-    }
 }

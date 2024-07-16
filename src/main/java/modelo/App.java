@@ -1,9 +1,11 @@
 package modelo;
 
-import InfoLib.db.Conexion;
+import db.Conexion;
+import Repositorio.LibroRepositorio;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.Query;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,20 +35,33 @@ public class App extends Application {
         HashSet<String> hash = new HashSet<String>();
         hash.add("a");
         var user = new Bibliotecario("45.539.868", "asd", "Henkear");
-
-        var libro = new Libro("1234567891", "tit00", hash , "a", "cine", "español");
-        var l = new CopiaLibro(TipoLibro.LIBRO_ELECTRONICO, libro, EstadoLibro.DISPONIBLE, 10, false);
-        var a = new Prestamo(l, user);
-        a.devolverLibro();
         emf = Persistence.createEntityManagerFactory("InfoLib");
-        EntityManager em = emf.createEntityManager();
 
-        em.getTransaction().begin();
-        em.persist(user);
-        em.persist(libro);
-        em.persist(l);
-        em.persist(a);
-        em.getTransaction().commit();
+        var libro = new Libro("1234587891", "TITULOOOO", hash , "donpal SA", "saika", "eng");
+
+//        var a = new Prestamo(l, user);
+//        a.devolverLibro();
+//        var e = new LibroRepositorio(emf);
+//        var libro2 = e.buscarCopias(libro);
+
+//        var l = new CopiaLibro(TipoLibro.TAPA_DURA, libro2.get(0), EstadoLibro.DISPONIBLE, 110, false);
+
+
+//        System.out.println(libro2);
+//        e.guardarLibro(libro);
+//        EntityManager em = emf.createEntityManager();
+
+
+
+
+
+
+
+//        e.guardarCopiar(l, 5);
+//        em.getTransaction().begin();
+//        em.persist(l);
+//        em.getTransaction().commit();
+//        em.close();
 
 //--------------------------------------------------------------
     }

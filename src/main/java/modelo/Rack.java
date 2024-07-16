@@ -3,7 +3,9 @@ package modelo;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "rack")
@@ -14,7 +16,9 @@ public class Rack {
     @Column(name = "descripcion", length = 255, nullable = true)
     private String descripcion;
     @OneToMany
-    private List<CopiaLibro> libros = new ArrayList<>();
+    @JoinColumn(name = "rack_id")
+    private Set<CopiaLibro> copias  = new HashSet<>();
+
 
 
     public Rack(){    }
@@ -24,13 +28,13 @@ public class Rack {
     }
     // IMPLEMENTAR DESPUES EN CASO DE SER NECESARIO
         
-    public void addLibro(CopiaLibro libro){
-        this.libros.add(libro);
-    }
-    
-    public void removeLibro(CopiaLibro libro){
-        this.libros.remove(libro);
-    }
+//    public void addLibro(CopiaLibro libro){
+//        this.libros.add(libro);
+//    }
+//
+//    public void removeLibro(CopiaLibro libro){
+//        this.libros.remove(libro);
+//    }
 
     // public ArrayList<CopiaLibro> getLibros(){
     //     // return libros;
