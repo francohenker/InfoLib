@@ -1,4 +1,4 @@
-package InfoLib.db;
+package db;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;

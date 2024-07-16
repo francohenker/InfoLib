@@ -1,6 +1,8 @@
 package modelo;
 
-import InfoLib.db.Conexion;
+import db.Conexion;
+import Repositorio.LibroRepositorio;
+import Repositorio.UsuarioRepositorio;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -33,20 +35,15 @@ public class App extends Application {
         HashSet<String> hash = new HashSet<String>();
         hash.add("a");
         var user = new Bibliotecario("45.539.868", "asd", "Henkear");
-
-        var libro = new Libro("1234567891", "tit00", hash , "a", "cine", "español");
+emf.
+        var libro = new Libro("1234567891", "TITULOOOO", hash , "donpal SA", "saika", "eng");
         var l = new CopiaLibro(TipoLibro.LIBRO_ELECTRONICO, libro, EstadoLibro.DISPONIBLE, 10, false);
-        var a = new Prestamo(l, user);
-        a.devolverLibro();
-        emf = Persistence.createEntityManagerFactory("InfoLib");
-        EntityManager em = emf.createEntityManager();
+//        var a = new Prestamo(l, user);
+//        a.devolverLibro();
+        var e = new LibroRepositorio(emf);
+        e.guardarLibro(libro);
+//        e.guardarCopiar(l, 5);
 
-        em.getTransaction().begin();
-        em.persist(user);
-        em.persist(libro);
-        em.persist(l);
-        em.persist(a);
-        em.getTransaction().commit();
 
 //--------------------------------------------------------------
     }
