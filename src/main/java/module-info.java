@@ -5,6 +5,7 @@ module modules {
     requires org.hibernate.orm.core;
 
 
+
     opens modelo to javafx.fxml, org.hibernate.orm.core;
     exports modelo;
 }
