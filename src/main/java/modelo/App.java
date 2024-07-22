@@ -10,7 +10,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 
@@ -18,73 +21,87 @@ import java.util.HashSet;
  * JavaFX App
  */
 public class App extends Application {
-    private static EntityManagerFactory emf = null;
-
-
+    // private static EntityManagerFactory emf = null;
 
     private static Scene scene;
 
-
     @Override
     public void start(Stage stage) throws IOException {
-//        scene = new Scene(loadFXML("primary"), 640, 480);
-//        stage.setScene(scene);
-//        stage.show();
-// ----------------------------------------------------------------
-// PRUEBAS
-        HashSet<String> hash = new HashSet<String>();
-        hash.add("a");
-        var user = new Bibliotecario("45.539.868", "asd", "Henkear");
-        emf = Persistence.createEntityManagerFactory("InfoLib");
 
-        var libro = new Libro("1234587891", "TITULOOOO", hash , "donpal SA", "saika", "eng");
+        // VBox contenedor = new VBox();
+        // agregamos al contenedor la tabla
+        // contenedor.getChildren().addAll(tabla, contenedorCarga);
 
-//        var a = new Prestamo(l, user);
-//        a.devolverLibro();
-//        var e = new LibroRepositorio(emf);
-//        var libro2 = e.buscarCopias(libro);
+        // creamos una escena
+        // Scene scene = new Scene(contenedor);
+        // var fxml = "primary";
+        // FXMLLoader loader = new FXMLLoader();
+        // loader.setLocation(getClass().getResource("/PocetniEkran.fxml"));
+        // Parent root = FXMLLoader.load(getClass().getResource("primary.fxml"));
+        // System.out.println(App.class.getResource("/primary.fxml"));
+        // String classpath = System.getProperty("java.class.path");
 
-//        var l = new CopiaLibro(TipoLibro.TAPA_DURA, libro2.get(0), EstadoLibro.DISPONIBLE, 110, false);
+        // System.out.println(classpath);
+        // Parent root = FXMLLoader.load(getClass().getResource("/vista/primary.fxml")); // scene = new Scene(root, 640,
+        scene = new Scene(loadFXML("Inicio"));
+        // Scene scene = new Scene(root, 640, 480); // 480);
+        stage.setScene(scene);
+        stage.show();
+        // // ----------------------------------------------------------------
+        // PRUEBAS
+        // HashSet<String> hash = new HashSet<String>();
+        // hash.add("a");
+        // var user = new Bibliotecario("45.539.868", "asd", "Henkear");
+        // emf = Persistence.createEntityManagerFactory("InfoLib");
 
+        // var libro = new Libro("1234587891", "TITULOOOO", hash , "donpal SA", "saika",
+        // "eng");
 
-//        System.out.println(libro2);
-//        e.guardarLibro(libro);
-//        EntityManager em = emf.createEntityManager();
+        // var a = new Prestamo(l, user);
+        // a.devolverLibro();
+        // var e = new LibroRepositorio(emf);
+        // var libro2 = e.buscarCopias(libro);
 
+        // var l = new CopiaLibro(TipoLibro.TAPA_DURA, libro2.get(0),
+        // EstadoLibro.DISPONIBLE, 110, false);
 
+        // System.out.println(libro2);
+        // e.guardarLibro(libro);
+        // EntityManager em = emf.createEntityManager();
 
+        // e.guardarCopiar(l, 5);
+        // em.getTransaction().begin();
+        // em.persist(l);
+        // em.getTransaction().commit();
+        // em.close();
 
-
-
-
-//        e.guardarCopiar(l, 5);
-//        em.getTransaction().begin();
-//        em.persist(l);
-//        em.getTransaction().commit();
-//        em.close();
-
-//--------------------------------------------------------------
+        // --------------------------------------------------------------
     }
 
-    static void setRoot(String fxml) throws IOException {
+    public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
+    // src/main/resources/primary.fxml
+
     private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/vista/"+fxml + ".fxml")
+        );
+        // System.out.println(App.class.getResource("/primary.fxml"));
         return fxmlLoader.load();
     }
 
-    @Override
-    public void stop() throws Exception {
-        super.stop();
-        if (Conexion.getEntityManagerFactory() != null && Conexion.getEntityManagerFactory().isOpen()) {
-            Conexion.getEntityManagerFactory().close(); // Cierra el EMF
-        }
-    }
+    // @Override
+    // public void stop() throws Exception {
+    // super.stop();
+    // if (Conexion.getEntityManagerFactory() != null &&
+    // Conexion.getEntityManagerFactory().isOpen()) {
+    // Conexion.getEntityManagerFactory().close(); // Cierra el EMF
+    // }
+    // }
 
     public static void main(String[] args) throws Exception {
-        Conexion.crearEntityManagerFactory();
+        // Conexion.crearEntityManagerFactory();
         launch();
 
     }
