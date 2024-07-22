@@ -1,5 +1,6 @@
 package modelo;
 
+import Repositorio.UsuarioRepositorio;
 import db.Conexion;
 import Repositorio.LibroRepositorio;
 import jakarta.persistence.EntityManager;
@@ -47,6 +48,9 @@ public class App extends Application {
 //        e.guardarCopiar(l, 3);
         var libro2 = e.buscarLibroPorTematica("En");
 //        e.guardarCopiar(l, 1);
+        var u = new UsuarioRepositorio(emf);
+        var dni = u.buscarPorDni("44.539.868");
+        System.out.println(dni);
 
 
 //        var a = new Prestamo(l, user);
