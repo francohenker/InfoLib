@@ -27,11 +27,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("../../resources/vista/PrestamoABM.fxml"));
-        scene sc = new Scene(fxmlLoader.load(), 640, 480);
-//        scene = new Scene(loadFXML("primary"), 640, 480);
+//        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/vista/LibroABM.fxml"));
+//        Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
 //        stage.setScene(scene);
-        stage.show();
+//        stage.show();
 
 // ----------------------------------------------------------------
 // PRUEBAS
@@ -40,18 +39,22 @@ public class App extends Application {
         var user = new Bibliotecario("45.539.868", "asd", "Henkear");
         emf = Persistence.createEntityManagerFactory("InfoLib");
 
-        var libro = new Libro("1234587891", "TITULOOOO", hash , "donpal SA", "saika", "eng");
+        var libro = new Libro("2134587895", "tuki", hash , "donpal SA", "Entretenimientoski", "español");
+        var l = new CopiaLibro(TipoLibro.TAPA_DURA, libro, EstadoLibro.DISPONIBLE, 110, false);
+
+        var e = new LibroRepositorio(emf);
+//        e.guardarLibro(libro);
+//        e.guardarCopiar(l, 3);
+        var libro2 = e.buscarLibroPorTematica("En");
+//        e.guardarCopiar(l, 1);
+
 
 //        var a = new Prestamo(l, user);
 //        a.devolverLibro();
-//        var e = new LibroRepositorio(emf);
-//        var libro2 = e.buscarCopias(libro);
-
-//        var l = new CopiaLibro(TipoLibro.TAPA_DURA, libro2.get(0), EstadoLibro.DISPONIBLE, 110, false);
 
 
-//        System.out.println(libro2);
-//        e.guardarLibro(libro);
+
+        System.out.println(libro2);
 //        EntityManager em = emf.createEntityManager();
 
 
@@ -60,7 +63,6 @@ public class App extends Application {
 
 
 
-//        e.guardarCopiar(l, 5);
 //        em.getTransaction().begin();
 //        em.persist(l);
 //        em.getTransaction().commit();

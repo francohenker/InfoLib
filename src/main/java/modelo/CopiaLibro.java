@@ -54,6 +54,16 @@ public class CopiaLibro {
         this.estado = estado;
     }
 
+    public TipoLibro getTipo(){return this.tipo;}
+
+    public Libro getLibro(){
+        return this.libro;
+    }
+
+    public EstadoLibro getEstado(){
+        return this.estado;
+    }
+
     public double getPrecio(){
         return this.precio;
     }
