@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<SplitPane dividerPositions="0.7437185929648241" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.7437185929648241" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.PrestamoControlador">
    <items>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="367.0" prefWidth="771.0">
          <children>
@@ -25,7 +25,8 @@
                   <TableColumn prefWidth="436.66668701171875" text="Multa" />
                </columns>
             </TableView>
-            <Label layoutY="6.0" prefHeight="16.0" prefWidth="86.0" text="Usuarios" />
+            <Label layoutY="6.0" prefHeight="16.0" prefWidth="86.0" text="Prestamos" />
+            <Button layoutX="78.0" layoutY="2.0" mnemonicParsing="false" onAction="#inicio" text="Inicio" />
          </children>
       </AnchorPane>
       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" spacing="10.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.InicioControlador">
+   <children>
+      <Button mnemonicParsing="false" onAction="#indexLibros" text="Gestionar libros" />
+      <Button mnemonicParsing="false" onAction="#indexPrestamos" text="Gestionar prestamos" />
+      <Button mnemonicParsing="false" onAction="#indexUsuarios" text="Gestionar usuarios" />
+   </children>
+</VBox>

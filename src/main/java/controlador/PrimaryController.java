@@ -1,15 +1,17 @@
-//
-//package controlador;
-//
-//import java.io.IOException;
-//import javafx.fxml.FXML;
-//import modelo.*;
-//
-//
-//public class PrimaryController {
-//
-//    @FXML
-//    private void switchToSecondary() throws IOException {
-//        App.setRoot("secondary");
-//    }
-//}
+
+package controlador;
+
+import javafx.fxml.FXML;
+import modelo.App;
+
+import java.io.IOException;
+import javafx.fxml.FXML;
+
+    
+public class PrimaryController {
+
+   @FXML
+   private void switchToSecondary() throws IOException {
+       App.setRoot("secondary");
+   }
+}
