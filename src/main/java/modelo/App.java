@@ -15,9 +15,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.HashSet;
 
-/**
- * JavaFX App
- */
 public class App extends Application {
     private static EntityManagerFactory emf = null;
 
