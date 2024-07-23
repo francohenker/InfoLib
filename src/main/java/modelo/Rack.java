@@ -15,8 +15,7 @@ public class Rack {
     private Long id;
     @Column(name = "descripcion", length = 255, nullable = true)
     private String descripcion;
-    @OneToMany
-    @JoinColumn(name = "rack_id")
+    @OneToMany(mappedBy = "rack", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CopiaLibro> copias  = new HashSet<>();
 
 
@@ -26,19 +25,6 @@ public class Rack {
     public Rack(String descripcion){
         this.descripcion = descripcion;
     }
-    // IMPLEMENTAR DESPUES EN CASO DE SER NECESARIO
-        
-//    public void addLibro(CopiaLibro libro){
-//        this.libros.add(libro);
-//    }
-//
-//    public void removeLibro(CopiaLibro libro){
-//        this.libros.remove(libro);
-//    }
-
-    // public ArrayList<CopiaLibro> getLibros(){
-    //     // return libros;
-    // }
 
     public void updateDescripcion(String descripcion){
         this.descripcion = descripcion;
@@ -48,6 +34,4 @@ public class Rack {
         return this.descripcion;
     }
 
-    // no se sabe si lo implementamos
-    // public boolean isLibro(Libro libro) { }
 }

@@ -16,7 +16,9 @@ public class Libro {
     private String ISBN;
     @Column(name = "titulo", length = 255, nullable = false)
     private String titulo;
-
+    @ElementCollection
+    @CollectionTable(name = "libro_autores", joinColumns = @JoinColumn(name = "libro_id"))
+    @Column(name = "autor")
     private Set<String> autores = new HashSet<>();
     @Column(name = "editorial", length = 50, nullable = false)
     private String editorial;
@@ -33,7 +35,7 @@ public class Libro {
     // constructor con argumentos, en caso de recibir un precio negativo se arroja una nueva excepcion indicando que no se puede 
     public Libro(String ISBN, String titulo, Set<String> autores, String editorial, String tematica, String idioma) throws IllegalArgumentException{
         if(ISBN.length() != 13 && ISBN.length() != 10){
-            throw new RuntimeException("ISBN no válido");
+            throw new IllegalArgumentException("ISBN no válido");
         }
         this.ISBN = ISBN;
         this.titulo = titulo.toUpperCase();

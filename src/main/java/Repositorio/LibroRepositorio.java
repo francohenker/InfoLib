@@ -3,6 +3,8 @@ package Repositorio;
 import jakarta.persistence.*;
 import modelo.CopiaLibro;
 import modelo.Libro;
+import modelo.Rack;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -34,9 +36,16 @@ public class LibroRepositorio implements Serializable {
         em.getTransaction().begin();
 
         for (int i = 0; i < nCopias; i++) {
-            CopiaLibro nuevaCopia = new CopiaLibro(copia.getTipo(), copia.getLibro(), copia.getEstado(), copia.getPrecio(), copia.isCopiaReferencia());
+            CopiaLibro nuevaCopia = new CopiaLibro(copia.getTipo(), copia.getLibro(), copia.getEstado(), copia.getPrecio(), copia.getRack(), copia.isCopiaReferencia());
             em.persist(nuevaCopia);
         }
+        em.getTransaction().commit();
+        em.close();
+    }
+    public void guardarRack(Rack rack){
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(rack);
         em.getTransaction().commit();
         em.close();
     }
@@ -97,4 +106,5 @@ public class LibroRepositorio implements Serializable {
             }
         }
     }
+
 }

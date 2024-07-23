@@ -21,14 +21,16 @@ public class CopiaLibro {
     private double precio;
     private boolean copiaReferencia = false; // por defecto es una copia normal
 
-
+    @ManyToOne
+    @JoinColumn(name = "rack_id")
+    private Rack rack;
 
 
     // protected para que no se puedan crear copias vacias
     protected CopiaLibro(){   }
 
     // Con este constructor se puede crear una copia normal o una copia de referencia
-    public CopiaLibro(TipoLibro tipo, Libro libro, EstadoLibro estado, double precio, boolean copiaReferencia){
+    public CopiaLibro(TipoLibro tipo, Libro libro, EstadoLibro estado, double precio, Rack rack, boolean copiaReferencia){
         try {
             updatePrecio(precio);
         }catch(Exception e){
@@ -37,20 +39,23 @@ public class CopiaLibro {
         this.tipo = tipo;
         this.libro = libro;
         this.estado = estado;
+        this.rack = rack;
         this.copiaReferencia = copiaReferencia;
     }
 
+    public double getPrecio(){
+        return this.precio;
+    }
     public void updatePrecio(double precio){
         if(precio < 0){
             throw new RuntimeException("Precio negativo");
         }
         this.precio = precio;
     }
-    public void setEstado(EstadoLibro estado){
-        this.estado = estado;
+    public EstadoLibro getEstado(){
+        return this.estado;
     }
-
-    public void updateEstado(EstadoLibro estado){
+    public void setEstado(EstadoLibro estado){
         this.estado = estado;
     }
 
@@ -60,13 +65,13 @@ public class CopiaLibro {
         return this.libro;
     }
 
-    public EstadoLibro getEstado(){
-        return this.estado;
+    public Rack getRack(){
+        return this.rack;
+    }
+    public void setRack(Rack rack){
+        this.rack = rack;
     }
 
-    public double getPrecio(){
-        return this.precio;
-    }
 
     // ver si se muestra esto en algun lado
     public boolean isCopiaReferencia(){
