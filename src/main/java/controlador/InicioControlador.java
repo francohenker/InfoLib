@@ -13,18 +13,18 @@ import modelo.App;
 public class InicioControlador {
 
     @FXML
-    void indexLibros(ActionEvent event) throws IOException {
-        App.setRoot("LibroABM");
+    private void indexLibros(ActionEvent event) throws IOException {
+        App.setRoot("/vista/LibroABM");
     }
 
     @FXML
     void indexPrestamos(ActionEvent event) throws IOException {
-        App.setRoot("PrestamoABM");
+        App.setRoot("/vista/PrestamoABM");
     }
 
     @FXML
     void indexUsuarios(ActionEvent event) throws IOException {
-        App.setRoot("UsuariosABM");
+        App.setRoot("/vista/UsuarioABM");
     }
 
 }
