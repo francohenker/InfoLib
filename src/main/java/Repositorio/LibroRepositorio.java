@@ -9,14 +9,14 @@ import java.util.List;
 public class LibroRepositorio implements Serializable {
     EntityManagerFactory emf;
 
-    public LibroRepositorio(EntityManagerFactory emf){
+    public LibroRepositorio(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
     // persiste los libros en la base de datos, en caso de no encontrar libro con igual isbn
-    public void guardarLibro(Libro libro){
+    public void guardarLibro(Libro libro) {
         EntityManager em = this.emf.createEntityManager();
-        if(!buscarLibroPorIsbn(libro.getIsbn()).isEmpty()){
+        if (!buscarLibroPorIsbn(libro.getIsbn()).isEmpty()) {
             throw new RuntimeException("El libro se encuentra en la biblioteca");
         }
         em.getTransaction().begin();
@@ -26,8 +26,8 @@ public class LibroRepositorio implements Serializable {
     }
 
     // persiste las copias del libro en la base de datos
-    public void guardarCopiar(CopiaLibro copia, int nCopias){
-        if(nCopias < 1){
+    public void guardarCopiar(CopiaLibro copia, int nCopias) {
+        if (nCopias < 1) {
             throw new RuntimeException("Número de copias invalido");
         }
         EntityManager em = this.emf.createEntityManager();
@@ -54,6 +54,7 @@ public class LibroRepositorio implements Serializable {
             }
         }
     }
+
     //busca un libro por isbn, lo usa guardarLibro para saber si existe algun libro con este isbn en la base de datos
     protected List<Libro> buscarLibroPorIsbn(String isbn) {
         EntityManager em = emf.createEntityManager();
@@ -67,6 +68,7 @@ public class LibroRepositorio implements Serializable {
             }
         }
     }
+
     //ARREGLAR
     public List<Libro> buscarLibroPorAutor(String autor) {
         EntityManager em = emf.createEntityManager();
@@ -80,6 +82,7 @@ public class LibroRepositorio implements Serializable {
             }
         }
     }
+
     // busca un libros por tematica
     public List<Libro> buscarLibroPorTematica(String tematica) {
         EntityManager em = emf.createEntityManager();
@@ -94,7 +97,7 @@ public class LibroRepositorio implements Serializable {
         }
     }
 
-    // VER DONDE SE IMPLEMENTA
+//     VER DONDE SE IMPLEMENTA Y CORREGIR
 //    public List<CopiaLibro> buscarCopias(Libro libro){
 //        EntityManager em = emf.createEntityManager();
 //        try {

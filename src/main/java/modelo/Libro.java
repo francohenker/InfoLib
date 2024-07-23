@@ -36,11 +36,11 @@ public class Libro {
             throw new RuntimeException("ISBN no válido");
         }
         this.ISBN = ISBN;
-        this.titulo = titulo;
+        this.titulo = titulo.toUpperCase();
         this.autores = autores;
-        this.editorial = editorial;
-        this.tematica = tematica;
-        this.idioma = idioma;
+        this.editorial = editorial.toUpperCase();
+        this.tematica = tematica.toUpperCase();
+        this.idioma = idioma.toUpperCase();
         
     }
 
@@ -55,6 +55,7 @@ public class Libro {
     public String getIsbn(){
         return this.ISBN;
     }
+
     @Override
     public String toString(){
         var a = this.ISBN + ". " + this.titulo + ". " + this.autores + ". " + this.editorial + ". " + this.tematica + ". " + this.idioma;
