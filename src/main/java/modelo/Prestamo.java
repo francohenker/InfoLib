@@ -21,32 +21,36 @@ public class Prestamo {
     private LocalDateTime fechaPrestamo = LocalDateTime.now();
     private LocalDateTime fechaDevolucion;
     @ManyToOne
-    @JoinColumn(name = "miembro_id", nullable = false)
-    private Usuario miembro;
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
 
 
     // no se puede crear un prestamo vacio desde afuera
     protected Prestamo() {}
 
-    public Prestamo(CopiaLibro copiaLibro, Usuario miembro) {
-        if(!this.miembro.isAlta()){
-            throw new RuntimeException("El miembro no se encuentra activo");
+    public Prestamo(CopiaLibro copiaLibro, Usuario usuario) {
+        if(!usuario.isAlta()){
+            throw new RuntimeException("El usuario no se encuentra activo");
         }
-        this.miembro = miembro;
+        this.usuario = usuario;
         this.copiaLibro = copiaLibro;
         this.copiaLibro.setEstado(EstadoLibro.PRESTADO);
     }
 
     public void devolverLibro(){
-        copiaLibro.setEstado(EstadoLibro.DISPONIBLE);
         this.fechaDevolucion = LocalDateTime.now();
         if(fechaDevolucion.isAfter(fechaPrestamo) ){
             Duration diferencia = Duration.between(fechaPrestamo, fechaDevolucion);
             this.multa = diferencia.toHours() * (copiaLibro.getPrecio() / 24);
         }
+        copiaLibro.setEstado(EstadoLibro.DISPONIBLE);
     }
 
     public double getMulta(){
         return this.multa;
+    }
+
+    public LocalDateTime getFechaPrestamo(){
+        return this.fechaPrestamo;
     }
 }

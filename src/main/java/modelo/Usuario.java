@@ -5,8 +5,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.ArrayList;
 
-
-
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "usuario")
@@ -36,8 +34,8 @@ public class Usuario {
         this.apellido = apellido.toUpperCase();
     }
 
-    // ver si esto no seria private
-    private boolean isValid(String dni){
+    // metodo estatico para comprobar si un dni es valido
+    public static boolean isValid(String dni){
         String dniRegex = "^\\d{2}\\.\\d{3}\\.\\d{3}$";
         Pattern pattern = Pattern.compile(dniRegex);
         Matcher matcher = pattern.matcher(dni);

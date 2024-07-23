@@ -26,6 +26,9 @@ public class UsuarioRepositorio {
 
     //busca un usuario por dni en la base de datos
     public List<Usuario> buscarPorDni(String dni) {
+        if(!Usuario.isValid(dni)){
+            throw new RuntimeException("Dni invalido");
+        }
         EntityManager em = this.emf.createEntityManager();
         try {
             em.getTransaction().begin();

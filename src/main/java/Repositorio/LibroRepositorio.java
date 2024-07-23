@@ -28,7 +28,7 @@ public class LibroRepositorio implements Serializable {
     }
 
     // persiste las copias del libro en la base de datos
-    public void guardarCopiar(CopiaLibro copia, int nCopias) {
+    public void guardarCopia(CopiaLibro copia, int nCopias) {
         if (nCopias < 1) {
             throw new RuntimeException("Número de copias invalido");
         }

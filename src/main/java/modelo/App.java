@@ -1,5 +1,6 @@
 package modelo;
 
+import Repositorio.PrestamoRepositorio;
 import Repositorio.UsuarioRepositorio;
 import db.Conexion;
 import Repositorio.LibroRepositorio;
@@ -34,12 +35,28 @@ public class App extends Application {
 //// PRUEBAS
 //        HashSet<String> hash = new HashSet<String>();
         emf = Persistence.createEntityManagerFactory("InfoLib");
+        var u = new UsuarioRepositorio(emf);
+        var user = u.buscarPorDni("44.539.868");
 
+//        u.guardarUsuario(new Usuario("44.539.868", "admin", "admin"));
+        var pre = new PrestamoRepositorio(emf);
+        var lr = new LibroRepositorio(emf);
+        var hash = new HashSet<String>();
+        hash.add("epcio");
+        hash.add("epa");
+        hash.add("tuki");
+        var libro = new Libro("6234567890", "epa", hash, "los pachis", "espacial", "español");
+        var rack = new Rack("rack 1");
+        var copia = new CopiaLibro(TipoLibro.AUDIOLIBRO, libro, EstadoLibro.DISPONIBLE, 10.0, rack, false );
+//        lr.guardarLibro(libro);
+//        lr.guardarRack(rack);
+//        lr.guardarCopia(copia, 1);
+//        var p = new Prestamo(copia, user.get(0));
+        var c = lr.buscarLibroPorTitulo("");
 
-
-
-
-
+        pre.guardarPrestamo(copia, user.get(0));
+//        var pre = new PrestamoRepositorio(emf);
+//        pre.buscarPrestamoPorUsuario();
 //--------------------------------------------------------------
     }
 
@@ -63,7 +80,6 @@ public class App extends Application {
     public static void main(String[] args) throws Exception {
         Conexion.crearEntityManagerFactory();
         launch();
-
     }
 
 }
