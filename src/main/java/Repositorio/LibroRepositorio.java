@@ -1,8 +1,8 @@
 package Repositorio;
 
 import jakarta.persistence.*;
-import modelo.*;
-
+import modelo.CopiaLibro;
+import modelo.Libro;
 import java.io.Serializable;
 import java.util.List;
 
@@ -90,25 +90,11 @@ public class LibroRepositorio implements Serializable {
             Query query = em.createQuery("FROM Libro libro WHERE libro.tematica LIKE :tematica", Libro.class);
             query.setParameter("tematica", "%" + tematica + "%");
             return query.getResultList();
+
         } finally {
             if (em.isOpen()) {
                 em.close();
             }
         }
     }
-
-//     VER DONDE SE IMPLEMENTA Y CORREGIR
-//    public List<CopiaLibro> buscarCopias(Libro libro){
-//        EntityManager em = emf.createEntityManager();
-//        try {
-//            Query query = em.createQuery("SELECT c FROM CopiaLibro c WHERE c.libro = :libro AND c.estado = :estado", CopiaLibro.class);
-//            query.setParameter("libro", libro);
-//            query.setParameter("estado", EstadoLibro.DISPONIBLE);
-//            return query.getResultList();
-//        } finally {
-//            if (em.isOpen()) {
-//                em.close();
-//            }
-//        }
-//    }
 }
