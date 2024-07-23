@@ -25,37 +25,38 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/vista/LibroABM.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
-//        stage.setScene(scene);
-//        stage.show();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/vista/Inicio.fxml"));
+
+        Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
+        stage.setScene(scene);
+        stage.show();
 
 // ----------------------------------------------------------------
-// PRUEBAS
-        HashSet<String> hash = new HashSet<String>();
-        hash.add("a");
-        var user = new Bibliotecario("45.539.868", "asd", "Henkear");
-        emf = Persistence.createEntityManagerFactory("InfoLib");
-
-        var libro = new Libro("2134587895", "tuki", hash , "donpal SA", "Entretenimientoski", "español");
-        var l = new CopiaLibro(TipoLibro.TAPA_DURA, libro, EstadoLibro.DISPONIBLE, 110, false);
-
-        var e = new LibroRepositorio(emf);
-//        e.guardarLibro(libro);
-//        e.guardarCopiar(l, 3);
-        var libro2 = e.buscarLibroPorTematica("En");
-//        e.guardarCopiar(l, 1);
-        var u = new UsuarioRepositorio(emf);
-        var dni = u.buscarPorDni("44.539.868");
-        System.out.println(dni);
-
-
-//        var a = new Prestamo(l, user);
-//        a.devolverLibro();
-
-
-
-        System.out.println(libro2);
+//// PRUEBAS
+//        HashSet<String> hash = new HashSet<String>();
+//        hash.add("a");
+//        var user = new Bibliotecario("45.539.868", "asd", "Henkear");
+//        emf = Persistence.createEntityManagerFactory("InfoLib");
+//
+//        var libro = new Libro("2134587895", "tuki", hash , "donpal SA", "Entretenimientoski", "español");
+//        var l = new CopiaLibro(TipoLibro.TAPA_DURA, libro, EstadoLibro.DISPONIBLE, 110, false);
+//
+//        var e = new LibroRepositorio(emf);
+////        e.guardarLibro(libro);
+////        e.guardarCopiar(l, 3);
+//        var libro2 = e.buscarLibroPorTematica("En");
+////        e.guardarCopiar(l, 1);
+//        var u = new UsuarioRepositorio(emf);
+//        var dni = u.buscarPorDni("44.539.868");
+//        System.out.println(dni);
+//
+//
+////        var a = new Prestamo(l, user);
+////        a.devolverLibro();
+//
+//
+//
+//        System.out.println(libro2);
 //        EntityManager em = emf.createEntityManager();
 
 
@@ -72,7 +73,7 @@ public class App extends Application {
 //--------------------------------------------------------------
     }
 
-    static void setRoot(String fxml) throws IOException {
+    public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
