@@ -14,7 +14,7 @@ public class UsuarioControlador {
 
     @FXML
     void inicio(ActionEvent event) throws IOException {
-        App.setRoot("Inicio");
+        App.setRoot("/vista/Inicio");
     }
 
 }
