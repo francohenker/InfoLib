@@ -12,7 +12,7 @@ public class UsuarioRepositorio {
     public UsuarioRepositorio(EntityManagerFactory emf){
         this.emf = emf;
     }
-
+    // guarda un usuario en la base de datos
     public void guardarUsuario(Usuario usuario){
         EntityManager em = this.emf.createEntityManager();
         if(!buscarPorDni(usuario.getDni()).isEmpty()){
@@ -24,7 +24,7 @@ public class UsuarioRepositorio {
         em.close();
     }
 
-    //BUSCA UN USUARIO POR DNI EN LA BASE DE DATOS
+    //busca un usuario por dni en la base de datos
     public List<Usuario> buscarPorDni(String dni) {
         EntityManager em = this.emf.createEntityManager();
         try {
