@@ -4,7 +4,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Query;
 import modelo.Usuario;
-
 import java.util.List;
 
 public class UsuarioRepositorio {
@@ -28,11 +27,8 @@ public class UsuarioRepositorio {
     //BUSCA UN USUARIO POR DNI EN LA BASE DE DATOS
     public List<Usuario> buscarPorDni(String dni) {
         EntityManager em = this.emf.createEntityManager();
-        var dni2 = dni;
         try {
             em.getTransaction().begin();
-
-            // Buscar en Usuario
             Query query = em.createQuery("FROM Usuario WHERE dni = :dniBuscado", Usuario.class);
             query.setParameter("dniBuscado", dni);
             return query.getResultList();
