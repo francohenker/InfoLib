@@ -107,4 +107,18 @@ public class LibroRepositorio implements Serializable {
         }
     }
 
+    // busca copias de un libro por isbn
+    public List<CopiaLibro> buscarCopiasPorIsbn(Libro libro){
+
+        EntityManager em = emf.createEntityManager();
+        try {
+            Query query = em.createQuery("SELECT c FROM CopiaLibro c WHERE c.libro.ISBN = :isbn", CopiaLibro.class);
+            query.setParameter("isbn", libro.getIsbn());
+            return query.getResultList();
+        } finally {
+            if (em.isOpen()) {
+                em.close();
+            }
+        }
+    }
 }

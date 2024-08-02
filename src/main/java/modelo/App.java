@@ -26,10 +26,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/vista/Inicio.fxml"));
-//        scene = new Scene(fxmlLoader.load(), 1080, 720);
-//        stage.setScene(scene);
-//        stage.show();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/vista/Inicio.fxml"));
+        scene = new Scene(fxmlLoader.load(), 1080, 720);
+        stage.setScene(scene);
+        stage.show();
 
 // ----------------------------------------------------------------
 //// PRUEBAS
@@ -38,23 +38,25 @@ public class App extends Application {
         var u = new UsuarioRepositorio(emf);
         var user = u.buscarPorDni("44.539.868");
 
-//        u.guardarUsuario(new Usuario("44.539.868", "admin", "admin"));
+//        u.guardarUsuario(new Usuario("45.539.868", "admin", "admin"));
         var pre = new PrestamoRepositorio(emf);
         var lr = new LibroRepositorio(emf);
         var hash = new HashSet<String>();
-        hash.add("epcio");
-        hash.add("epa");
-        hash.add("tuki");
-        var libro = new Libro("1314567190", "DON saika", hash, "Estimado", "novela", "english");
+        hash.add("saik");
+        hash.add("opa");
+        hash.add("opai");
+        var libro = new Libro("4314567190", "DON saika", hash, "Estimado", "novela", "english");
         var rack = new Rack("rack 1");
         var copia = new CopiaLibro(TipoLibro.AUDIOLIBRO, libro, EstadoLibro.DISPONIBLE, 10.0, rack, false );
-        lr.guardarLibro(libro);
+//        lr.guardarLibro(libro);
 //        lr.guardarRack(rack);
-//        lr.guardarCopia(copia, 1);
-//        var p = new Prestamo(copia, user.get(0));
+//        lr.guardarCopia(copia, 2);
+        var p = new Prestamo(copia, user.get(0));
+        var busqueda = lr.buscarCopiasPorIsbn(libro);
+        System.out.println(busqueda);
 //        var c = lr.buscarLibroPorAutor("epa");
-        var c = lr.buscarLibroPorTitulo("don");
-        System.out.println(c);
+//        var c = lr.buscarLibroPorTitulo("don");
+//        System.out.println(c);
 //        pre.guardarPrestamo(copia, user.get(0));
 //        var pre = new PrestamoRepositorio(emf);
 //        pre.buscarPrestamoPorUsuario();
