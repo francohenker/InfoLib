@@ -1,6 +1,8 @@
 package modelo;
 
 import jakarta.persistence.*;
+import org.hibernate.Hibernate;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +18,7 @@ public class Libro {
     private String ISBN;
     @Column(name = "titulo", length = 255, nullable = false)
     private String titulo;
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "libro_autores", joinColumns = @JoinColumn(name = "libro_id"))
     @Column(name = "autor")
     private Set<String> autores = new HashSet<>();
@@ -60,6 +62,7 @@ public class Libro {
 
     @Override
     public String toString(){
+//        Hibernate.initialize(this.autores);
         var a = this.ISBN + ". " + this.titulo + ". " + this.autores + ". " + this.editorial + ". " + this.tematica + ". " + this.idioma;
         var b = a.replace("[", "");
         return b.replace("]", ""); //provisorio

@@ -15,7 +15,7 @@ public class Rack {
     private Long id;
     @Column(name = "descripcion", length = 255, nullable = true)
     private String descripcion;
-    @OneToMany(mappedBy = "rack", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "rack", cascade = CascadeType.ALL)
     private Set<CopiaLibro> copias  = new HashSet<>();
 
 

@@ -45,16 +45,17 @@ public class App extends Application {
         hash.add("epcio");
         hash.add("epa");
         hash.add("tuki");
-        var libro = new Libro("6234567890", "epa", hash, "los pachis", "espacial", "español");
+        var libro = new Libro("1314567190", "DON saika", hash, "Estimado", "novela", "english");
         var rack = new Rack("rack 1");
         var copia = new CopiaLibro(TipoLibro.AUDIOLIBRO, libro, EstadoLibro.DISPONIBLE, 10.0, rack, false );
-//        lr.guardarLibro(libro);
+        lr.guardarLibro(libro);
 //        lr.guardarRack(rack);
 //        lr.guardarCopia(copia, 1);
 //        var p = new Prestamo(copia, user.get(0));
-        var c = lr.buscarLibroPorTitulo("");
-
-        pre.guardarPrestamo(copia, user.get(0));
+//        var c = lr.buscarLibroPorAutor("epa");
+        var c = lr.buscarLibroPorTitulo("don");
+        System.out.println(c);
+//        pre.guardarPrestamo(copia, user.get(0));
 //        var pre = new PrestamoRepositorio(emf);
 //        pre.buscarPrestamoPorUsuario();
 //--------------------------------------------------------------
