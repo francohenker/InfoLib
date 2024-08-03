@@ -1,30 +1,28 @@
-package Repositorio;
-
+package servicio;
+import Repositorio.Repositorio;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Query;
-import modelo.Libro;
+import jakarta.persistence.TypedQuery;
+import modelo.CopiaLibro;
 import modelo.Prestamo;
 import modelo.Usuario;
-import modelo.CopiaLibro;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class PrestamoRepositorio {
-    EntityManagerFactory emf;
+public class PrestamoService {
+    private Repositorio repositorio;
 
-    public PrestamoRepositorio(EntityManagerFactory emf) {
-        this.emf = emf;
+    public PrestamoService(Repositorio repositorio) {
+        this.repositorio = repositorio;
     }
+
     /**
-     VERIFICAR
+     * VERIFICAR
      * no mas de 5 prestamos activos para un usuario
      * no realizar el prestamo si se supero la fecha de entrega de un libro y este no se entrego
-     *
      **/
     public void guardarPrestamo(CopiaLibro copia, Usuario usuario) {
-        EntityManager em = emf.createEntityManager();
 
 //        if(buscarPrestamoPorUsuario(usuario).size() >= 5){
 //            throw new RuntimeException("Solo se puede tener 5 prestamos activos");
@@ -34,39 +32,35 @@ public class PrestamoRepositorio {
 //        }
 
 
-
-
         Prestamo prestamo = new Prestamo(copia, usuario);
-        em.getTransaction().begin();
-        em.persist(prestamo);
-        em.getTransaction().commit();
-        em.close();
+        this.repositorio.iniciarTransaccion();
+        this.repositorio.insertar(prestamo);
+        this.repositorio.confirmarTransaccion();
     }
+
     //PROBAR
+    //busca la cantidad de prestamos que tiene actuales un usuario
     protected List<Prestamo> buscarPrestamoPorUsuario(Usuario usuario) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            Query query = em.createQuery("FROM Prestamo p WHERE p.fechaDevolucion IS NULL", Prestamo.class);
-//            query.setParameter("usuario", usuario);
-            return query.getResultList();
-        } finally {
-            if (em.isOpen()) {
-                em.close();
-            }
-        }
+        this.repositorio.iniciarTransaccion();
+        TypedQuery<Prestamo> query = repositorio.getEntityManager().createQuery("FROM Prestamo p WHERE p.fechaDevolucion IS NULL", Prestamo.class);
+        query.setParameter("usuario", usuario);
+        return query.getResultList();
+
     }
+
     //PROBAR
-    protected boolean tienePrestamoAtrasado(Usuario usuario){
+    // busca si el usuario tiene prestamos atrasados
+    protected boolean tienePrestamoAtrasado(Usuario usuario) {
         List<Prestamo> prestamos = buscarPrestamoPorUsuario(usuario);
-        for(Prestamo prestamo : prestamos){
-            if(prestamo.getFechaPrestamo().plusDays(10).isAfter(LocalDateTime.now())){ //VERIFICAR
+        for (Prestamo prestamo : prestamos) {
+            if (prestamo.getFechaPrestamo().plusDays(10).isAfter(LocalDateTime.now())) { //VERIFICAR
                 return true;
             }
         }
         return false;
     }
 
-//    //IMPLEMENTAR
+    //    //IMPLEMENTAR
 //    public List<Usuario> getUsuariosPorLibro(Libro libro){
 //
 //    }
