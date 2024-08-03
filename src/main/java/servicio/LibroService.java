@@ -72,9 +72,10 @@ public class LibroService {
         return query.getResultList();
     }
 
-//    // busca copias de un libro por isbn
+    // busca copias de un libro por isbn
+    //AGREGAR VALIDACION PARA MOSTRAR SOLAMENTE LAS COPIAS QUE NO ESTEN PRESTADAS
     public List<CopiaLibro> buscarCopiasPorIsbn(Libro libro){
-        this.repositorio.iniciarTransaccion();
+//        this.repositorio.iniciarTransaccion();
         TypedQuery<CopiaLibro> query = repositorio.getEntityManager().createQuery("SELECT c FROM CopiaLibro c WHERE c.libro.ISBN = :isbn", CopiaLibro.class);
         query.setParameter("isbn", libro.getIsbn());
         return query.getResultList();

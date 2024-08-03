@@ -15,22 +15,26 @@ public class UsuarioService {
 
     // guarda un usuario en la base de datos
     public void guardarUsuario(Usuario usuario){
-        this.repositorio.iniciarTransaccion();
-        if(!buscarPorDni(usuario.getDni()).isEmpty()){
+        if(buscarPorDni(usuario.getDni()) == null){
             throw new RuntimeException("Usuario existente en la base de datos");
         }
+        this.repositorio.iniciarTransaccion();
         this.repositorio.insertar(usuario);
         this.repositorio.confirmarTransaccion();
     }
 
     //busca un usuario por dni en la base de datos
-    protected List<Usuario> buscarPorDni(String dni) {
+    public Usuario buscarPorDni(String dni) {
         if(!Usuario.isValid(dni)){
             throw new RuntimeException("Dni invalido");
         }
+        this.repositorio.iniciarTransaccion();
         TypedQuery<Usuario> query =  repositorio.getEntityManager().createQuery("FROM Usuario WHERE dni = :dniBuscado", Usuario.class);
         query.setParameter("dniBuscado", dni);
-        return query.getResultList();
+        //en caso de no encontrar usuario con ese dni, retorna null
+        // de lo contrario retorna el primer elemento (deberia ser el unico)
+        this.repositorio.confirmarTransaccion();
+        return query.getResultList().isEmpty() ? null : query.getResultList().get(0);
         }
     }
 

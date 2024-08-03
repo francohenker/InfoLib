@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import servicio.LibroService;
+import servicio.PrestamoService;
 import servicio.UsuarioService;
 
 import java.io.IOException;
@@ -35,36 +36,26 @@ public class App extends Application {
 //        HashSet<String> hash = new HashSet<String>();
         emf = Persistence.createEntityManagerFactory("InfoLib");
         var repo = new Repositorio(emf);
-        var su = new UsuarioService(repo);
-        su.guardarUsuario(new Usuario("30.539.868", "saik", "saik"));
+        var pre = new PrestamoService(repo);
+        var us = new UsuarioService(repo);
+        var lib = new LibroService(repo);
+        var user = us.buscarPorDni("44.539.868");
+        var libro = lib.buscarLibroPorTitulo("");
+        var copia = lib.buscarCopiasPorIsbn(libro.get(0));
+        pre.guardarPrestamo(copia.get(0), user);
 
-//        System.out.println(tit);
 
-        //        var u = new UsuarioRepositorio(emf);
-//        var user = u.buscarPorDni("44.539.868");
-//
-////        u.guardarUsuario(new Usuario("45.539.868", "admin", "admin"));
-//        var pre = new PrestamoRepositorio(emf);
+
+
         var hash = new HashSet<String>();
         hash.add("saik");
         hash.add("opa");
         hash.add("opai");
-        var libro = new Libro("4314567190", "DON saika", hash, "Estimado", "novela", "english");
+//        var libro = new Libro("4314567190", "DON saika", hash, "Estimado", "novela", "english");
 //        var rack = new Rack("rack 1");
 //        var copia = new CopiaLibro(TipoLibro.AUDIOLIBRO, libro, EstadoLibro.DISPONIBLE, 10.0, rack, false );
 
-//        sLibro.guardarLibro(libro);
-////        lr.guardarRack(rack);
-////        lr.guardarCopia(copia, 2);
-//        var p = new Prestamo(copia, user.get(0));
-//        var busqueda = lr.buscarCopiasPorIsbn(libro);
-//        System.out.println(busqueda);
-//        var c = lr.buscarLibroPorAutor("epa");
-//        var c = lr.buscarLibroPorTitulo("don");
-//        System.out.println(c);
-//        pre.guardarPrestamo(copia, user.get(0));
-//        var pre = new PrestamoRepositorio(emf);
-//        pre.buscarPrestamoPorUsuario();
+
 //--------------------------------------------------------------
     }
 
