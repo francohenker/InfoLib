@@ -4,10 +4,8 @@ import Repositorio.PrestamoRepositorio;
 import Repositorio.UsuarioRepositorio;
 import db.Conexion;
 import Repositorio.LibroRepositorio;
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import jakarta.persistence.Query;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,7 +24,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/vista/Inicio.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/vista/prestamoAlta.fxml"));
         scene = new Scene(fxmlLoader.load(), 1080, 720);
         stage.setScene(scene);
         stage.show();
