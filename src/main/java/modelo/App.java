@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import servicio.LibroService;
 import servicio.PrestamoService;
+import servicio.RackService;
 import servicio.UsuarioService;
 
 import java.io.IOException;
@@ -40,10 +41,12 @@ public class App extends Application {
         var us = new UsuarioService(repo);
         var lib = new LibroService(repo);
         var user = us.buscarPorDni("44.539.868");
-        var libro = lib.buscarLibroPorTitulo("");
+        var libro = lib.buscarLibroPorTitulo("estimado");
         var copia = lib.buscarCopiasPorIsbn(libro.get(0));
-        pre.guardarPrestamo(copia.get(0), user);
-
+//        System.out.println(copia);
+//        pre.guardarPrestamo(copia.get(0), user);
+        var usersPrestamo = pre.tienePrestamoAtrasado(user);
+        System.out.println(usersPrestamo);
 
 
 
@@ -51,10 +54,13 @@ public class App extends Application {
         hash.add("saik");
         hash.add("opa");
         hash.add("opai");
-//        var libro = new Libro("4314567190", "DON saika", hash, "Estimado", "novela", "english");
-//        var rack = new Rack("rack 1");
-//        var copia = new CopiaLibro(TipoLibro.AUDIOLIBRO, libro, EstadoLibro.DISPONIBLE, 10.0, rack, false );
-
+        var l1 = new Libro("7314567190", "estimado", hash, "Estimado", "novela", "english");
+        var rack = new Rack("rack 2");
+        var c1 = new CopiaLibro(TipoLibro.TAPA_DURA, l1, EstadoLibro.DISPONIBLE, 10.0, rack, false );
+        var r = new RackService(repo);
+//        r.guardarRack(rack);
+//                lib.guardarLibro(l1);
+//        lib.guardarCopia(c1, 3);
 
 //--------------------------------------------------------------
     }

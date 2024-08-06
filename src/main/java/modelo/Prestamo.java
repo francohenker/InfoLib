@@ -53,4 +53,15 @@ public class Prestamo {
     public LocalDateTime getFechaPrestamo(){
         return this.fechaPrestamo;
     }
+
+    @Override
+    public String toString() {
+        return  "id=" + id +
+                ", copiaLibro=" + copiaLibro +
+                ", multa=" + multa +
+                ", fechaPrestamo=" + fechaPrestamo +
+                ", fechaDevolucion=" + fechaDevolucion +
+                ", usuario=" + usuario;
+    }
+
 }

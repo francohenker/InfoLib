@@ -38,22 +38,20 @@ public class PrestamoService {
         this.repositorio.confirmarTransaccion();
     }
 
-    //PROBAR
     //busca la cantidad de prestamos que tiene actuales un usuario
-    protected List<Prestamo> buscarPrestamoPorUsuario(Usuario usuario) {
+    public List<Prestamo> buscarPrestamoPorUsuario(Usuario usuario) {
         this.repositorio.iniciarTransaccion();
-        TypedQuery<Prestamo> query = repositorio.getEntityManager().createQuery("FROM Prestamo p WHERE p.fechaDevolucion IS NULL", Prestamo.class);
+        TypedQuery<Prestamo> query = repositorio.getEntityManager().createQuery("FROM Prestamo p WHERE p.usuario = :usuario AND p.fechaDevolucion IS NULL", Prestamo.class);
         query.setParameter("usuario", usuario);
         return query.getResultList();
 
     }
 
-    //PROBAR
     // busca si el usuario tiene prestamos atrasados
-    protected boolean tienePrestamoAtrasado(Usuario usuario) {
+    public boolean tienePrestamoAtrasado(Usuario usuario) {
         List<Prestamo> prestamos = buscarPrestamoPorUsuario(usuario);
         for (Prestamo prestamo : prestamos) {
-            if (prestamo.getFechaPrestamo().plusDays(10).isAfter(LocalDateTime.now())) { //VERIFICAR
+            if (prestamo.getFechaPrestamo().plusDays(10).isBefore(LocalDateTime.now())) {
                 return true;
             }
         }

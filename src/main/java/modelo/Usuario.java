@@ -62,6 +62,14 @@ public class Usuario {
         return (this.estado == EstadoMiembro.ALTA);
     }
 
+    @Override
+    public String toString() {
+        return  "id=" + id +
+                ", dni='" + dni + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", estado=" + estado;
+    }
 
 
 }
