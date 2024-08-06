@@ -15,7 +15,7 @@ public class UsuarioService {
 
     // guarda un usuario en la base de datos
     public void guardarUsuario(Usuario usuario){
-        if(buscarPorDni(usuario.getDni()) == null){
+        if(buscarPorDni(usuario.getDni()) != null){
             throw new RuntimeException("Usuario existente en la base de datos");
         }
         this.repositorio.iniciarTransaccion();

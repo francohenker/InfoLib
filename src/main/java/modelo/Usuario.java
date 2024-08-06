@@ -1,9 +1,11 @@
 package modelo;
 
 import jakarta.persistence.*;
+
+import java.util.Base64;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.ArrayList;
+
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -22,7 +24,7 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     @Column(name = "estado", length = 4, nullable = false)
     private EstadoMiembro estado = EstadoMiembro.ALTA;
-    @Column(name = "contraseña", length = 20, nullable = false)
+    @Column(name = "contraseña", length = 100, nullable = false)
     private String contraseña;
 
     protected Usuario(){    }
@@ -43,10 +45,13 @@ public class Usuario {
         if(contraseña.length() < 8){
             throw new RuntimeException("La contraseña debe tener al menos 8 caracteres");
         }
+        if(contraseña.length() > 20){
+            throw new RuntimeException("La contraseña debe tener menos de 20 caracteres");
+        }
         this.dni = dni;
         this.nombre = nombre.toUpperCase();
         this.apellido = apellido.toUpperCase();
-        this.contraseña = contraseña;
+        this.contraseña = Base64.getEncoder().encodeToString(contraseña.getBytes());
     }
 
     // metodo estatico para comprobar si un dni es valido
@@ -76,6 +81,8 @@ public class Usuario {
     public boolean isAlta(){
         return (this.estado == EstadoMiembro.ALTA);
     }
+
+
 
     @Override
     public String toString() {

@@ -20,7 +20,7 @@ import java.util.HashSet;
 public class App extends Application {
     private static EntityManagerFactory emf = null;
 
-
+    //objeto temporal donde volcar el usuaio para la sesion
 
     private static Scene scene;
 
@@ -37,15 +37,16 @@ public class App extends Application {
 //        HashSet<String> hash = new HashSet<String>();
         emf = Persistence.createEntityManagerFactory("InfoLib");
         var repo = new Repositorio(emf);
-        var pre = new PrestamoService(repo);
+        var repo2 = new Repositorio(emf);
+        var pre = new PrestamoService(repo2);
         var us = new UsuarioService(repo);
         var lib = new LibroService(repo);
-//        var user = us.buscarPorDni("44539868");
-        us.guardarUsuario(new Usuario("44539868", "saik", "opai", "1234"));
-//        var libro = lib.buscarLibroPorTitulo("estimado");
-//        var copia = lib.buscarCopiasPorIsbn(libro.get(0));
+        var user = us.buscarPorDni("13339868");
+//        us.guardarUsuario(new Usuario("13339868", "user2", "epa", "contraseña"));
+        var libro = lib.buscarLibroPorTitulo("estimado");
+        var copia = lib.buscarCopiasPorIsbn(libro.get(0));
 //        System.out.println(copia);
-//        pre.guardarPrestamo(copia.get(0), user);
+        pre.guardarPrestamo(copia.get(0), user);
 //        var usersPrestamo = pre.buscarPrestamoPorUsuario(user);
 //        System.out.println(usersPrestamo);
 //        var repo2 = new Repositorio(emf);

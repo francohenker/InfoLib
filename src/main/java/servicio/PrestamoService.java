@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import modelo.CopiaLibro;
+import modelo.EstadoLibro;
 import modelo.Prestamo;
 import modelo.Usuario;
 
@@ -24,15 +25,16 @@ public class PrestamoService {
      **/
     public void guardarPrestamo(CopiaLibro copia, Usuario usuario) {
 
-//        if(buscarPrestamoPorUsuario(usuario).size() >= 5){
-//            throw new RuntimeException("Solo se puede tener 5 prestamos activos");
-//        }
-//        if(tienePrestamoAtrasado(usuario)){
-//            throw new RuntimeException("El usuario tiene prestamos atrasados");
-//        }
+        if(buscarPrestamoPorUsuario(usuario).size() >= 5){
+            throw new RuntimeException("Solo se puede tener 5 prestamos activos");
+        }
+        if(tienePrestamoAtrasado(usuario)){
+            throw new RuntimeException("El usuario tiene prestamos atrasados");
+        }
 
 
         Prestamo prestamo = new Prestamo(copia, usuario);
+        copia.setEstado(EstadoLibro.PRESTADO);
         this.repositorio.iniciarTransaccion();
         this.repositorio.insertar(prestamo);
         this.repositorio.confirmarTransaccion();
@@ -40,10 +42,11 @@ public class PrestamoService {
 
     //busca la cantidad de prestamos que tiene actuales un usuario
     public List<Prestamo> buscarPrestamoPorUsuario(Usuario usuario) {
-        this.repositorio.iniciarTransaccion();
+//        this.repositorio.iniciarTransaccion();
         TypedQuery<Prestamo> query = repositorio.getEntityManager().createQuery("FROM Prestamo p WHERE p.usuario = :usuario AND p.fechaDevolucion IS NULL", Prestamo.class);
         query.setParameter("usuario", usuario);
         return query.getResultList();
+//        this.repositorio.cerrar();
 
     }
 

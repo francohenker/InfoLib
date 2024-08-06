@@ -33,6 +33,10 @@ public class Repositorio {
         this.em.getTransaction().rollback();
     }
 
+    public void cerrar() {
+        this.em.close();
+    }
+
     public void insertar(Object o) {
         this.em.persist(o);
     }
