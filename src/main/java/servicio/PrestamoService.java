@@ -48,7 +48,7 @@ public class PrestamoService {
     }
 
     // busca si el usuario tiene prestamos atrasados
-    public boolean tienePrestamoAtrasado(Usuario usuario) {
+    protected boolean tienePrestamoAtrasado(Usuario usuario) {
         List<Prestamo> prestamos = buscarPrestamoPorUsuario(usuario);
         for (Prestamo prestamo : prestamos) {
             if (prestamo.getFechaPrestamo().plusDays(10).isBefore(LocalDateTime.now())) {
@@ -57,6 +57,21 @@ public class PrestamoService {
         }
         return false;
     }
+
+    //CONTROLAR COMO MOSTRAR LA MULTA EN CASO DE HABER UNA
+    // setea la fecha de devolucion del prestamo
+
+    public void devolver(Prestamo prestamo){
+
+        this.repositorio.iniciarTransaccion();
+        prestamo.devolverLibro();
+        this.repositorio.modificar(prestamo);
+        this.repositorio.modificar(prestamo.getCopiaLibro());
+        this.repositorio.confirmarTransaccion();
+
+
+    }
+
 
     //    //IMPLEMENTAR
 //    public List<Usuario> getUsuariosPorLibro(Libro libro){

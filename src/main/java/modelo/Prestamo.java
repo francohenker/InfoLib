@@ -39,10 +39,11 @@ public class Prestamo {
 
     public void devolverLibro(){
         this.fechaDevolucion = LocalDateTime.now();
-        if(fechaDevolucion.isAfter(fechaPrestamo) ){
+        if (fechaPrestamo.plusDays(10).isBefore(LocalDateTime.now()) ) {
             Duration diferencia = Duration.between(fechaPrestamo, fechaDevolucion);
             this.multa = diferencia.toHours() * (copiaLibro.getPrecio() / 24);
         }
+
         copiaLibro.setEstado(EstadoLibro.DISPONIBLE);
     }
 
@@ -54,6 +55,9 @@ public class Prestamo {
         return this.fechaPrestamo;
     }
 
+    public CopiaLibro getCopiaLibro() {
+        return this.copiaLibro;
+    }
     @Override
     public String toString() {
         return  "id=" + id +

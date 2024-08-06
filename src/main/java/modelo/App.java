@@ -45,9 +45,11 @@ public class App extends Application {
         var copia = lib.buscarCopiasPorIsbn(libro.get(0));
 //        System.out.println(copia);
 //        pre.guardarPrestamo(copia.get(0), user);
-        var usersPrestamo = pre.tienePrestamoAtrasado(user);
+        var usersPrestamo = pre.buscarPrestamoPorUsuario(user);
         System.out.println(usersPrestamo);
-
+        var repo2 = new Repositorio(emf);
+        var pre2 = new PrestamoService(repo2);
+//        pre2.devolver(usersPrestamo.get(0));
 
 
         var hash = new HashSet<String>();

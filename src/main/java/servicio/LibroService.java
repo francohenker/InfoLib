@@ -35,8 +35,13 @@ public class LibroService {
         this.repositorio.iniciarTransaccion();
 
         for (int i = 0; i < nCopias; i++) {
-            CopiaLibro nuevaCopia = new CopiaLibro(copia.getTipo(), copia.getLibro(), copia.getEstado(), copia.getPrecio(), copia.getRack(), copia.isCopiaReferencia());
-            this.repositorio.insertar(nuevaCopia);
+            try{
+                CopiaLibro nuevaCopia = new CopiaLibro(copia.getTipo(), copia.getLibro(), copia.getEstado(), copia.getPrecio(), copia.getRack(), copia.isCopiaReferencia());
+                this.repositorio.insertar(nuevaCopia);
+
+            }catch (Exception e){
+                this.repositorio.descartarTransaccion();
+            }
         }
         this.repositorio.confirmarTransaccion();
 
