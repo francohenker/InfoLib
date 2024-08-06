@@ -8,8 +8,8 @@ public class Bibliotecario extends Usuario{
 
     protected Bibliotecario(){    }
 
-    public Bibliotecario(String dni, String nombre, String apellido){
-        super(dni, nombre, apellido);
+    public Bibliotecario(String dni, String nombre, String apellido, String contraseña){
+        super(dni, nombre, apellido, contraseña);
     }
 
 

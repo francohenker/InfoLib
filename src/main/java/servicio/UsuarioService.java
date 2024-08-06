@@ -31,6 +31,7 @@ public class UsuarioService {
         this.repositorio.iniciarTransaccion();
         TypedQuery<Usuario> query =  repositorio.getEntityManager().createQuery("FROM Usuario WHERE dni = :dniBuscado", Usuario.class);
         query.setParameter("dniBuscado", dni);
+
         //en caso de no encontrar usuario con ese dni, retorna null
         // de lo contrario retorna el primer elemento (deberia ser el unico)
         this.repositorio.confirmarTransaccion();

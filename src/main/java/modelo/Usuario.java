@@ -22,21 +22,36 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     @Column(name = "estado", length = 4, nullable = false)
     private EstadoMiembro estado = EstadoMiembro.ALTA;
+    @Column(name = "contraseña", length = 20, nullable = false)
+    private String contraseña;
 
     protected Usuario(){    }
 
-    public Usuario(String dni, String nombre, String apellido){
+    public Usuario(String dni, String nombre, String apellido, String contraseña){
         if(!isValid(dni)){
             throw new RuntimeException("Dni invalido");
+        }
+        if(nombre == null || nombre.isEmpty()){
+            throw new RuntimeException("El nombre no puede ser vacio");
+        }
+        if(apellido == null || apellido.isEmpty()){
+            throw new RuntimeException("El apellido no puede ser vacio");
+        }
+        if(contraseña == null || contraseña.isEmpty()){
+            throw new RuntimeException("La contraseña no puede ser vacia");
+        }
+        if(contraseña.length() < 8){
+            throw new RuntimeException("La contraseña debe tener al menos 8 caracteres");
         }
         this.dni = dni;
         this.nombre = nombre.toUpperCase();
         this.apellido = apellido.toUpperCase();
+        this.contraseña = contraseña;
     }
 
     // metodo estatico para comprobar si un dni es valido
     public static boolean isValid(String dni){
-        String dniRegex = "^\\d{2}\\.\\d{3}\\.\\d{3}$";
+        String dniRegex = "^\\d{8}$";
         Pattern pattern = Pattern.compile(dniRegex);
         Matcher matcher = pattern.matcher(dni);
         return matcher.matches();
