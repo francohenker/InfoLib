@@ -11,11 +11,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import servicio.LibroService;
 import servicio.PrestamoService;
-import servicio.RackService;
 import servicio.UsuarioService;
 
 import java.io.IOException;
-import java.util.HashSet;
 
 public class App extends Application {
     private static EntityManagerFactory emf = null;
@@ -27,7 +25,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/vista/login2.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/vista/login.fxml"));
         scene = new Scene(fxmlLoader.load(), 1080, 720);
         stage.setScene(scene);
         stage.show();
