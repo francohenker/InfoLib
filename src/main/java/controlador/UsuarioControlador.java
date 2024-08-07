@@ -22,9 +22,9 @@ public class UsuarioControlador {
     @FXML
     private Button buttonlibros;
     @FXML
-    private TextField DNIUsuario;
+    private TextField textfieldDNIUsuario;
     @FXML
-    private TextField apellidoUsuario;
+    private TextField textfieldApellidoUsuario;
     @FXML
     private TextField nombreUsuario;
     @FXML
