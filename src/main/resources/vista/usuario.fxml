@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" layoutX="504.8" layoutY="14.0" prefHeight="18.0" prefWidth="110.0" text="ABM USUARIO" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <VBox prefHeight="500.0" prefWidth="110.0" style="-fx-background-color: #2977dd;" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button id="buttonprestamos" fx:id="buttonPagePrestamos" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Prestamos" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets left="5.0" top="90.0" />
+               </VBox.margin>
+            </Button>
+            <Button id="buttonusuarios" fx:id="buttonPageUsuarios" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Usuarios" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets left="5.0" top="70.0" />
+               </VBox.margin>
+            </Button>
+            <Button id="buttonlibros" fx:id="buttonPageLibros" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Libros" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets left="5.0" top="70.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <HBox layoutY="620.0" prefHeight="220.0" prefWidth="1080.0" style="-fx-background-color: #e8f2ff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="10.0" prefWidth="110.0" text="Datos Usuario:">
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </Label>
+            <VBox prefHeight="202.0" prefWidth="170.0">
+               <children>
+                  <Label text="Ingrese el DNI del Usuario">
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="textfieldDNIUsuario" style="-fx-background-color: white;">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="80.0" top="10.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="202.0" prefWidth="170.0">
+               <children>
+                  <Label text="Ingrese el Apellido del Usuario">
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="textfieldApellidoUsuario" style="-fx-background-color: white;">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="80.0" left="10.0" top="10.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="202.0" prefWidth="170.0">
+               <children>
+                  <Label text="Ingrese el Nombre del Usuario">
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="textfieldNombreUsuario" style="-fx-background-color: white;">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Button fx:id="buttonAgregarUsuario" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" text="Agregar">
+                     <VBox.margin>
+                        <Insets left="10.0" top="30.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="30.0" left="10.0" top="10.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="202.0" prefWidth="170.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="191.0" text="Ingrese contraseña del Usuario">
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="textfieldPasswordUsuario" style="-fx-background-color: white;">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Button fx:id="buttonEliminarUsuario" mnemonicParsing="false" prefHeight="26.0" prefWidth="186.0" text="Eliminar">
+                     <VBox.margin>
+                        <Insets left="10.0" top="30.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="30.0" left="10.0" top="10.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox prefHeight="202.0" prefWidth="170.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="191.0" text="Seleccione el rol del Usuario">
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ChoiceBox fx:id="choiceboxRolUsuario" prefHeight="26.0" prefWidth="189.0" style="-fx-background-color: white;">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </ChoiceBox>
+                  <Button fx:id="buttonModificarUsuario" mnemonicParsing="false" prefHeight="26.0" prefWidth="189.0" text="Modificar">
+                     <VBox.margin>
+                        <Insets left="5.0" right="10.0" top="30.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="30.0" left="10.0" top="10.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+      <TableView layoutX="117.0" layoutY="44.0" prefHeight="449.0" prefWidth="960.0" AnchorPane.bottomAnchor="226.39999999999998" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="3.2000000000000455" AnchorPane.topAnchor="44.0">
+        <columns>
+          <TableColumn prefWidth="240.0" text="DNI" />
+          <TableColumn prefWidth="240.0" text="Apellido" />
+            <TableColumn prefWidth="240.0" text="Nombre " />
+            <TableColumn prefWidth="240.0" text="Rol" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
