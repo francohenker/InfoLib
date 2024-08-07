@@ -18,15 +18,22 @@ import java.io.IOException;
 public class App extends Application {
     private static EntityManagerFactory emf = null;
 
-    //objeto temporal donde volcar el usuaio para la sesion
+    //objeto temporal donde volcar el usuaio para controlar la sesion
+//    public static Usuario usuario = new Usuario();
 
     private static Scene scene;
 
 
     @Override
     public void start(Stage stage) throws IOException {
+//        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/vista/usuario.fxml"));
+//        scene = new Scene(fxmlLoader.load(), 1080, 720);
+//        stage.setScene(scene);
+//        stage.setResizable(false);
+//        stage.show();
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/vista/login.fxml"));
-        scene = new Scene(fxmlLoader.load(), 1080, 720);
+        Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
+        stage.setTitle("Inicio de Sesión");
         stage.setScene(scene);
         stage.show();
 

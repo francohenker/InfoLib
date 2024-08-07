@@ -7,17 +7,20 @@ package controlador;
 
 import Repositorio.Repositorio;
 import db.Conexion;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import modelo.App;
+import servicio.Enrutador;
 import servicio.UsuarioService;
+import servicio.Ventana;
 
 public class loginControlador {
     private Repositorio repositorio;
     private UsuarioService usuarioService;
-
-
+    private Ventana ve = new Ventana();
+    private Enrutador en = new Enrutador();
     @FXML
     private TextField campoUsuario;
     @FXML
@@ -27,17 +30,20 @@ public class loginControlador {
 
     @FXML
     public void initialize(){
-        botonIngresar.setOnAction(event -> login());
+        botonIngresar.setOnAction(event -> login(event));
     }
 
     @FXML
-    public void login(){
+    public void login(ActionEvent event){
         var repo = new Repositorio(Conexion.getEntityManagerFactory());
         var us = new UsuarioService(repo);
         String dniUsuario = campoUsuario.getText();
-        String contrasenia = campoContraseña.getText();
-        if(us.checkContraseña(contrasenia, dniUsuario)){
-            System.out.println("login correcto");
+        String contraseña = campoContraseña.getText();
+        try{
+            us.checkContraseña(contraseña, dniUsuario);
+            Enrutador.redirigir(event, "/vista/usuario.fxml");
+        }catch (Exception e){
+            ve.error("Usuario y/o contraseña incorrectos");
         }
 
     }
