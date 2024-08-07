@@ -53,7 +53,7 @@
                         <Insets top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="DNIUsuario" style="-fx-background-color: white;">
+                  <TextField fx:id="textfieldDNIUsuario" style="-fx-background-color: white;">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -70,7 +70,7 @@
                         <Insets top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="apellidoUsuario" style="-fx-background-color: white;">
+                  <TextField fx:id="textfieldApellidoUsuario" style="-fx-background-color: white;">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -87,12 +87,12 @@
                         <Insets top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="nombreUsuario" style="-fx-background-color: white;">
+                  <TextField fx:id="textfieldNombreUsuario" style="-fx-background-color: white;">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
                   </TextField>
-                  <Button fx:id="agregarUsuario" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" text="Agregar">
+                  <Button fx:id="buttonAgregarUsuario" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" text="Agregar">
                      <VBox.margin>
                         <Insets left="10.0" top="30.0" />
                      </VBox.margin>
@@ -149,12 +149,12 @@
          </children>
       </HBox>
       <TableView layoutX="117.0" layoutY="44.0" prefHeight="449.0" prefWidth="960.0" AnchorPane.bottomAnchor="226.39999999999998" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="3.2000000000000455" AnchorPane.topAnchor="44.0">
-        <columns>
-          <TableColumn prefWidth="240.0" text="DNI" />
-          <TableColumn prefWidth="240.0" text="Apellido" />
+         <columns>
+            <TableColumn prefWidth="240.0" text="DNI" />
+            <TableColumn prefWidth="240.0" text="Apellido" />
             <TableColumn prefWidth="240.0" text="Nombre " />
             <TableColumn prefWidth="240.0" text="Rol" />
-        </columns>
+         </columns>
       </TableView>
    </children>
 </AnchorPane>
