@@ -41,9 +41,8 @@ public class Prestamo {
         this.fechaDevolucion = LocalDateTime.now();
         if (fechaPrestamo.plusDays(10).isBefore(LocalDateTime.now()) ) {
             Duration diferencia = Duration.between(fechaPrestamo, fechaDevolucion);
-            this.multa = diferencia.toHours() * (copiaLibro.getPrecio() / 24);
+            this.multa = diferencia.toDays() * copiaLibro.getPrecio();
         }
-
         copiaLibro.setEstado(EstadoLibro.DISPONIBLE);
     }
 

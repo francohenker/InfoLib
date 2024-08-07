@@ -3,10 +3,7 @@ import Repositorio.Repositorio;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
-import modelo.CopiaLibro;
-import modelo.EstadoLibro;
-import modelo.Prestamo;
-import modelo.Usuario;
+import modelo.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,6 +22,9 @@ public class PrestamoService {
      **/
     public void guardarPrestamo(CopiaLibro copia, Usuario usuario) {
 
+        if(usuario.getEstado() == EstadoMiembro.BAJA){
+            throw new RuntimeException("El usuario se encuentra dado de baja");
+        }
         if(buscarPrestamoPorUsuario(usuario).size() >= 5){
             throw new RuntimeException("Solo se puede tener 5 prestamos activos");
         }
@@ -32,11 +32,10 @@ public class PrestamoService {
             throw new RuntimeException("El usuario tiene prestamos atrasados");
         }
 
-
         Prestamo prestamo = new Prestamo(copia, usuario);
-        copia.setEstado(EstadoLibro.PRESTADO);
         this.repositorio.iniciarTransaccion();
         this.repositorio.insertar(prestamo);
+        this.repositorio.modificar(copia);
         this.repositorio.confirmarTransaccion();
     }
 

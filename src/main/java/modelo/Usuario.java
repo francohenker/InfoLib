@@ -82,7 +82,9 @@ public class Usuario {
         return (this.estado == EstadoMiembro.ALTA);
     }
 
-
+    public boolean checkContraseña(String contraseña){
+        return this.contraseña.equals(Base64.getEncoder().encodeToString(contraseña.getBytes()));
+    }
 
     @Override
     public String toString() {

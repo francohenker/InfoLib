@@ -2,8 +2,10 @@ package servicio;
 
 import Repositorio.Repositorio;
 import jakarta.persistence.TypedQuery;
+import modelo.EstadoMiembro;
 import modelo.Usuario;
 
+import java.util.Base64;
 import java.util.List;
 
 public class UsuarioService {
@@ -36,7 +38,33 @@ public class UsuarioService {
         // de lo contrario retorna el primer elemento (deberia ser el unico)
         this.repositorio.confirmarTransaccion();
         return query.getResultList().isEmpty() ? null : query.getResultList().get(0);
-        }
     }
+
+    //modifica el estado de un usuario
+    public void modificarUsuario(Usuario usuario, EstadoMiembro estado){
+        if(usuario.getEstado() == estado){
+            return;
+        }
+        this.repositorio.iniciarTransaccion();
+        this.repositorio.modificar(usuario);
+        this.repositorio.confirmarTransaccion();
+    }
+
+    public boolean checkContraseña(String contraseña, String dni){
+        if(contraseña == null || contraseña.isEmpty()){
+            throw new RuntimeException("La contraseña no puede ser vacia");
+        }
+        if(!Usuario.isValid(dni)){
+            throw new RuntimeException("Dni invalido");
+        }
+        var usuario = buscarPorDni(dni);
+        if(usuario == null){
+            throw new RuntimeException("Usuario no encontrado");
+        }
+
+        return usuario.checkContraseña(contraseña);
+    }
+
+}
 
 

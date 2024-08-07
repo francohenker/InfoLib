@@ -27,10 +27,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/vista/prestamoAlta.fxml"));
-//        scene = new Scene(fxmlLoader.load(), 1080, 720);
-//        stage.setScene(scene);
-//        stage.show();
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/vista/prestamoAlta.fxml"));
+        scene = new Scene(fxmlLoader.load(), 1080, 720);
+        stage.setScene(scene);
+        stage.show();
 
 // ----------------------------------------------------------------
 //// PRUEBAS
@@ -46,7 +46,7 @@ public class App extends Application {
         var libro = lib.buscarLibroPorTitulo("estimado");
         var copia = lib.buscarCopiasPorIsbn(libro.get(0));
 //        System.out.println(copia);
-        pre.guardarPrestamo(copia.get(0), user);
+//        pre.guardarPrestamo(copia.get(2), user);
 //        var usersPrestamo = pre.buscarPrestamoPorUsuario(user);
 //        System.out.println(usersPrestamo);
 //        var repo2 = new Repositorio(emf);
@@ -54,14 +54,14 @@ public class App extends Application {
 //        pre2.devolver(usersPrestamo.get(0));
 
 
-        var hash = new HashSet<String>();
-        hash.add("saik");
-        hash.add("opa");
-        hash.add("opai");
-        var l1 = new Libro("7314567190", "estimado", hash, "Estimado", "novela", "english");
-        var rack = new Rack("rack 2");
-        var c1 = new CopiaLibro(TipoLibro.TAPA_DURA, l1, EstadoLibro.DISPONIBLE, 10.0, rack, false );
-        var r = new RackService(repo);
+//        var hash = new HashSet<String>();
+//        hash.add("saik");
+//        hash.add("opa");
+//        hash.add("opai");
+//        var l1 = new Libro("7314567190", "estimado", hash, "Estimado", "novela", "english");
+//        var rack = new Rack("rack 2");
+//        var c1 = new CopiaLibro(TipoLibro.TAPA_DURA, l1, EstadoLibro.DISPONIBLE, 10.0, rack, false );
+//        var r = new RackService(repo);
 //        r.guardarRack(rack);
 //                lib.guardarLibro(l1);
 //        lib.guardarCopia(c1, 3);

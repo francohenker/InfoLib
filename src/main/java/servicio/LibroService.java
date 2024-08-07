@@ -3,6 +3,7 @@ package servicio;
 import Repositorio.Repositorio;
 import jakarta.persistence.TypedQuery;
 import modelo.CopiaLibro;
+import modelo.EstadoLibro;
 import modelo.Libro;
 import modelo.Rack;
 
@@ -45,6 +46,16 @@ public class LibroService {
         }
         this.repositorio.confirmarTransaccion();
 
+    }
+
+
+    //
+    public void modifcarEstado(CopiaLibro copia, EstadoLibro estado){
+        if(estado == EstadoLibro.PRESTADO){
+            throw new RuntimeException("No se puede modificar el estado directamente a prestado");
+        }
+        copia.setEstado(estado);
+        this.repositorio.modificar(copia);
     }
 
     // busca libros que coincidan con el titulo
