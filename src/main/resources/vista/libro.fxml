@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: white;" fx:controller="controlador.libroControlador" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label alignment="CENTER" layoutX="504.8" layoutY="14.0" prefHeight="18.0" prefWidth="110.0" text="ABM LIBRO" AnchorPane.topAnchor="14.0">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+        <VBox layoutY="44.8" prefHeight="542.0" prefWidth="110.0" style="-fx-background-color: #dee2e6;" AnchorPane.bottomAnchor="133.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="45.0">
+            <children>
+                <Button id="buttonprestamos" fx:id="buttonPagePrestamos" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #0077b6;" text="Prestamos" VBox.vgrow="ALWAYS">
+                    <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="40.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="buttonRack" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #0077b6;" text="Rack">
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="70.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button id="buttonusuarios" fx:id="buttonPageUsuarios" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #0077b6;" text="Usuarios" VBox.vgrow="ALWAYS">
+                    <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="70.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <Button id="buttonlibros" fx:id="buttonPageLibros" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #0077b6;" text="Libros" VBox.vgrow="ALWAYS">
+                    <VBox.margin>
+                        <Insets left="5.0" right="5.0" top="70.0" />
+                    </VBox.margin>
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+            </children>
+            <opaqueInsets>
+                <Insets bottom="5.0" />
+            </opaqueInsets>
+            <padding>
+                <Insets bottom="5.0" />
+            </padding>
+        </VBox>
+        <HBox alignment="CENTER" layoutX="-1.0" layoutY="591.0" prefHeight="126.0" prefWidth="1080.0" style="-fx-background-color: #dee2e6;">
+            <children>
+                <VBox prefHeight="126.0" prefWidth="96.0">
+                    <children>
+                        <Label prefHeight="18.0" prefWidth="73.0" text="Datos Copias:" />
+                        <Label>
+                            <VBox.margin>
+                                <Insets top="90.0" />
+                            </VBox.margin>
+                        </Label>
+                    </children>
+                </VBox>
+                <VBox prefHeight="202.0" prefWidth="157.0">
+                    <children>
+                        <Label prefHeight="18.0" prefWidth="107.0" text="Tipo">
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </Label>
+                        <ChoiceBox fx:id="tipo" prefHeight="18.0" prefWidth="159.0" style="-fx-background-color: white;">
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </ChoiceBox>
+                    </children>
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                </VBox>
+                <VBox prefHeight="202.0" prefWidth="170.0">
+                    <children>
+                        <Label prefHeight="18.0" prefWidth="101.0" text="Estado">
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </Label>
+                        <ChoiceBox fx:id="estado" prefHeight="26.0" prefWidth="172.0" style="-fx-background-color: white;">
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </ChoiceBox>
+                    </children>
+                    <HBox.margin>
+                        <Insets left="5.0" />
+                    </HBox.margin>
+                </VBox>
+                <VBox prefHeight="202.0" prefWidth="170.0">
+                    <children>
+                        <Label text="Copia de Referencia">
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </Label>
+                        <ChoiceBox fx:id="copiaReferencia" prefHeight="26.0" prefWidth="172.0" style="-fx-background-color: white;">
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </ChoiceBox>
+                        <Button fx:id="agregarCopia" mnemonicParsing="false" prefHeight="26.0" prefWidth="189.0" style="-fx-background-color: #0077b6;" text="Agregar">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="6.0" />
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                    <HBox.margin>
+                        <Insets left="5.0" />
+                    </HBox.margin>
+                </VBox>
+                <VBox prefHeight="202.0" prefWidth="170.0">
+                    <children>
+                        <Label prefHeight="18.0" prefWidth="191.0" text="Precio">
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </Label>
+                        <TextField fx:id="precio" style="-fx-background-color: white;">
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </TextField>
+                        <Button fx:id="eliminarCopia" mnemonicParsing="false" prefHeight="26.0" prefWidth="186.0" style="-fx-background-color: #0077b6;" text="Eliminar">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="6.0" />
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                    <HBox.margin>
+                        <Insets left="5.0" />
+                    </HBox.margin>
+                </VBox>
+                <VBox prefHeight="202.0" prefWidth="170.0">
+                    <children>
+                        <Label prefHeight="18.0" prefWidth="191.0" text="Cantidad de Copias">
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </Label>
+                        <TextField fx:id="cantidadCopias" style="-fx-background-color: white;">
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </TextField>
+                        <Button fx:id="modificarCopia" mnemonicParsing="false" prefHeight="26.0" prefWidth="189.0" style="-fx-background-color: #0077b6;" text="Modificar">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="6.0" />
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                    <HBox.margin>
+                        <Insets left="5.0" />
+                    </HBox.margin>
+                </VBox>
+            </children>
+        </HBox>
+        <TableView layoutX="117.0" layoutY="44.0" prefHeight="214.0" prefWidth="960.0" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="3.0">
+            <columns>
+                <TableColumn prefWidth="128.79998475313187" text="ISBN" />
+                <TableColumn prefWidth="246.40003967285156" text="Título" />
+                <TableColumn prefWidth="206.39999389648438" text="Autores" />
+                <TableColumn prefWidth="157.5999755859375" text="Editorial" />
+                <TableColumn prefWidth="128.0" text="Tematica" />
+                <TableColumn prefWidth="92.0" text="Idioma" />
+            </columns>
+        </TableView>
+        <HBox alignment="CENTER" layoutX="118.0" layoutY="260.0" prefHeight="106.0" prefWidth="960.0" style="-fx-background-color: #dee2e6;" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="3.0">
+            <children>
+                <VBox prefHeight="222.0" prefWidth="108.0">
+                    <children>
+                        <Label prefHeight="18.0" prefWidth="89.0" text="Datos Libros:" />
+                        <Label>
+                            <VBox.margin>
+                                <Insets top="90.0" />
+                            </VBox.margin>
+                        </Label>
+                    </children>
+                </VBox>
+                <VBox prefHeight="202.0" prefWidth="157.0">
+                    <children>
+                        <Label prefHeight="18.0" prefWidth="107.0" text="ISBN">
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="isbn" style="-fx-background-color: white;">
+                            <VBox.margin>
+                                <Insets top="15.0" />
+                            </VBox.margin>
+                        </TextField>
+                    </children>
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                </VBox>
+                <VBox prefHeight="202.0" prefWidth="170.0">
+                    <children>
+                        <Label prefHeight="18.0" prefWidth="101.0" text="Título ">
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="titulo" style="-fx-background-color: white;">
+                            <VBox.margin>
+                                <Insets top="15.0" />
+                            </VBox.margin>
+                        </TextField>
+                    </children>
+                    <HBox.margin>
+                        <Insets left="5.0" />
+                    </HBox.margin>
+                </VBox>
+                <VBox prefHeight="202.0" prefWidth="170.0">
+                    <children>
+                        <Label text="Autor/es">
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="autores" style="-fx-background-color: white;">
+                            <VBox.margin>
+                                <Insets top="15.0" />
+                            </VBox.margin>
+                        </TextField>
+                    </children>
+                    <HBox.margin>
+                        <Insets left="5.0" />
+                    </HBox.margin>
+                </VBox>
+                <VBox prefHeight="202.0" prefWidth="170.0">
+                    <children>
+                        <Label prefHeight="18.0" prefWidth="191.0" text="Editorial">
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="editorial" style="-fx-background-color: white;">
+                            <VBox.margin>
+                                <Insets top="15.0" />
+                            </VBox.margin>
+                        </TextField>
+                        <Button fx:id="agregarLibro" mnemonicParsing="false" prefHeight="26.0" prefWidth="186.0" style="-fx-background-color: #0077b6;" text="Agregar">
+                            <VBox.margin>
+                                <Insets top="5.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                    </children>
+                    <HBox.margin>
+                        <Insets left="5.0" />
+                    </HBox.margin>
+                </VBox>
+                <VBox prefHeight="202.0" prefWidth="170.0">
+                    <children>
+                        <Label prefHeight="18.0" prefWidth="191.0" text="Tematica">
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="tematica" style="-fx-background-color: white;">
+                            <VBox.margin>
+                                <Insets top="15.0" />
+                            </VBox.margin>
+                        </TextField>
+                        <Button fx:id="eliminarLibro" mnemonicParsing="false" prefHeight="26.0" prefWidth="189.0" style="-fx-background-color: #0077b6;" text="Eliminar">
+                            <VBox.margin>
+                                <Insets top="5.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                    </children>
+                    <HBox.margin>
+                        <Insets left="5.0" />
+                    </HBox.margin>
+                </VBox>
+                <VBox prefHeight="186.0" prefWidth="166.0">
+                    <children>
+                        <Label prefHeight="18.0" prefWidth="191.0" text="Idioma">
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </Label>
+                        <TextField fx:id="idioma" style="-fx-background-color: white;">
+                            <VBox.margin>
+                                <Insets top="15.0" />
+                            </VBox.margin>
+                        </TextField>
+                        <Button fx:id="modificarLibro" mnemonicParsing="false" prefHeight="26.0" prefWidth="189.0" style="-fx-background-color: #0077b6;" text="Modificar">
+                            <VBox.margin>
+                                <Insets top="5.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                    </children>
+                    <HBox.margin>
+                        <Insets left="5.0" right="30.0" />
+                    </HBox.margin>
+                </VBox>
+            </children>
+        </HBox>
+        <TableView layoutX="117.0" layoutY="393.0" prefHeight="194.0" prefWidth="960.0">
+            <columns>
+                <TableColumn prefWidth="128.79998475313187" text="ID" />
+                <TableColumn prefWidth="246.40003967285156" text="Título" />
+                <TableColumn prefWidth="182.39993286132812" text="Tipo" />
+                <TableColumn prefWidth="136.00006103515625" text="Estado" />
+                <TableColumn prefWidth="102.39990234375" text="Copia Referencia" />
+                <TableColumn prefWidth="205.60009765625" text="Precio" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>
