@@ -41,35 +41,7 @@ public class App extends Application {
 //// PRUEBAS
 //        HashSet<String> hash = new HashSet<String>();
         emf = Persistence.createEntityManagerFactory("InfoLib");
-        var repo = new Repositorio(emf);
-        var repo2 = new Repositorio(emf);
-        var pre = new PrestamoService(repo2);
-        var us = new UsuarioService(repo);
-        var lib = new LibroService(repo);
-        var user = us.buscarPorDni("13339868");
-//        us.guardarUsuario(new Usuario("13339868", "user2", "epa", "contraseña"));
-        var libro = lib.buscarLibroPorTitulo("estimado");
-        var copia = lib.buscarCopiasPorIsbn(libro.get(0));
-//        System.out.println(copia);
-//        pre.guardarPrestamo(copia.get(2), user);
-//        var usersPrestamo = pre.buscarPrestamoPorUsuario(user);
-//        System.out.println(usersPrestamo);
-//        var repo2 = new Repositorio(emf);
-//        var pre2 = new PrestamoService(repo2);
-//        pre2.devolver(usersPrestamo.get(0));
 
-
-//        var hash = new HashSet<String>();
-//        hash.add("saik");
-//        hash.add("opa");
-//        hash.add("opai");
-//        var l1 = new Libro("7314567190", "estimado", hash, "Estimado", "novela", "english");
-//        var rack = new Rack("rack 2");
-//        var c1 = new CopiaLibro(TipoLibro.TAPA_DURA, l1, EstadoLibro.DISPONIBLE, 10.0, rack, false );
-//        var r = new RackService(repo);
-//        r.guardarRack(rack);
-//                lib.guardarLibro(l1);
-//        lib.guardarCopia(c1, 3);
 
 //--------------------------------------------------------------
     }
