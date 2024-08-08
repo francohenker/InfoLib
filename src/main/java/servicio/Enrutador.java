@@ -14,7 +14,6 @@ public class Enrutador {
 
     public static void redirigir(ActionEvent event, String ruta) {
         try {
-
             FXMLLoader loader = new FXMLLoader(App.class.getResource(ruta));
             Parent root = loader.load();
             Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();

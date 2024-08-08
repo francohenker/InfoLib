@@ -59,6 +59,21 @@ public class Libro {
     public String getIsbn(){
         return this.ISBN;
     }
+    public String getTitulo(){
+        return this.titulo;
+    }
+    public Set<String> getAutores(){
+        return this.autores;
+    }
+    public String getEditorial(){
+        return this.editorial;
+    }
+    public String getTematica(){
+        return this.tematica;
+    }
+    public String getIdioma(){
+        return this.idioma;
+    }
 
     @Override
     public String toString(){

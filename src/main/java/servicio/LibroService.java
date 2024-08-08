@@ -96,5 +96,7 @@ public class LibroService {
 
     }
 
-
+    public List<Libro> obtenerTodos(){
+        return this.repositorio.obtenerTodos(Libro.class);
+    }
 }
