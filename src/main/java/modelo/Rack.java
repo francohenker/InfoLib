@@ -34,4 +34,8 @@ public class Rack {
         return this.descripcion;
     }
 
+    public String getId(){
+        return this.id.toString();
+    }
+
 }

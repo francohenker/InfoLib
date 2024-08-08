@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: white;" fx:controller="controlador.libroControlador" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.libroControlador">
     <children>
         <Label alignment="CENTER" layoutX="504.8" layoutY="14.0" prefHeight="18.0" prefWidth="110.0" text="ABM LIBRO" AnchorPane.topAnchor="14.0">
             <font>
@@ -68,7 +68,6 @@
             <children>
                 <VBox prefHeight="126.0" prefWidth="96.0">
                     <children>
-                        <Label prefHeight="18.0" prefWidth="73.0" text="Datos Copias:" />
                         <Label>
                             <VBox.margin>
                                 <Insets top="90.0" />
@@ -131,14 +130,6 @@
                                 <Insets top="10.0" />
                             </VBox.margin>
                         </ChoiceBox>
-                        <Button fx:id="agregarCopia" mnemonicParsing="false" prefHeight="26.0" prefWidth="189.0" style="-fx-background-color: #0077b6;" text="Agregar">
-                            <font>
-                                <Font name="System Bold" size="12.0" />
-                            </font>
-                            <VBox.margin>
-                                <Insets top="6.0" />
-                            </VBox.margin>
-                        </Button>
                     </children>
                     <HBox.margin>
                         <Insets left="5.0" />
@@ -159,7 +150,7 @@
                                 <Insets top="10.0" />
                             </VBox.margin>
                         </TextField>
-                        <Button fx:id="eliminarCopia" mnemonicParsing="false" prefHeight="26.0" prefWidth="186.0" style="-fx-background-color: #0077b6;" text="Eliminar">
+                        <Button fx:id="agregarCopia" mnemonicParsing="false" prefHeight="26.0" prefWidth="189.0" style="-fx-background-color: #0077b6;" text="Agregar">
                             <font>
                                 <Font name="System Bold" size="12.0" />
                             </font>
@@ -187,7 +178,7 @@
                                 <Insets top="10.0" />
                             </VBox.margin>
                         </TextField>
-                        <Button fx:id="modificarCopia" mnemonicParsing="false" prefHeight="26.0" prefWidth="189.0" style="-fx-background-color: #0077b6;" text="Modificar">
+                        <Button fx:id="eliminarCopia" mnemonicParsing="false" prefHeight="26.0" prefWidth="186.0" style="-fx-background-color: #0077b6;" text="Eliminar">
                             <font>
                                 <Font name="System Bold" size="12.0" />
                             </font>
@@ -200,28 +191,48 @@
                         <Insets left="5.0" />
                     </HBox.margin>
                 </VBox>
+            <VBox prefHeight="200.0" prefWidth="170.0">
+               <children>
+                  <Label text="Rack">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ChoiceBox fx:id="choicerack" prefWidth="170.0" style="-fx-background-color: white;">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </ChoiceBox>
+                        <Button fx:id="modificarCopia" mnemonicParsing="false" prefHeight="26.0" prefWidth="189.0" style="-fx-background-color: #0077b6;" text="Modificar">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                     <VBox.margin>
+                        <Insets top="6.0" />
+                     </VBox.margin>
+                        </Button>
+               </children>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </VBox>
             </children>
         </HBox>
-        <TableView fx:id="tablelibro" layoutX="117.0" layoutY="44.0" prefHeight="214.0" prefWidth="960.0" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="3.0">
+        <TableView fx:id="tablelibro" layoutX="110.0" layoutY="44.0" prefHeight="217.0" prefWidth="967.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="3.0">
             <columns>
                 <TableColumn fx:id="isbncolumn" prefWidth="128.79998475313187" text="ISBN" />
                 <TableColumn fx:id="titulocolumn" prefWidth="246.40003967285156" text="Título" />
                 <TableColumn fx:id="autorescolumn" prefWidth="206.39999389648438" text="Autores" />
                 <TableColumn fx:id="editorialcolumn" prefWidth="157.5999755859375" text="Editorial" />
                 <TableColumn fx:id="tematicacolumn" prefWidth="128.0" text="Tematica" />
-                <TableColumn fx:id="idiomacolumn" prefWidth="92.0" text="Idioma" />
+                <TableColumn fx:id="idiomacolumn" prefWidth="97.0" text="Idioma" />
             </columns>
         </TableView>
-        <HBox alignment="CENTER" layoutX="118.0" layoutY="260.0" prefHeight="106.0" prefWidth="960.0" style="-fx-background-color: #dee2e6;" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="3.0">
+        <HBox alignment="CENTER" layoutX="110.0" layoutY="260.0" prefHeight="133.0" prefWidth="967.0" style="-fx-background-color: #dee2e6;" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="3.0">
             <children>
-                <VBox prefHeight="222.0" prefWidth="108.0">
+                <VBox prefHeight="133.0" prefWidth="115.0">
                     <children>
-                        <Label prefHeight="18.0" prefWidth="89.0" text="Datos Libros:" />
-                        <Label>
-                            <VBox.margin>
-                                <Insets top="90.0" />
-                            </VBox.margin>
-                        </Label>
+                        <Label prefHeight="18.0" prefWidth="98.0" text="Datos Libros:" />
                     </children>
                 </VBox>
                 <VBox prefHeight="202.0" prefWidth="157.0">
@@ -241,7 +252,7 @@
                         </TextField>
                     </children>
                     <HBox.margin>
-                        <Insets />
+                        <Insets left="5.0" />
                     </HBox.margin>
                 </VBox>
                 <VBox prefHeight="202.0" prefWidth="170.0">
@@ -370,14 +381,15 @@
                 </VBox>
             </children>
         </HBox>
-        <TableView fx:id="tablecopia" layoutX="117.0" layoutY="393.0" prefHeight="194.0" prefWidth="960.0">
+        <TableView fx:id="tablecopia" layoutX="110.0" layoutY="393.0" prefHeight="194.0" prefWidth="967.0">
             <columns>
-                <TableColumn fx:id="cantidadcopia" prefWidth="128.79998475313187" text="Cantidad" />
-                <TableColumn fx:id="titulocopia" prefWidth="246.40003967285156" text="Título" />
-                <TableColumn fx:id="tipocopia" prefWidth="182.39993286132812" text="Tipo" />
-                <TableColumn fx:id="estadocopia" prefWidth="136.00006103515625" text="Estado" />
-                <TableColumn fx:id="referenciacopia" prefWidth="102.39990234375" text="Copia Referencia" />
-                <TableColumn fx:id="preciocopia" prefWidth="205.60009765625" text="Precio" />
+                <TableColumn fx:id="titulocopia" prefWidth="218.0" text="Título" />
+                <TableColumn fx:id="tipocopia" prefWidth="139.0" text="Tipo" />
+                <TableColumn fx:id="estadocopia" prefWidth="157.0" text="Estado" />
+                <TableColumn fx:id="referenciacopia" prefWidth="129.0" text="Copia Referencia" />
+                <TableColumn fx:id="cantidadcopia" prefWidth="77.0" text="Cantidad" />
+                <TableColumn fx:id="preciocopia" prefWidth="115.0" text="Precio" />
+            <TableColumn fx:id="columnrack" prefWidth="124.0" text="Rack" />
             </columns>
         </TableView>
     </children>

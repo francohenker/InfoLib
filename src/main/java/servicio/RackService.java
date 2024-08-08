@@ -3,6 +3,8 @@ package servicio;
 import Repositorio.Repositorio;
 import modelo.Rack;
 
+import java.util.List;
+
 public class RackService {
     private Repositorio repositorio;
 
@@ -20,6 +22,15 @@ public class RackService {
         this.repositorio.iniciarTransaccion();
         this.repositorio.eliminar(rack);
         this.repositorio.confirmarTransaccion();
+    }
+    public void modificarRack(Rack rack){
+        this.repositorio.iniciarTransaccion();
+        this.repositorio.modificar(rack);
+        this.repositorio.confirmarTransaccion();
+    }
+
+    public List<Rack> obtenerTodos(){
+        return this.repositorio.obtenerTodos(Rack.class);
     }
 
 }

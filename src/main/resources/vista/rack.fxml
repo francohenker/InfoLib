@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: white;" fx:controller="controlador.rackControlador" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label alignment="CENTER" layoutX="504.8" layoutY="14.0" prefHeight="18.0" prefWidth="110.0" text="ABM RACK" AnchorPane.topAnchor="14.0">
             <font>
@@ -22,7 +22,7 @@
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Button>
-                <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #0077b6;" text="Rack">
+                <Button fx:id="buttonRack" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #0077b6;" text="Rack">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
@@ -130,9 +130,9 @@
                 </VBox>
             </children>
         </HBox>
-        <TableView layoutX="117.0" layoutY="44.0" prefHeight="449.0" prefWidth="960.0" AnchorPane.bottomAnchor="226.39999999999998" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="3.2000000000000455" AnchorPane.topAnchor="44.0">
+        <TableView fx:id="tvrack" layoutX="117.0" layoutY="44.0" prefHeight="449.0" prefWidth="960.0" AnchorPane.bottomAnchor="226.39999999999998" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="3.2000000000000455" AnchorPane.topAnchor="44.0">
             <columns>
-                <TableColumn fx:id="columnaDecoracion" prefWidth="92.79997712373734" />
+                <TableColumn fx:id="columnaId" prefWidth="92.79997712373734" text="ID"/>
                 <TableColumn fx:id="columnadescripcion" prefWidth="863.1999969482422" text="Descripción" />
             </columns>
         </TableView>
