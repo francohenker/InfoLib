@@ -66,6 +66,8 @@ public class UsuarioControlador {
     private TableColumn <Usuario, String> nombrecolumna;
     @FXML
     private TableColumn <Usuario, String> rolcolumna;
+    @FXML
+    private ChoiceBox estadousuario;
 
     @FXML
     void initialize() {
@@ -81,6 +83,9 @@ public class UsuarioControlador {
         apellidocolumna.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getApellido()));
         nombrecolumna.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
         rolcolumna.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDni()));
+
+        estadousuario.setItems(FXCollections.observableArrayList(EstadoMiembro.values()));
+
 
         // Configurar el doble clic para cargar los datos en los campos de texto
         // y el color rojo de los usuarios dados de BAJA del sistema
@@ -119,8 +124,14 @@ public class UsuarioControlador {
 
     private void rellenarCampos(Usuario usuario){
         textfieldDNIUsuario.setText(usuario.getDni());
+        textfieldDNIUsuario.setDisable(true);
         textfieldNombreUsuario.setText(usuario.getNombre());
+        textfieldNombreUsuario.setDisable(true);
         textfieldApellidoUsuario.setText(usuario.getApellido());
+        textfieldApellidoUsuario.setDisable(true);
+        textfieldPasswordUsuario.setDisable(true);
+        estadousuario.setValue(usuario.getEstado());
+
     }
 
 
