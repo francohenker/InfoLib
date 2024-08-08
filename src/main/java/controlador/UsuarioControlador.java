@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import modelo.App;
+import modelo.Bibliotecario;
 import modelo.EstadoMiembro;
 import modelo.Usuario;
 import servicio.Enrutador;
@@ -23,6 +24,7 @@ import servicio.Ventana;
 
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static modelo.App.setRoot;
 
@@ -78,13 +80,23 @@ public class UsuarioControlador {
         buttonPageUsuarios.setOnAction(event -> ventanaUsuario(event));
 
 //        buttonAgregarUsuario.setOnAction(event -> cargarUsuario());
+
+
         // configura los tipos de valores de la tabla
         dnicolumna.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDni()));
         apellidocolumna.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getApellido()));
         nombrecolumna.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
-        rolcolumna.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDni()));
+        rolcolumna.setCellValueFactory(cellData -> {
+            Usuario usuario = cellData.getValue();
+            if (usuario instanceof Bibliotecario) {
+                return new SimpleStringProperty("BIBLIOTECARIO");
+            } else {
+                return new SimpleStringProperty("USUARIO");
+            }
+        });
 
         estadousuario.setItems(FXCollections.observableArrayList(EstadoMiembro.values()));
+        choiceboxRolUsuario.setItems(FXCollections.observableArrayList("BIBLIOTECARIO", "USUARIO"));
 
 
         // Configurar el doble clic para cargar los datos en los campos de texto
@@ -129,9 +141,10 @@ public class UsuarioControlador {
         textfieldNombreUsuario.setDisable(true);
         textfieldApellidoUsuario.setText(usuario.getApellido());
         textfieldApellidoUsuario.setDisable(true);
+        textfieldPasswordUsuario.setText("**********");
         textfieldPasswordUsuario.setDisable(true);
         estadousuario.setValue(usuario.getEstado());
-
+        choiceboxRolUsuario.setValue(usuario instanceof Bibliotecario ? "BIBLIOTECARIO" : "USUARIO");
     }
 
 
@@ -150,9 +163,13 @@ public class UsuarioControlador {
 
     private void cargarTabla(){
         var us = new UsuarioService(new Repositorio(Conexion.getEntityManagerFactory()));
-        List<Usuario> personas = us.obtenerTodos();
+        List<Usuario> usuarios = us.obtenerTodos();
+        List<Bibliotecario> bibliotecarios = usuarios.stream()
+                .filter(usuario -> usuario instanceof Bibliotecario)
+                .map(usuario -> (Bibliotecario) usuario)
+                .collect(Collectors.toList());
 
-        ObservableList<Usuario> listaPersonas = FXCollections.observableArrayList(personas);
+        ObservableList<Usuario> listaPersonas = FXCollections.observableArrayList(usuarios);
 
         tvusuario.setItems(listaPersonas);
     }

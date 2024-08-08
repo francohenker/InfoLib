@@ -126,7 +126,7 @@
                                 <Font size="13.0" />
                             </font>
                         </Label>
-                        <ChoiceBox fx:id="copiaReferencia" prefHeight="26.0" prefWidth="172.0" style="-fx-background-color: white;">
+                        <ChoiceBox fx:id="referencia" prefHeight="26.0" prefWidth="172.0" style="-fx-background-color: white;">
                             <VBox.margin>
                                 <Insets top="10.0" />
                             </VBox.margin>
@@ -202,14 +202,14 @@
                 </VBox>
             </children>
         </HBox>
-        <TableView layoutX="117.0" layoutY="44.0" prefHeight="214.0" prefWidth="960.0" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="3.0">
+        <TableView fx:id="tablelibro" layoutX="117.0" layoutY="44.0" prefHeight="214.0" prefWidth="960.0" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="3.0">
             <columns>
-                <TableColumn prefWidth="128.79998475313187" text="ISBN" />
-                <TableColumn prefWidth="246.40003967285156" text="Título" />
-                <TableColumn prefWidth="206.39999389648438" text="Autores" />
-                <TableColumn prefWidth="157.5999755859375" text="Editorial" />
-                <TableColumn prefWidth="128.0" text="Tematica" />
-                <TableColumn prefWidth="92.0" text="Idioma" />
+                <TableColumn fx:id="isbncolumn" prefWidth="128.79998475313187" text="ISBN" />
+                <TableColumn fx:id="titulocolumn" prefWidth="246.40003967285156" text="Título" />
+                <TableColumn fx:id="autorescolumn" prefWidth="206.39999389648438" text="Autores" />
+                <TableColumn fx:id="editorialcolumn" prefWidth="157.5999755859375" text="Editorial" />
+                <TableColumn fx:id="tematicacolumn" prefWidth="128.0" text="Tematica" />
+                <TableColumn fx:id="idiomacolumn" prefWidth="92.0" text="Idioma" />
             </columns>
         </TableView>
         <HBox alignment="CENTER" layoutX="118.0" layoutY="260.0" prefHeight="106.0" prefWidth="960.0" style="-fx-background-color: #dee2e6;" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="3.0">
@@ -370,14 +370,14 @@
                 </VBox>
             </children>
         </HBox>
-        <TableView layoutX="117.0" layoutY="393.0" prefHeight="194.0" prefWidth="960.0">
+        <TableView fx:id="tablecopia" layoutX="117.0" layoutY="393.0" prefHeight="194.0" prefWidth="960.0">
             <columns>
-                <TableColumn prefWidth="128.79998475313187" text="ID" />
-                <TableColumn prefWidth="246.40003967285156" text="Título" />
-                <TableColumn prefWidth="182.39993286132812" text="Tipo" />
-                <TableColumn prefWidth="136.00006103515625" text="Estado" />
-                <TableColumn prefWidth="102.39990234375" text="Copia Referencia" />
-                <TableColumn prefWidth="205.60009765625" text="Precio" />
+                <TableColumn fx:id="cantidadcopia" prefWidth="128.79998475313187" text="ID" />
+                <TableColumn fx:id="titulocopia" prefWidth="246.40003967285156" text="Título" />
+                <TableColumn fx:id="tipocopia" prefWidth="182.39993286132812" text="Tipo" />
+                <TableColumn fx:id="estadocopia" prefWidth="136.00006103515625" text="Estado" />
+                <TableColumn fx:id="referenciacopia" prefWidth="102.39990234375" text="Copia Referencia" />
+                <TableColumn fx:id="preciocopia" prefWidth="205.60009765625" text="Precio" />
             </columns>
         </TableView>
     </children>

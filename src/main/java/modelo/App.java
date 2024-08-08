@@ -31,7 +31,7 @@ public class App extends Application {
 //        stage.setScene(scene);
 //        stage.setResizable(false);
 //        stage.show();
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/vista/libro.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/vista/usuario.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
         stage.setTitle("Inicio de Sesión");
         stage.setScene(scene);
