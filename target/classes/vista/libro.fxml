@@ -372,7 +372,7 @@
         </HBox>
         <TableView fx:id="tablecopia" layoutX="117.0" layoutY="393.0" prefHeight="194.0" prefWidth="960.0">
             <columns>
-                <TableColumn fx:id="cantidadcopia" prefWidth="128.79998475313187" text="ID" />
+                <TableColumn fx:id="cantidadcopia" prefWidth="128.79998475313187" text="Cantidad" />
                 <TableColumn fx:id="titulocopia" prefWidth="246.40003967285156" text="Título" />
                 <TableColumn fx:id="tipocopia" prefWidth="182.39993286132812" text="Tipo" />
                 <TableColumn fx:id="estadocopia" prefWidth="136.00006103515625" text="Estado" />
