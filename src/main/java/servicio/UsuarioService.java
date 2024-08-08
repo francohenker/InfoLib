@@ -2,6 +2,7 @@ package servicio;
 
 import Repositorio.Repositorio;
 import jakarta.persistence.TypedQuery;
+import modelo.Bibliotecario;
 import modelo.EstadoMiembro;
 import modelo.Usuario;
 
@@ -40,6 +41,7 @@ public class UsuarioService {
         return query.getResultList().isEmpty() ? null : query.getResultList().get(0);
     }
 
+
     //modifica el estado de un usuario
     public void modificarUsuario(Usuario usuario, EstadoMiembro estado){
         if(usuario.getEstado() == estado){
@@ -48,6 +50,18 @@ public class UsuarioService {
         this.repositorio.iniciarTransaccion();
         this.repositorio.modificar(usuario);
         this.repositorio.confirmarTransaccion();
+    }
+    public boolean esBibliotecario(Long usuarioId) {
+
+        try {
+            String hql = "SELECT COUNT(b) FROM Bibliotecario b WHERE b.id = :usuarioId";
+            Long count = this.repositorio.getEntityManager().createQuery(hql, Long.class)
+                    .setParameter("usuarioId", usuarioId)
+                    .getSingleResult();
+            return count > 0;
+        } finally {
+            this.repositorio.cerrar();
+        }
     }
 
     public boolean checkContraseña(String contraseña, String dni){
@@ -65,6 +79,9 @@ public class UsuarioService {
         return usuario.checkContraseña(contraseña);
     }
 
+    public List<Usuario> obtenerTodos(){
+        return this.repositorio.obtenerTodos(Usuario.class);
+    }
 }
 
 
