@@ -44,35 +44,37 @@ public class UsuarioControlador {
     @FXML
     private Button buttonPageLibros;
     @FXML
+    private Button buttonRack;
+    @FXML
+    private Button buttonAgregarUsuario;
+    @FXML
+    private Button buttonEliminarUsuario;
+    @FXML
+    private Button buttonModificarUsuario;
+    @FXML
+    private Button buttonlimpiar;
+    @FXML
     private TextField textfieldDNIUsuario;
     @FXML
     private TextField textfieldApellidoUsuario;
     @FXML
-    private Button buttonRack;
-    @FXML
     private TextField textfieldNombreUsuario;
-    @FXML
-    private Button buttonAgregarUsuario;
     @FXML
     private TextField textfieldPasswordUsuario;
     @FXML
-    private Button buttonEliminarUsuario;
-    @FXML
     private ChoiceBox choiceboxRolUsuario;
     @FXML
-    private Button buttonModificarUsuario;
-    @FXML
-    private TableView  tvusuario;
-    @FXML
-    private TableColumn <Usuario, String> dnicolumna;
-    @FXML
-    private TableColumn <Usuario, String> apellidocolumna;
-    @FXML
-    private TableColumn <Usuario, String> nombrecolumna;
-    @FXML
-    private TableColumn <Usuario, String> rolcolumna;
+    private TableView tvusuario;
     @FXML
     private ChoiceBox estadousuario;
+    @FXML
+    private TableColumn<Usuario, String> dnicolumna;
+    @FXML
+    private TableColumn<Usuario, String> apellidocolumna;
+    @FXML
+    private TableColumn<Usuario, String> nombrecolumna;
+    @FXML
+    private TableColumn<Usuario, String> rolcolumna;
 
     @FXML
     void initialize() {
@@ -90,12 +92,14 @@ public class UsuarioControlador {
         buttonEliminarUsuario.setOnAction(event -> eliminarUsuario());
         buttonModificarUsuario.setOnAction(event -> modificarUsuario());
 
+        buttonlimpiar.setOnAction(event -> limpiarCampos());
+
         // configura los tipos de valores de la tabla
         dnicolumna.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDni()));
         apellidocolumna.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getApellido()));
         nombrecolumna.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
 
-        apellidocolumna.textProperty().addListener(new ChangeListener<String>() {
+        textfieldApellidoUsuario.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 // Regex que permite solo letras (mayúsculas y minúsculas)
@@ -105,8 +109,6 @@ public class UsuarioControlador {
                 }
             }
         });
-
-
 
 
         rolcolumna.setCellValueFactory(cellData -> {
@@ -120,6 +122,7 @@ public class UsuarioControlador {
 
         estadousuario.setItems(FXCollections.observableArrayList(EstadoMiembro.values()));
         estadousuario.setDisable(true);
+        estadousuario.setValue(EstadoMiembro.ALTA);
         choiceboxRolUsuario.setItems(FXCollections.observableArrayList("BIBLIOTECARIO", "USUARIO"));
 
 
@@ -161,14 +164,14 @@ public class UsuarioControlador {
         cargarTabla();
     }
 
-    private void rellenarCampos(Usuario usuario){
+    private void rellenarCampos(Usuario usuario) {
         textfieldDNIUsuario.setText(usuario.getDni());
         textfieldDNIUsuario.setDisable(true);
         textfieldNombreUsuario.setText(usuario.getNombre());
         textfieldNombreUsuario.setDisable(true);
         textfieldApellidoUsuario.setText(usuario.getApellido());
         textfieldApellidoUsuario.setDisable(true);
-        textfieldPasswordUsuario.setText("**********");
+//        textfieldPasswordUsuario.setText("**********");
         estadousuario.setValue(usuario.getEstado());
         choiceboxRolUsuario.setValue(usuario instanceof Bibliotecario ? "BIBLIOTECARIO" : "USUARIO");
     }
@@ -177,17 +180,20 @@ public class UsuarioControlador {
     private void ventanaPrestamo(ActionEvent event) {
         Enrutador.redirigir(event, "/vista/prestamo.fxml");
     }
+
     private void ventanaLibros(ActionEvent event) {
         Enrutador.redirigir(event, "/vista/libro.fxml");
     }
+
     private void ventanaUsuario(ActionEvent event) {
         Enrutador.redirigir(event, "/vista/usuario.fxml");
     }
+
     private void ventanaRack(ActionEvent event) {
         Enrutador.redirigir(event, "/vista/rack.fxml");
     }
 
-    private void cargarTabla(){
+    private void cargarTabla() {
         var us = new UsuarioService(new Repositorio(Conexion.getEntityManagerFactory()));
         List<Usuario> usuarios = us.obtenerTodos();
         List<Bibliotecario> bibliotecarios = usuarios.stream()
@@ -200,61 +206,94 @@ public class UsuarioControlador {
         tvusuario.setItems(listaPersonas);
     }
 
-    private void cargarCampos(){
+    private void cargarCampos() {
 
     }
 
     private void agregarUsuario() {
-        //APLICAR VALIDACIONES
-        try{
-            if(usuarioService.buscarPorDni(textfieldDNIUsuario.getText()) != null) {
+
+        if (textfieldDNIUsuario.getText().trim().isEmpty()) {
+            Ventana.error("Error", "El dni no puede estar vacío");
+            return;
+        }
+        if (textfieldNombreUsuario.getText().trim().isEmpty()) {
+            Ventana.error("Error", "El nombre no puede estar vacío");
+            return;
+        }
+        if (textfieldApellidoUsuario.getText().trim().isEmpty()) {
+            Ventana.error("Error", "El apellido no puede estar vacío");
+            return;
+        }
+        if (textfieldPasswordUsuario.getText().trim().isEmpty()) {
+            Ventana.error("Error", "La contrasenya no puede estar vacía");
+            return;
+        }
+        if (textfieldPasswordUsuario.getText().trim().length() < 8 || textfieldPasswordUsuario.getText().trim().length() > 20) {
+            Ventana.error("Error", "La contrasenya debe tener entre 8 y 20 caracteres");
+            return;
+        }
+        if(choiceboxRolUsuario.getValue() == null){
+            Ventana.error("Error", "Debe ingresar el rol del miembro");
+            return;
+        }
+        if (!verificarNombre(textfieldNombreUsuario.getText().trim())) {
+            Ventana.error("Error", "El nombre no puede contener símbolos ni números.");
+            return;
+        }
+        if (!verificarNombre(textfieldApellidoUsuario.getText().trim())) {
+            Ventana.error("Error", "El apellido no puede contener símbolos ni números.");
+            return;
+        }
+        try {
+            if (usuarioService.buscarPorDni(textfieldDNIUsuario.getText()) != null) {
                 Ventana.error("El usuario ya existe", "Existe un usuario con este dni en el sistema");
                 return;
-            }else {
-                if(choiceboxRolUsuario.getValue().equals("BIBLIOTECARIO")){
+            } else {
+                if (choiceboxRolUsuario.getValue().equals("BIBLIOTECARIO")) {
                     usuarioService.guardarUsuario(new Bibliotecario(textfieldDNIUsuario.getText(), textfieldNombreUsuario.getText(), textfieldApellidoUsuario.getText(), textfieldPasswordUsuario.getText()));
-                }else{
+                } else {
                     usuarioService.guardarUsuario(new Usuario(textfieldDNIUsuario.getText(), textfieldNombreUsuario.getText(), textfieldApellidoUsuario.getText(), textfieldPasswordUsuario.getText()));
                 }
             }
-        }catch (Exception e){
+            cargarTabla();
+            limpiarCampos();
+        } catch (Exception e) {
             Ventana.error("Error al agregar usuario", e.getMessage());
         }
-        cargarTabla();
-        limpiarCampos();
     }
 
     private void modificarUsuario() {
         Usuario user = (Usuario) tvusuario.getSelectionModel().getSelectedItem();
-        if(user == null){
+        if (user == null) {
             Ventana.error("No hay usuario seleccionado", "No hay usuario seleccionado para modificar");
             return;
         }
-        if(usuarioService.buscarPorDni(textfieldDNIUsuario.getText()) == null) {
+        if (usuarioService.buscarPorDni(textfieldDNIUsuario.getText()) == null) {
             Ventana.error("El usuario no existe", "No existe un usuario con este dni en el sistema para modificar");
-        }else{
+        } else {
             usuarioService.modificarUsuario(user, (EstadoMiembro) estadousuario.getValue(), textfieldPasswordUsuario.getText());
 
         }
         cargarTabla();
         limpiarCampos();
     }
+
     private void eliminarUsuario() {
         Usuario user = (Usuario) tvusuario.getSelectionModel().getSelectedItem();
-        if(user == null){
+        if (user == null) {
             Ventana.error("No hay usuario seleccionado", "No hay usuario seleccionado para dar de baja");
             return;
         }
-        if(usuarioService.buscarPorDni(user.getDni()) == null) {
+        if (usuarioService.buscarPorDni(user.getDni()) == null) {
             Ventana.error("El usuario no existe", "No existe un usuario con este dni en el sistema para dar de baja");
-        }else{
+        } else {
             usuarioService.modificarUsuario(user, EstadoMiembro.BAJA);
         }
         cargarTabla();
         limpiarCampos();
     }
 
-    private void limpiarCampos(){
+    private void limpiarCampos() {
         textfieldApellidoUsuario.setDisable(false);
         textfieldApellidoUsuario.setText("");
         textfieldNombreUsuario.setDisable(false);
@@ -262,44 +301,14 @@ public class UsuarioControlador {
         textfieldDNIUsuario.setDisable(false);
         textfieldDNIUsuario.setText("");
         textfieldPasswordUsuario.setText("");
+        //ver el choiceboxrolusuario como limpiar
     }
 
-    private boolean validChars(String c){
-        String dniRegex = "[a-zA-Z]]";
-        Pattern pattern = Pattern.compile(dniRegex);
-        Matcher matcher = pattern.matcher(c);
-        return matcher.matches();
-    }
-
-    private void stringValidos(TextField campo){
-        if(!validChars(campo.getText())){
-            campo.setText("");
+    private boolean verificarNombre(String nombre) {
+        if (!nombre.isEmpty()) {
+            return nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+");
         }
+        return false;
     }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

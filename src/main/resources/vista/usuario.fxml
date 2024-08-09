@@ -44,8 +44,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.UsuarioControlador">
    <children>
       <Label alignment="CENTER" layoutX="504.8" layoutY="14.0" prefHeight="18.0" prefWidth="110.0" text="ABM USUARIO" AnchorPane.topAnchor="14.0">
@@ -94,14 +92,14 @@
       </VBox>
       <HBox layoutY="620.0" prefHeight="220.0" prefWidth="1080.0" style="-fx-background-color: #dee2e6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <VBox prefHeight="202.0" prefWidth="170.0">
+            <VBox maxHeight="220.0" prefHeight="220.0" prefWidth="170.0">
                <children>
                   <Label text="DNI del Usuario">
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="textfieldDNIUsuario" promptText="45053249" style="-fx-background-color: white;">
+                  <TextField fx:id="textfieldDNIUsuario" promptText="11222333" style="-fx-background-color: white;">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -118,7 +116,7 @@
                         <Insets top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="textfieldApellidoUsuario" style="-fx-background-color: white;">
+                  <TextField fx:id="textfieldApellidoUsuario" promptText="Simpson" style="-fx-background-color: white;">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -128,18 +126,26 @@
                   <Insets bottom="80.0" left="10.0" top="10.0" />
                </HBox.margin>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="170.0">
+            <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="170.0">
                <children>
-                  <Label text="Estado Usuario">
+                  <Label text="Nombre del Usuario">
                      <VBox.margin>
-                        <Insets top="30.0" />
+                        <Insets right="35.0" top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <ChoiceBox fx:id="estadousuario" prefWidth="170.0" style="-fx-background-color: white;">
+                  <TextField fx:id="textfieldNombreUsuario" promptText="Homer" style="-fx-background-color: white;">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
-                  </ChoiceBox>
+                  </TextField>
+                  <Button fx:id="buttonlimpiar" alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: #0077b6;" text="Limpiar">
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
                </children>
                <HBox.margin>
                   <Insets top="10.0" />
@@ -150,12 +156,12 @@
             </VBox>
             <VBox prefHeight="202.0" prefWidth="170.0">
                <children>
-                  <Label text="Nombre del Usuario">
+                  <Label prefHeight="18.0" prefWidth="191.0" text="Contraseña del Usuario">
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="textfieldNombreUsuario" style="-fx-background-color: white;">
+                  <TextField fx:id="textfieldPasswordUsuario" promptText="**********" style="-fx-background-color: white;">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -175,16 +181,16 @@
             </VBox>
             <VBox prefHeight="202.0" prefWidth="170.0">
                <children>
-                  <Label prefHeight="18.0" prefWidth="191.0" text="Contraseña del Usuario">
+                  <Label text="Estado Usuario">
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="textfieldPasswordUsuario" style="-fx-background-color: white;">
+                  <ChoiceBox fx:id="estadousuario" prefWidth="170.0" style="-fx-background-color: white;">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
-                  </TextField>
+                  </ChoiceBox>
                   <Button fx:id="buttonEliminarUsuario" mnemonicParsing="false" prefHeight="26.0" prefWidth="186.0" style="-fx-background-color: #0077b6;" text="Eliminar">
                      <VBox.margin>
                         <Insets left="10.0" top="30.0" />
