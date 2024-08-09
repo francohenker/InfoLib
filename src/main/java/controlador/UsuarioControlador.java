@@ -1,9 +1,4 @@
-/**
- * Sample Skeleton for 'UsuariosABM.fxml' Controller Class
- */
-
 package controlador;
-
 
 import Repositorio.Repositorio;
 import db.Conexion;
@@ -15,27 +10,19 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import modelo.App;
 import modelo.Bibliotecario;
 import modelo.EstadoMiembro;
 import modelo.Usuario;
 import servicio.Enrutador;
-import servicio.LibroService;
 import servicio.UsuarioService;
 import servicio.Ventana;
 
-
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import static modelo.App.setRoot;
 
 public class UsuarioControlador {
     private Repositorio repositorio;
     private UsuarioService usuarioService;
-    private Ventana ve = new Ventana();
 
     @FXML
     private Button buttonPagePrestamos;
@@ -82,10 +69,10 @@ public class UsuarioControlador {
         this.usuarioService = new UsuarioService(repositorio);
 
         //configura la accion de los botones laterales
-        buttonRack.setOnAction(event -> ventanaRack(event));
-        buttonPagePrestamos.setOnAction(event -> ventanaPrestamo(event));
-        buttonPageLibros.setOnAction(event -> ventanaLibros(event));
-        buttonPageUsuarios.setOnAction(event -> ventanaUsuario(event));
+        buttonRack.setOnAction(this::ventanaRack);
+        buttonPagePrestamos.setOnAction(this::ventanaPrestamo);
+        buttonPageLibros.setOnAction(this::ventanaLibros);
+        buttonPageUsuarios.setOnAction(this::ventanaUsuario);
 
         //configura los botones del abm
         buttonAgregarUsuario.setOnAction(event -> agregarUsuario());
@@ -99,17 +86,40 @@ public class UsuarioControlador {
         apellidocolumna.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getApellido()));
         nombrecolumna.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
 
+        //controla la entrada unica de letras en apellido
         textfieldApellidoUsuario.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 // Regex que permite solo letras (mayúsculas y minúsculas)
                 if (!newValue.matches("[a-zA-Z]*")) {
                     // Si el nuevo valor contiene caracteres no permitidos, se borra
-                    apellidocolumna.setText(newValue.replaceAll("[^a-zA-Z]", ""));
+                    textfieldApellidoUsuario.setText(newValue.replaceAll("[^a-zA-Z]", ""));
                 }
             }
         });
 
+        //controla la entrada unica de letras en nombre
+        textfieldNombreUsuario.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                // Regex que permite solo letras (mayúsculas y minúsculas)
+                if (!newValue.matches("[a-zA-Z]*")) {
+                    // Si el nuevo valor contiene caracteres no permitidos, se borra
+                    textfieldNombreUsuario.setText(newValue.replaceAll("[^a-zA-Z]", ""));
+                }
+            }
+        });
+        //controla la entrada unica de numeros en el dni
+        textfieldDNIUsuario.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                // Regex que permite solo letras (mayúsculas y minúsculas)
+                if (!newValue.matches("[0-9]*")) {
+                    // Si el nuevo valor contiene caracteres no permitidos, se borra
+                    textfieldDNIUsuario.setText(newValue.replaceAll("[^0-9]", ""));
+                }
+            }
+        });
 
         rolcolumna.setCellValueFactory(cellData -> {
             Usuario usuario = cellData.getValue();
@@ -129,6 +139,7 @@ public class UsuarioControlador {
         // y el color rojo de los usuarios dados de BAJA del sistema
         tvusuario.setRowFactory(tv -> {
             TableRow<Usuario> row = new TableRow<>() {
+
                 @Override
                 protected void updateItem(Usuario usuario, boolean empty) {
                     super.updateItem(usuario, empty);
@@ -155,10 +166,8 @@ public class UsuarioControlador {
                     choiceboxRolUsuario.setDisable(true);
                 }
             });
-
             return row;
         });
-
         //carga los datos de la base de datos en la tabla
         cargarTabla();
     }
@@ -174,7 +183,6 @@ public class UsuarioControlador {
         estadousuario.setValue(usuario.getEstado());
         choiceboxRolUsuario.setValue(usuario instanceof Bibliotecario ? "BIBLIOTECARIO" : "USUARIO");
     }
-
 
     private void ventanaPrestamo(ActionEvent event) {
         Enrutador.redirigir(event, "/vista/prestamo.fxml");
@@ -207,51 +215,15 @@ public class UsuarioControlador {
 
 
     private void agregarUsuario() {
-        if(estadousuario.getValue().equals(EstadoMiembro.BAJA)){
-            Ventana.error("Error", "No se puede registrar un usuario dado de BAJA");
-            return;
-        }
-        if (textfieldDNIUsuario.getText().trim().isEmpty()) {
-            Ventana.error("Error", "El dni no puede estar vacío");
-            return;
-        }
-        if (textfieldNombreUsuario.getText().trim().isEmpty()) {
-            Ventana.error("Error", "El nombre no puede estar vacío");
-            return;
-        }
-        if (textfieldApellidoUsuario.getText().trim().isEmpty()) {
-            Ventana.error("Error", "El apellido no puede estar vacío");
-            return;
-        }
-        if (textfieldPasswordUsuario.getText().trim().isEmpty()) {
-            Ventana.error("Error", "La contrasenya no puede estar vacía");
-            return;
-        }
-        if (textfieldPasswordUsuario.getText().trim().length() < 8 || textfieldPasswordUsuario.getText().trim().length() > 20) {
-            Ventana.error("Error", "La contrasenya debe tener entre 8 y 20 caracteres");
-            return;
-        }
-        if(choiceboxRolUsuario.getValue() == null){
-            Ventana.error("Error", "Debe ingresar el rol del miembro");
-            return;
-        }
-        if (!verificarNombre(textfieldNombreUsuario.getText().trim())) {
-            Ventana.error("Error", "El nombre no puede contener símbolos ni números.");
-            return;
-        }
-        if (!verificarNombre(textfieldApellidoUsuario.getText().trim())) {
-            Ventana.error("Error", "El apellido no puede contener símbolos ni números.");
-            return;
-        }
         try {
             if (usuarioService.buscarPorDni(textfieldDNIUsuario.getText()) != null) {
                 Ventana.error("El usuario ya existe", "Existe un usuario con este dni en el sistema");
                 return;
             } else {
                 if (choiceboxRolUsuario.getValue().equals("BIBLIOTECARIO")) {
-                    usuarioService.guardarUsuario(new Bibliotecario(textfieldDNIUsuario.getText(), textfieldNombreUsuario.getText(), textfieldApellidoUsuario.getText(), textfieldPasswordUsuario.getText()));
+                    usuarioService.guardarUsuario(new Bibliotecario(textfieldDNIUsuario.getText(), textfieldNombreUsuario.getText(), textfieldApellidoUsuario.getText(), textfieldPasswordUsuario.getText()), textfieldPasswordUsuario.getText());
                 } else {
-                    usuarioService.guardarUsuario(new Usuario(textfieldDNIUsuario.getText(), textfieldNombreUsuario.getText(), textfieldApellidoUsuario.getText(), textfieldPasswordUsuario.getText()));
+                    usuarioService.guardarUsuario(new Usuario(textfieldDNIUsuario.getText(), textfieldNombreUsuario.getText(), textfieldApellidoUsuario.getText(), textfieldPasswordUsuario.getText()), textfieldPasswordUsuario.getText());
                 }
             }
             cargarTabla();
@@ -267,11 +239,18 @@ public class UsuarioControlador {
             Ventana.error("No hay usuario seleccionado", "No hay usuario seleccionado para modificar");
             return;
         }
-        if (usuarioService.buscarPorDni(textfieldDNIUsuario.getText()) == null) {
-            Ventana.error("El usuario no existe", "No existe un usuario con este dni en el sistema para modificar");
-        } else {
-            usuarioService.modificarUsuario(user, (EstadoMiembro) estadousuario.getValue(), textfieldPasswordUsuario.getText());
-
+        try{
+            if (usuarioService.buscarPorDni(textfieldDNIUsuario.getText()) == null) {
+                Ventana.error("El usuario no existe", "No existe un usuario con este dni en el sistema para modificar");
+            } else {
+                if(textfieldPasswordUsuario.getText().trim().isEmpty()){
+                    usuarioService.modificarUsuario(user, (EstadoMiembro) estadousuario.getValue());
+                }else{
+                    usuarioService.modificarUsuario(user, (EstadoMiembro) estadousuario.getValue(), textfieldPasswordUsuario.getText());
+                }
+            }
+        }catch (Exception e){
+            Ventana.error("Error al modificar usuario", e.getMessage());
         }
         cargarTabla();
         limpiarCampos();
@@ -283,10 +262,14 @@ public class UsuarioControlador {
             Ventana.error("No hay usuario seleccionado", "No hay usuario seleccionado para dar de baja");
             return;
         }
-        if (usuarioService.buscarPorDni(user.getDni()) == null) {
-            Ventana.error("El usuario no existe", "No existe un usuario con este dni en el sistema para dar de baja");
-        } else {
-            usuarioService.modificarUsuario(user, EstadoMiembro.BAJA);
+        try{
+            if (usuarioService.buscarPorDni(user.getDni()) == null) {
+                Ventana.error("El usuario no existe", "No existe un usuario con este dni en el sistema para dar de baja");
+            } else {
+                usuarioService.modificarUsuario(user, EstadoMiembro.BAJA);
+            }
+        }catch (Exception e){
+            Ventana.error("Error al dar de baja usuario", e.getMessage());
         }
         cargarTabla();
         limpiarCampos();
@@ -300,14 +283,11 @@ public class UsuarioControlador {
         textfieldNombreUsuario.clear();
         textfieldDNIUsuario.clear();
         textfieldPasswordUsuario.clear();
-        //ver el choiceboxrolusuario como limpiar
+        choiceboxRolUsuario.setValue(null);
+        choiceboxRolUsuario.setDisable(false);
+        estadousuario.setValue(null);
     }
 
-    private boolean verificarNombre(String nombre) {
-        if (!nombre.isEmpty()) {
-            return nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+");
-        }
-        return false;
-    }
+
 
 }

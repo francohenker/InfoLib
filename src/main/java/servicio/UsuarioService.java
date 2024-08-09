@@ -17,13 +17,32 @@ public class UsuarioService {
     }
 
     // guarda un usuario en la base de datos
-    public void guardarUsuario(Usuario usuario){
+    public void guardarUsuario(Usuario usuario, String contraseña){
+        if(usuario.getEstado() == EstadoMiembro.BAJA){
+            throw new RuntimeException("No se puede registrar un usuario dado de BAJA");
+        }
+        if (usuario.getNombre().trim().isEmpty()) {
+            throw new RuntimeException("El nombre no puede estar vacío");
+        }
+        if (usuario.getApellido().trim().isEmpty()) {
+            throw new RuntimeException("El apellido no puede estar vacío");
+        }
+        if (!checkContraseña(contraseña)) {
+            throw new RuntimeException("La contraseña no puede estar vacía");
+        }
+        if (!verificarNombre(usuario.getNombre().trim())) {
+            throw new RuntimeException("El nombre no puede contener símbolos ni números.");
+        }
+        if (!verificarNombre(usuario.getApellido().trim())) {
+            throw new RuntimeException("El apellido no puede contener símbolos ni números.");
+        }
         if(buscarPorDni(usuario.getDni()) != null){
             throw new RuntimeException("Usuario existente en la base de datos");
         }
         if(usuario.getEstado() == EstadoMiembro.BAJA){
             throw new RuntimeException("No se puede registrar un usuario dado de baja");
         }
+
         this.repositorio.iniciarTransaccion();
         this.repositorio.insertar(usuario);
         this.repositorio.confirmarTransaccion();
@@ -59,6 +78,7 @@ public class UsuarioService {
     //modifica el estado de un usuario y su contraseña
     public void modificarUsuario(Usuario usuario, EstadoMiembro estado, String contraseña){
         boolean actualizar = false;
+        checkContraseña(contraseña);
 
         if(usuario.getEstado() != estado){
             usuario.setEstado(estado);
@@ -89,7 +109,7 @@ public class UsuarioService {
     }
 
     public boolean checkContraseña(String contraseña, String dni){
-        if(contraseña == null || contraseña.isEmpty()){
+        if(contraseña == null || contraseña.trim().isEmpty()){
             throw new RuntimeException("La contraseña no puede ser vacia");
         }
         if(!Usuario.isValid(dni)){
@@ -101,6 +121,23 @@ public class UsuarioService {
         }
 
         return usuario.checkContraseña(contraseña);
+    }
+
+    private boolean checkContraseña(String contraseña){
+        if(contraseña == null || contraseña.trim().isEmpty()){
+            throw new RuntimeException("La contraseña no puede ser vacia");
+        }
+        if(contraseña.length() < 8 || contraseña.length() > 20){
+            throw new RuntimeException("La contrasenya debe tener entre 8 y 20 caracteres");
+        }
+        return true;
+    }
+
+    private boolean verificarNombre(String nombre) {
+        if (!nombre.trim().isEmpty()) {
+            return nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+");
+        }
+        return false;
     }
 
     public List<Usuario> obtenerTodos(){

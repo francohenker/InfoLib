@@ -5,7 +5,6 @@ import jakarta.persistence.TypedQuery;
 import modelo.CopiaLibro;
 import modelo.EstadoLibro;
 import modelo.Libro;
-import modelo.Rack;
 
 import java.util.List;
 

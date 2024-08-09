@@ -14,7 +14,7 @@ import servicio.RackService;
 
 import java.util.List;
 
-public class rackControlador {
+public class RackControlador {
     private RackService rackService;
     private Enrutador en;
 
@@ -78,7 +78,6 @@ public class rackControlador {
         });
         //carga los datos de la tabla
         cargarTabla();
-
     }
 
     private void cargarTabla(){

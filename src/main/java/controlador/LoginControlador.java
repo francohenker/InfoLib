@@ -1,9 +1,4 @@
-/**
- * Sample Skeleton for 'Inicio.fxml' Controller Class
- */
-
 package controlador;
-
 
 import Repositorio.Repositorio;
 import db.Conexion;
@@ -15,9 +10,10 @@ import servicio.Enrutador;
 import servicio.UsuarioService;
 import servicio.Ventana;
 
-public class loginControlador {
+public class LoginControlador {
     private Repositorio repositorio;
     private UsuarioService usuarioService;
+
     @FXML
     private TextField campoUsuario;
     @FXML
@@ -42,9 +38,5 @@ public class loginControlador {
         }catch (Exception e){
             Ventana.error("Error","Usuario y/o contraseña incorrectos");
         }
-
     }
-
-
-
 }

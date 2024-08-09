@@ -13,11 +13,10 @@ import modelo.*;
 import servicio.Enrutador;
 import servicio.LibroService;
 import servicio.RackService;
-import servicio.Ventana;
 
 import java.util.List;
 
-public class libroControlador {
+public class LibroControlador {
     private Repositorio repositorio;
     private LibroService libroservice;
     private RackService rackService;
@@ -42,6 +41,10 @@ public class libroControlador {
     private Button eliminarLibro;
     @FXML
     private Button modificarLibro;
+    @FXML
+    private Button limpiarlibro;
+    @FXML
+    private Button limpiarcopia;
     @FXML
     private TextField precio;
     @FXML
@@ -85,8 +88,6 @@ public class libroControlador {
     @FXML
     private TableColumn <CopiaLibro, String> titulocopia;
     @FXML
-    private TableColumn <CopiaLibro, String> cantidadcopia;
-    @FXML
     private ChoiceBox tipo;
     @FXML
     private ChoiceBox estado;
@@ -101,11 +102,25 @@ public class libroControlador {
         this.repositorio = new Repositorio(Conexion.getEntityManagerFactory());
         this.libroservice = new LibroService(repositorio);
         this.rackService = new RackService(repositorio);
+
         //configura la accion de los botones laterales
         buttonRack.setOnAction(event -> ventanaRack(event));
         buttonPagePrestamos.setOnAction(event -> ventanaPrestamo(event));
         buttonPageLibros.setOnAction(event -> ventanaLibros(event));
         buttonPageUsuarios.setOnAction(event -> ventanaUsuario(event));
+
+        //configura los botones del amb libro
+        limpiarlibro.setOnAction(event -> limpiarCamposLibro());
+        agregarLibro.setOnAction(event -> agregarLibro());
+        modificarLibro.setOnAction(event -> modificarLibro());
+        eliminarLibro.setOnAction(event -> eliminarLibro());
+
+        //configura los botones del amb copia
+        limpiarcopia.setOnAction(event -> limpiarCamposCopia());
+        agregarCopia.setOnAction(event -> agregarCopia());
+        modificarCopia.setOnAction(event -> modificarCopia());
+        eliminarCopia.setOnAction(event -> eliminarCopia());
+
 
         //configura la tabla de libros
         isbncolumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIsbn()));
@@ -219,9 +234,8 @@ public class libroControlador {
         ObservableList<CopiaLibro> listaCopias = FXCollections.observableArrayList(copias);
 
         tablecopia.setItems(listaCopias);
-//        cantidadcopia.setText("1");
-    }
 
+    }
     private void limpiarCampo(){
         isbn.clear();
         titulo.clear();
@@ -233,6 +247,56 @@ public class libroControlador {
         cantidadCopias.clear();
 
     }
+
+    private void limpiarCamposLibro(){
+        isbn.clear();
+        titulo.clear();
+        autores.clear();
+        editorial.clear();
+        tematica.clear();
+        idioma.clear();
+        isbn.setDisable(false);
+        titulo.setDisable(false);
+        autores.setDisable(false);
+        editorial.setDisable(false);
+        tematica.setDisable(false);
+        idioma.setDisable(false);
+    }
+    private void limpiarCamposCopia(){
+        tipo.setValue(null);
+        estado.setValue(null);
+        precio.clear();
+        referencia.setValue(null);
+        choicerack.setValue(null);
+        cantidadCopias.setDisable(false);
+    }
+
+    private void agregarLibro(){
+
+    }
+    private void eliminarLibro(){
+
+    }
+    private void modificarLibro(){
+
+    }
+    private void agregarCopia(){}
+    private void eliminarCopia(){}
+    private void modificarCopia(){}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
