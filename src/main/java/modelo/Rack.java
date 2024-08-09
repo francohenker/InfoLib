@@ -36,4 +36,9 @@ public class Rack {
         return this.id.toString();
     }
 
+    @Override
+    public String toString() {
+//        return "Rack " + this.getId() + " - " + this.getDescripcion();
+        return this.getDescripcion();
+    }
 }

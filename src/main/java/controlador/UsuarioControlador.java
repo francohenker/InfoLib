@@ -294,12 +294,12 @@ public class UsuarioControlador {
 
     private void limpiarCampos() {
         textfieldApellidoUsuario.setDisable(false);
-        textfieldApellidoUsuario.setText("");
         textfieldNombreUsuario.setDisable(false);
-        textfieldNombreUsuario.setText("");
         textfieldDNIUsuario.setDisable(false);
-        textfieldDNIUsuario.setText("");
-        textfieldPasswordUsuario.setText("");
+        textfieldApellidoUsuario.clear();
+        textfieldNombreUsuario.clear();
+        textfieldDNIUsuario.clear();
+        textfieldPasswordUsuario.clear();
         //ver el choiceboxrolusuario como limpiar
     }
 

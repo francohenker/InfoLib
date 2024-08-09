@@ -56,6 +56,7 @@ public class Repositorio {
     public <T> T obtener(Class<T> clase, Object id) {
         return this.em.find(clase, id);
     }
+
     public <T> List<T> obtenerTodos(Class<T> clase) {
         CriteriaBuilder cb = this.em.getCriteriaBuilder();
         CriteriaQuery<T> consulta = cb.createQuery(clase);

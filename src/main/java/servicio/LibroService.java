@@ -90,7 +90,7 @@ public class LibroService {
 
     // busca copias de un libro por isbn
     public List<CopiaLibro> buscarCopiasPorIsbn(Libro libro){
-        TypedQuery<CopiaLibro> query = repositorio.getEntityManager().createQuery("SELECT c FROM CopiaLibro c WHERE c.libro.ISBN = :isbn AND c.estado = 'DISPONIBLE'", CopiaLibro.class);
+        TypedQuery<CopiaLibro> query = repositorio.getEntityManager().createQuery("SELECT c FROM CopiaLibro c WHERE c.libro.ISBN = :isbn", CopiaLibro.class);
         query.setParameter("isbn", libro.getIsbn());
         return query.getResultList();
 
