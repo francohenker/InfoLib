@@ -8,19 +8,19 @@ import java.util.Optional;
 public class Ventana {
 
 
-    public void error(String s) {
+    public static void error(String header, String text) {
         Alert alertError = new Alert(Alert.AlertType.ERROR);
         alertError.setTitle("Error");
-        alertError.setHeaderText((String) null);
-        alertError.setContentText(s);
+        alertError.setHeaderText(header);
+        alertError.setContentText(text);
         alertError.showAndWait();
     }
 
-    public void exito(String s) {
+    public static void exito(String header, String text) {
         Alert alertExisto = new Alert(Alert.AlertType.INFORMATION);
         alertExisto.setTitle("Exito");
-        alertExisto.setHeaderText((String) null);
-        alertExisto.setContentText(s);
+        alertExisto.setHeaderText(header);
+        alertExisto.setContentText(text);
         alertExisto.showAndWait();
     }
 

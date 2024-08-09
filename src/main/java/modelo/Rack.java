@@ -18,8 +18,6 @@ public class Rack {
     @OneToMany(mappedBy = "rack", cascade = CascadeType.ALL)
     private Set<CopiaLibro> copias  = new HashSet<>();
 
-
-
     public Rack(){    }
 
     public Rack(String descripcion){

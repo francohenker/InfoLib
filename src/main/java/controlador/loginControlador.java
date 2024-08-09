@@ -18,8 +18,6 @@ import servicio.Ventana;
 public class loginControlador {
     private Repositorio repositorio;
     private UsuarioService usuarioService;
-    private Ventana ve = new Ventana();
-    private Enrutador en = new Enrutador();
     @FXML
     private TextField campoUsuario;
     @FXML
@@ -29,20 +27,20 @@ public class loginControlador {
 
     @FXML
     public void initialize(){
+        this.repositorio = new Repositorio(Conexion.getEntityManagerFactory());
+        this.usuarioService = new UsuarioService(repositorio);
         botonIngresar.setOnAction(event -> login(event));
     }
 
     @FXML
     public void login(ActionEvent event){
-        var repo = new Repositorio(Conexion.getEntityManagerFactory());
-        var us = new UsuarioService(repo);
         String dniUsuario = campoUsuario.getText();
         String contraseña = campoContraseña.getText();
         try{
-            us.checkContraseña(contraseña, dniUsuario);
+            usuarioService.checkContraseña(contraseña, dniUsuario);
             Enrutador.redirigir(event, "/vista/usuario.fxml");
         }catch (Exception e){
-            ve.error("Usuario y/o contraseña incorrectos");
+            Ventana.error("Error","Usuario y/o contraseña incorrectos");
         }
 
     }

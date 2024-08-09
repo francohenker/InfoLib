@@ -47,10 +47,31 @@ public class UsuarioService {
         if(usuario.getEstado() == estado){
             return;
         }
+        usuario.setEstado(estado);
         this.repositorio.iniciarTransaccion();
         this.repositorio.modificar(usuario);
         this.repositorio.confirmarTransaccion();
     }
+
+    //modifica el estado de un usuario y su contraseña
+    public void modificarUsuario(Usuario usuario, EstadoMiembro estado, String contraseña){
+        boolean actualizar = false;
+
+        if(usuario.getEstado() != estado){
+            usuario.setEstado(estado);
+            actualizar = true;
+        }
+        if(!usuario.checkContraseña(contraseña)){
+            usuario.setContraseña(contraseña);
+            actualizar = true;
+        }
+        if(actualizar){
+            this.repositorio.iniciarTransaccion();
+            this.repositorio.modificar(usuario);
+            this.repositorio.confirmarTransaccion();
+        }
+    }
+
     public boolean esBibliotecario(Long usuarioId) {
 
         try {

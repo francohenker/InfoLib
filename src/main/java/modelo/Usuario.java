@@ -78,6 +78,14 @@ public class Usuario {
         return this.estado;
     }
 
+    public void setEstado(EstadoMiembro estado){
+        this.estado = estado;
+    }
+
+    public void setContraseña(String contraseña){
+        this.contraseña = Base64.getEncoder().encodeToString(contraseña.getBytes());
+    }
+
     public boolean isAlta(){
         return (this.estado == EstadoMiembro.ALTA);
     }
