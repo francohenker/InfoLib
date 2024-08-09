@@ -121,7 +121,6 @@ public class UsuarioControlador {
         });
 
         estadousuario.setItems(FXCollections.observableArrayList(EstadoMiembro.values()));
-        estadousuario.setDisable(true);
         estadousuario.setValue(EstadoMiembro.ALTA);
         choiceboxRolUsuario.setItems(FXCollections.observableArrayList("BIBLIOTECARIO", "USUARIO"));
 
@@ -206,12 +205,12 @@ public class UsuarioControlador {
         tvusuario.setItems(listaPersonas);
     }
 
-    private void cargarCampos() {
-
-    }
 
     private void agregarUsuario() {
-
+        if(estadousuario.getValue().equals(EstadoMiembro.BAJA)){
+            Ventana.error("Error", "No se puede registrar un usuario dado de BAJA");
+            return;
+        }
         if (textfieldDNIUsuario.getText().trim().isEmpty()) {
             Ventana.error("Error", "El dni no puede estar vacío");
             return;

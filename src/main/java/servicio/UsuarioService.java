@@ -21,6 +21,9 @@ public class UsuarioService {
         if(buscarPorDni(usuario.getDni()) != null){
             throw new RuntimeException("Usuario existente en la base de datos");
         }
+        if(usuario.getEstado() == EstadoMiembro.BAJA){
+            throw new RuntimeException("No se puede registrar un usuario dado de baja");
+        }
         this.repositorio.iniciarTransaccion();
         this.repositorio.insertar(usuario);
         this.repositorio.confirmarTransaccion();
