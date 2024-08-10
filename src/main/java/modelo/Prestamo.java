@@ -46,12 +46,24 @@ public class Prestamo {
         copiaLibro.setEstado(EstadoLibro.DISPONIBLE);
     }
 
+    public Long getId(){
+        return this.id;
+    }
+
     public double getMulta(){
         return this.multa;
     }
 
     public LocalDateTime getFechaPrestamo(){
         return this.fechaPrestamo;
+    }
+
+    public LocalDateTime getFechaDevolucion(){
+        return this.fechaDevolucion;
+    }
+
+    public Usuario getUsuario() {
+        return this.usuario;
     }
 
     public CopiaLibro getCopiaLibro() {

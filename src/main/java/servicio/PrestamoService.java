@@ -74,6 +74,10 @@ public class PrestamoService {
 
     }
 
+    public List<Prestamo> obtenerTodos(){
+        return this.repositorio.obtenerTodos(Prestamo.class);
+
+    }
 
     //    //IMPLEMENTAR
 //    public List<Usuario> getUsuariosPorLibro(Libro libro){

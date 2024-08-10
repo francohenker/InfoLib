@@ -207,16 +207,16 @@ public class LibroControlador {
         // carga la tabla de libros
         cargarLibros();
     }
-    public void ventanaPrestamo(ActionEvent event) {
+    private void ventanaPrestamo(ActionEvent event) {
         Enrutador.redirigir(event, "/vista/prestamo.fxml");
     }
-    public void ventanaLibros(ActionEvent event) {
+    private void ventanaLibros(ActionEvent event) {
         Enrutador.redirigir(event, "/vista/libro.fxml");
     }
-    public void ventanaUsuario(ActionEvent event) {
+    private void ventanaUsuario(ActionEvent event) {
         Enrutador.redirigir(event, "/vista/usuario.fxml");
     }
-    public void ventanaRack(ActionEvent event) {
+    private void ventanaRack(ActionEvent event) {
         Enrutador.redirigir(event, "/vista/rack.fxml");
     }
 

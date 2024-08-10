@@ -22,7 +22,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/vista/libro.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/vista/prestamo.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1080, 720);
         stage.setTitle("Inicio de Sesión");
         stage.setScene(scene);
