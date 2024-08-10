@@ -10,10 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import modelo.CopiaLibro;
-import modelo.Prestamo;
-import modelo.TipoLibro;
-import modelo.Usuario;
+import modelo.*;
 import servicio.Enrutador;
 import servicio.PrestamoService;
 import servicio.UsuarioService;
@@ -192,8 +189,14 @@ public class PrestamoControlador {
         limpiarCampos();
         cargarTabla();
     }
-    private void buscarDni(){}
-    private void buscarId(){}
+    private void buscarDni(){
+//        List<Prestamo> listaprestamo = prestamoservice.getLibrosPorUsuario(usuarioService.buscarPorDni(busquedadni.getText()));
+//        cargarTabla(listaprestamo);
+    }
+    private void buscarId(){
+//        List<Prestamo> listaprestamo = prestamoservice.getUsuariosPorLibro();
+//        cargarTabla();
+    }
 
 
 

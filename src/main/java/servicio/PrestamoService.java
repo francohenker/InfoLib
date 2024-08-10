@@ -112,7 +112,7 @@ public class PrestamoService {
 
     }
 
-    //    //IMPLEMENTAR
+//        //IMPLEMENTAR
 //    public List<Usuario> getUsuariosPorLibro(Libro libro){
 //
 //    }

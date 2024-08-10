@@ -12,8 +12,8 @@ public class Prestamo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
-    @JoinColumn(name = "copialibro_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "copialibro_id", nullable = false, unique = false)
     private CopiaLibro copiaLibro;
     @Column(name = "multa")
     private double multa = 0;

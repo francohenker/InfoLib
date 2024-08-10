@@ -34,7 +34,7 @@ public class LoginControlador {
         String contraseña = campoContraseña.getText();
         try{
             usuarioService.checkContraseña(contraseña, dniUsuario);
-            Enrutador.redirigir(event, "/vista/usuario.fxml");
+            Enrutador.redirigir(event, "/vista/libro.fxml");
         }catch (Exception e){
             Ventana.error("Error","Usuario y/o contraseña incorrectos");
         }
