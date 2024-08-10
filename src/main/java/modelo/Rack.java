@@ -36,6 +36,10 @@ public class Rack {
         return this.id.toString();
     }
 
+    public Set<CopiaLibro> getCopias(){
+        return this.copias;
+    }
+
     @Override
     public String toString() {
 //        return "Rack " + this.getId() + " - " + this.getDescripcion();

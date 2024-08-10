@@ -19,6 +19,9 @@ public class RackService {
     }
 
     public void borrarRack(Rack rack){
+        if(!rack.getCopias().isEmpty()){
+            throw new RuntimeException("No se puede borrar un rack porque tiene copias asociadas");
+        }
         this.repositorio.iniciarTransaccion();
         this.repositorio.eliminar(rack);
         this.repositorio.confirmarTransaccion();

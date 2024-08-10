@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import modelo.Rack;
 import servicio.Enrutador;
 import servicio.RackService;
+import servicio.Ventana;
 
 import java.util.List;
 
@@ -99,9 +100,14 @@ public class RackControlador {
         cargarTabla();
     }
     private void eliminar(){
-        Rack rackSeleccionado = (Rack) tvrack.getSelectionModel().getSelectedItem();
-        rackService.borrarRack(rackSeleccionado);
-        cargarTabla();
+        try{
+            Rack rackSeleccionado = (Rack) tvrack.getSelectionModel().getSelectedItem();
+            rackService.borrarRack(rackSeleccionado);
+            cargarTabla();
+
+        }catch (Exception e){
+            Ventana.error("Error al eliminar rack", e.getMessage());
+        }
     }
     private void modificar(){
         Rack rack = (Rack) tvrack.getSelectionModel().getSelectedItem();

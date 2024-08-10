@@ -24,12 +24,12 @@ public class Ventana {
         alertExisto.showAndWait();
     }
 
-    public Optional<ButtonType> confirmacion(String p, String r) {
+    public static Optional<ButtonType> confirmacion(String header, String text) {
         // Mostrar un Alert de confirmación
         Alert alertConfirmacion = new Alert(Alert.AlertType.CONFIRMATION);
         alertConfirmacion.setTitle("Confirmar");
-        alertConfirmacion.setHeaderText(p);
-        alertConfirmacion.setContentText(r);
+        alertConfirmacion.setHeaderText(header);
+        alertConfirmacion.setContentText(text);
         Optional<ButtonType> resultado = alertConfirmacion.showAndWait();
         return resultado;
     }

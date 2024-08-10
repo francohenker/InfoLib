@@ -1,7 +1,5 @@
 package servicio;
 import Repositorio.Repositorio;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import modelo.*;
 
@@ -20,8 +18,14 @@ public class PrestamoService {
      * no mas de 5 prestamos activos para un usuario
      * no realizar el prestamo si se supero la fecha de entrega de un libro y este no se entrego
      **/
-    public void guardarPrestamo(CopiaLibro copia, Usuario usuario) {
 
+    public void guardarPrestamo(CopiaLibro copia, Usuario usuario) {
+        if(usuario == null){
+            throw new RuntimeException("No se encontro el usuario");
+        }
+        if(copia.isCopiaReferencia()){
+            throw new RuntimeException("No se puede realizar un prestamo de una copia de referencia");
+        }
         if(usuario.getEstado() == EstadoMiembro.BAJA){
             throw new RuntimeException("El usuario se encuentra dado de baja");
         }
@@ -31,21 +35,51 @@ public class PrestamoService {
         if(tienePrestamoAtrasado(usuario)){
             throw new RuntimeException("El usuario tiene prestamos atrasados");
         }
+        if(copia == null){
+            throw new RuntimeException("No se encontro el libro");
+        }
+        if(copia.getEstado() != EstadoLibro.DISPONIBLE){
+            throw new RuntimeException("El libro no se encuentra disponible");
+        }
 
         Prestamo prestamo = new Prestamo(copia, usuario);
         this.repositorio.iniciarTransaccion();
         this.repositorio.insertar(prestamo);
         this.repositorio.modificar(copia);
         this.repositorio.confirmarTransaccion();
+
+    }
+
+
+    //CONTROLAR COMO MOSTRAR LA MULTA EN CASO DE HABER UNA
+    // setea la fecha de devolucion del prestamo
+    public void devolverPrestamo(Prestamo prestamo){
+        if(prestamo.getCopiaLibro().getEstado() == EstadoLibro.PERDIDO){
+            throw new RuntimeException("El libro no se encuentra perdido");
+        }
+        if(prestamo.getCopiaLibro().getEstado() == EstadoLibro.DISPONIBLE){
+            throw new RuntimeException("El libro no se encuentra prestado");
+        }
+
+        this.repositorio.iniciarTransaccion();
+        prestamo.devolverLibro();
+        this.repositorio.modificar(prestamo);
+        this.repositorio.modificar(prestamo.getCopiaLibro());
+        if(prestamo.getMulta() > 0){
+            Ventana.confirmacion("Multas", String.format("El usuario tiene una multa de $%.2f", prestamo.getMulta()));
+        }
+        this.repositorio.confirmarTransaccion();
+
+
     }
 
     //busca la cantidad de prestamos que tiene actuales un usuario
     public List<Prestamo> buscarPrestamoPorUsuario(Usuario usuario) {
-//        this.repositorio.iniciarTransaccion();
+
         TypedQuery<Prestamo> query = repositorio.getEntityManager().createQuery("FROM Prestamo p WHERE p.usuario = :usuario AND p.fechaDevolucion IS NULL", Prestamo.class);
         query.setParameter("usuario", usuario);
         return query.getResultList();
-//        this.repositorio.cerrar();
+
 
     }
 
@@ -60,19 +94,9 @@ public class PrestamoService {
         return false;
     }
 
-    //CONTROLAR COMO MOSTRAR LA MULTA EN CASO DE HABER UNA
-    // setea la fecha de devolucion del prestamo
-
-    public void devolver(Prestamo prestamo){
-
-        this.repositorio.iniciarTransaccion();
-        prestamo.devolverLibro();
-        this.repositorio.modificar(prestamo);
-        this.repositorio.modificar(prestamo.getCopiaLibro());
-        this.repositorio.confirmarTransaccion();
 
 
-    }
+
 
     public List<Prestamo> obtenerTodos(){
         return this.repositorio.obtenerTodos(Prestamo.class);

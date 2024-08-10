@@ -10,18 +10,24 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import modelo.CopiaLibro;
 import modelo.Prestamo;
 import modelo.TipoLibro;
 import modelo.Usuario;
 import servicio.Enrutador;
 import servicio.PrestamoService;
+import servicio.UsuarioService;
+import servicio.Ventana;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class PrestamoControlador {
+    private CopiaLibro copiaLibro;
     private PrestamoService prestamoservice;
+    private UsuarioService usuarioService;
+
     @FXML
     private Button buttonrack;
     @FXML
@@ -75,6 +81,8 @@ public class PrestamoControlador {
     void initialize() {
         Repositorio repositorio = new Repositorio(Conexion.getEntityManagerFactory());
         this.prestamoservice = new PrestamoService(repositorio);
+        this.usuarioService = new UsuarioService(repositorio);
+
 
         //configura la accion de los botones laterales
         buttonrack.setOnAction(this::ventanaRack);
@@ -97,15 +105,27 @@ public class PrestamoControlador {
             return new SimpleStringProperty(date != null ? date.format(formatter) : "");
         } );
         columnadevolucion.setCellValueFactory(celldata -> {
-            LocalDateTime date = celldata.getValue().getFechaPrestamo();
+            LocalDateTime date = celldata.getValue().getFechaDevolucion();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
             return new SimpleStringProperty(date != null ? date.format(formatter) : "");
         });
 
+        //configura los botones de prestamo y busqueda
+        prestamo.setOnAction(event -> prestar());
+        devolucion.setOnAction(event -> devolver());
+        buscardni.setOnAction(event -> buscarDni());
+        buscarid.setOnAction(event -> buscarId());
+        limpiar.setOnAction(event -> limpiarCampos());
+
+        // configura los valores de choicebox tipo de copia
         tipo.getItems().setAll(TipoLibro.values());
 
-
         cargarTabla();
+    }
+
+    public void setCopia(CopiaLibro copiaLibro) {
+        this.copiaLibro = copiaLibro;
+        cargarCamposCopia(copiaLibro);
     }
 
     private void ventanaPrestamo(ActionEvent event) {
@@ -130,8 +150,50 @@ public class PrestamoControlador {
         tvprestamo.setItems(listaprestamo);
     }
 
+    private void cargarCamposCopia(CopiaLibro copia){
+        if(copia != null){
+            tipo.setValue(copiaLibro.getTipo());
+            precio.setText(String.valueOf(copiaLibro.getPrecio()));
+            titulo.setText(copiaLibro.getLibro().getTitulo());
+            tipo.setDisable(true);
+            precio.setDisable(true);
+            titulo.setDisable(true);
+        }
 
+    }
 
+    private void limpiarCampos(){
+        dni.setText("");
+        titulo.setText("");
+        busquedadni.setText("");
+        busquedaid.setText("");
+        precio.setText("");
+    }
+
+    private void prestar(){
+        try {
+            prestamoservice.guardarPrestamo(copiaLibro, usuarioService.buscarPorDni(dni.getText()));
+        }catch (Exception e){
+            Ventana.error("Error al prestar libro", e.getMessage());
+        }
+
+        limpiarCampos();
+        cargarTabla();
+    }
+
+    private void devolver(){
+        try{
+            Prestamo prestamo = (Prestamo) tvprestamo.getSelectionModel().getSelectedItem();
+            prestamoservice.devolverPrestamo(prestamo);
+
+        }catch (Exception e){
+            Ventana.error("Error al devolver libro", e.getMessage());
+        }
+        limpiarCampos();
+        cargarTabla();
+    }
+    private void buscarDni(){}
+    private void buscarId(){}
 
 
 

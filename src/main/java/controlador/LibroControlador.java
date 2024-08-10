@@ -8,9 +8,15 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import modelo.*;
 import servicio.Enrutador;
 import servicio.LibroService;
@@ -204,6 +210,14 @@ public class LibroControlador {
         agregarListeners(busquedatitulo, busquedaautor, busquedatematica);
 
 
+        //configura el doble click para realizar un prestamo
+        tablecopia.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2 && !tablecopia.getSelectionModel().isEmpty()) {
+                CopiaLibro copiaSeleccionada = (CopiaLibro) tablecopia.getSelectionModel().getSelectedItem();
+                abrirPantallaPrestamos(event, copiaSeleccionada);
+            }
+        });
+
         // carga la tabla de libros
         cargarLibros();
     }
@@ -385,6 +399,23 @@ public class LibroControlador {
 
         }catch (Exception e){
             Ventana.error("Error", "Error al buscar el libro:\n" + e.getMessage());
+        }
+    }
+
+    private void abrirPantallaPrestamos(MouseEvent event, CopiaLibro copiaSeleccionada) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/prestamo.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el controlador de la pantalla de préstamos
+            PrestamoControlador prestamoControlador = loader.getController();
+            prestamoControlador.setCopia(copiaSeleccionada);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
