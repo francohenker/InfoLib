@@ -5,7 +5,7 @@ import org.hibernate.Hibernate;
 
 import java.util.HashSet;
 import java.util.Set;
-
+import java.util.stream.Collectors;
 
 
 @Entity
@@ -41,21 +41,18 @@ public class Libro {
         }
         this.ISBN = ISBN;
         this.titulo = titulo.toUpperCase();
-        this.autores = autores;
+        // Convertir todos los valores a mayúsculas
+        Set<String> autoresMayuscula = autores.stream()
+                .map(String::toUpperCase).map(String::trim)
+                .collect(Collectors.toSet());
+
+        this.autores = autoresMayuscula;
         this.editorial = editorial.toUpperCase();
         this.tematica = tematica.toUpperCase();
         this.idioma = idioma.toUpperCase();
         
     }
 
-    // IMPLEMENTAR DESPUES
-    // public void addCopia(Libro libro){
-
-    // }
-
-    // public void removeCopia(Libro libro){
-
-    // }
     public String getIsbn(){
         return this.ISBN;
     }

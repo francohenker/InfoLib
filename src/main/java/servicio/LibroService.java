@@ -14,11 +14,29 @@ public class LibroService {
     public LibroService(Repositorio repositorio) {
         this.repositorio = repositorio;
     }
+
     // persiste los libros en la base de datos en caso de no encontrar libro con igual isbn
     public void guardarLibro(Libro libro) {
-
+        if(libro.getIsbn().trim().isEmpty()){
+            throw new RuntimeException("ISBN no válido");
+        }
         if (!buscarLibroPorIsbn(libro.getIsbn()).isEmpty()) {
             throw new RuntimeException("El libro se encuentra en la biblioteca");
+        }
+        if(libro.getAutores().isEmpty()){
+            throw new RuntimeException("Debe indicar al menos un autor");
+        }
+        if(libro.getEditorial().isEmpty()){
+            throw new RuntimeException("Debe indicar una editorial");
+        }
+        if(libro.getTematica().isEmpty()){
+            throw new RuntimeException("Debe indicar una tematica");
+        }
+        if(libro.getIdioma().isEmpty()){
+            throw new RuntimeException("Debe indicar un idioma");
+        }
+        if(contieneNumeros(libro.getIdioma())){
+            throw new RuntimeException("El idioma no puede contener números");
         }
         this.repositorio.iniciarTransaccion();
         this.repositorio.insertar(libro);
@@ -93,6 +111,10 @@ public class LibroService {
         query.setParameter("isbn", libro.getIsbn());
         return query.getResultList();
 
+    }
+
+    private boolean contieneNumeros(String string){
+        return string.chars().anyMatch(Character::isDigit);
     }
 
     public List<Libro> obtenerTodos(){

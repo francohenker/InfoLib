@@ -3,6 +3,8 @@ package controlador;
 import Repositorio.Repositorio;
 import db.Conexion;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,13 +15,16 @@ import modelo.*;
 import servicio.Enrutador;
 import servicio.LibroService;
 import servicio.RackService;
+import servicio.Ventana;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LibroControlador {
     private Repositorio repositorio;
     private LibroService libroservice;
-    private RackService rackService;
     @FXML
     private Button buttonRack;
     @FXML
@@ -88,6 +93,8 @@ public class LibroControlador {
     @FXML
     private TableColumn <CopiaLibro, String> titulocopia;
     @FXML
+    private TableColumn <CopiaLibro, Rack> columnrack;
+    @FXML
     private ChoiceBox tipo;
     @FXML
     private ChoiceBox estado;
@@ -101,7 +108,7 @@ public class LibroControlador {
     void initialize() {
         this.repositorio = new Repositorio(Conexion.getEntityManagerFactory());
         this.libroservice = new LibroService(repositorio);
-        this.rackService = new RackService(repositorio);
+        RackService rackService = new RackService(repositorio);
 
         //configura la accion de los botones laterales
         buttonRack.setOnAction(event -> ventanaRack(event));
@@ -132,13 +139,11 @@ public class LibroControlador {
 
         //configura la tabla de copia
         preciocopia.setCellValueFactory(new PropertyValueFactory<>("Precio"));
-        referenciacopia.setCellValueFactory(cellData -> {
-            return cellData.getValue().isCopiaReferencia() ? new SimpleStringProperty("SI") : new SimpleStringProperty("NO");
-        });
+        referenciacopia.setCellValueFactory(cellData -> cellData.getValue().isCopiaReferencia() ? new SimpleStringProperty("SI") : new SimpleStringProperty("NO"));
         estadocopia.setCellValueFactory(new PropertyValueFactory<>("estado"));
         tipocopia.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         titulocopia.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLibro().getTitulo()));
-//        cantidadcopia.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().)); //realizar la consulta para saber la cantidad de copias
+        columnrack.setCellValueFactory(new PropertyValueFactory<>("rack"));
 
 
         //configura los textfield de copia
@@ -149,10 +154,20 @@ public class LibroControlador {
         estado.getItems().setAll(EstadoLibro.values());
 
 
+        //controla la entrada de autores separados por comas
+        autores.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                // Regex que permite solo letras (mayúsculas y minúsculas)
+                if (!newValue.matches("[a-zA-Z, ]*")) {
+                    // Si el nuevo valor contiene caracteres no permitidos, se borra
+                    autores.setText(newValue.replaceAll("[^a-zA-Z, ]", ""));
+                }
+            }
+        });
 
 
-
-        // Configura el doble clic para cargar los campos textfield
+        // Configura el doble clic para cargar los campos textfield libro
         tablelibro.setRowFactory( tv -> {
             TableRow<Libro> row = new TableRow<>();
             row.setOnMouseClicked(event ->
@@ -272,15 +287,28 @@ public class LibroControlador {
     }
 
     private void agregarLibro(){
+        try{
+            Set<String> autor = new HashSet<>(Arrays.asList(autores.getText().split(",")));
+            libroservice.guardarLibro(new Libro(isbn.getText(), titulo.getText(), autor, editorial.getText(), tematica.getText(), idioma.getText()));
+            cargarLibros();
+        }catch (Exception e){
+            Ventana.error("Error", "Error al agregar el libro:\n" + e.getMessage());
+        }
+
 
     }
+
     private void eliminarLibro(){
 
     }
     private void modificarLibro(){
 
     }
-    private void agregarCopia(){}
+    private void agregarCopia(){
+        Libro libro = (Libro) tablelibro.getSelectionModel().getSelectedItem();
+        libroservice.guardarCopia(new CopiaLibro((TipoLibro) tipo.getValue(), libro, (EstadoLibro) estado.getValue(), Double.parseDouble(precio.getText()),
+                (Rack) choicerack.getValue(), referencia.getValue().equals("SI")), Integer.parseInt(cantidadCopias.getText()));
+    }
     private void eliminarCopia(){}
     private void modificarCopia(){}
 
