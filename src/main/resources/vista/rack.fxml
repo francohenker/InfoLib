@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: white;" fx:controller="controlador.RackControlador" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.RackControlador">
     <children>
         <Label alignment="CENTER" layoutX="504.8" layoutY="14.0" prefHeight="18.0" prefWidth="110.0" text="ABM RACK" AnchorPane.topAnchor="14.0">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <VBox prefHeight="493.0" prefWidth="110.0" style="-fx-background-color: #dee2e6;" AnchorPane.bottomAnchor="227.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox layoutY="-4.0" prefHeight="513.0" prefWidth="110.0" style="-fx-background-color: #dee2e6;" AnchorPane.bottomAnchor="211.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="-4.0">
             <children>
                 <Button id="buttonprestamos" fx:id="buttonPagePrestamos" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #0077b6;" text="Prestamos" VBox.vgrow="ALWAYS">
                     <VBox.margin>
@@ -132,7 +138,7 @@
         </HBox>
         <TableView fx:id="tvrack" layoutX="117.0" layoutY="44.0" prefHeight="449.0" prefWidth="960.0" AnchorPane.bottomAnchor="226.39999999999998" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="3.2000000000000455" AnchorPane.topAnchor="44.0">
             <columns>
-                <TableColumn fx:id="columnaId" prefWidth="92.79997712373734" text="ID"/>
+                <TableColumn fx:id="columnaId" prefWidth="92.79997712373734" text="ID" />
                 <TableColumn fx:id="columnadescripcion" prefWidth="863.1999969482422" text="Descripción" />
             </columns>
         </TableView>

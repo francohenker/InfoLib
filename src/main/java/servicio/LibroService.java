@@ -45,6 +45,16 @@ public class LibroService {
 
     }
 
+    //eliminar un libro simpre y cuando no posea copias
+    public void eliminarLibro(Libro libro) {
+        if(!buscarCopiasPorIsbn(libro).isEmpty()){
+            throw new RuntimeException("No se puede eliminar un libro que tenga copias");
+        }
+        this.repositorio.iniciarTransaccion();
+        this.repositorio.eliminar(libro);
+        this.repositorio.confirmarTransaccion();
+    }
+
     // persiste las copias del libro en la base de datos
     public void guardarCopia(CopiaLibro copia, int nCopias) {
         if (nCopias < 1) {
@@ -75,18 +85,19 @@ public class LibroService {
 
             }catch (Exception e){
                 this.repositorio.descartarTransaccion();
+                throw new RuntimeException("Error al crear copia\n" + e.getMessage());
             }
         }
         this.repositorio.confirmarTransaccion();
-
     }
 
 
-    //
+    // modifica una copialibro
     public void modifcarCopia(CopiaLibro copia, EstadoLibro estado, Rack rack, double precio){
         if(estado == EstadoLibro.PRESTADO){
             throw new RuntimeException("No se puede modificar el estado directamente a prestado");
         }
+
         this.repositorio.iniciarTransaccion();
         copia.setEstado(estado);
         copia.setRack(rack);

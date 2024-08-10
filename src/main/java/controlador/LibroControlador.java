@@ -37,15 +37,11 @@ public class LibroControlador {
     @FXML
     private Button agregarCopia;
     @FXML
-    private Button eliminarCopia;
-    @FXML
     private Button modificarCopia;
     @FXML
     private Button agregarLibro;
     @FXML
     private Button eliminarLibro;
-    @FXML
-    private Button modificarLibro;
     @FXML
     private Button limpiarlibro;
     @FXML
@@ -119,14 +115,12 @@ public class LibroControlador {
         //configura los botones del amb libro
         limpiarlibro.setOnAction(event -> limpiarCamposLibro());
         agregarLibro.setOnAction(event -> agregarLibro());
-        modificarLibro.setOnAction(event -> modificarLibro());
         eliminarLibro.setOnAction(event -> eliminarLibro());
 
         //configura los botones del amb copia
         limpiarcopia.setOnAction(event -> limpiarCamposCopia());
         agregarCopia.setOnAction(event -> agregarCopia());
         modificarCopia.setOnAction(event -> modificarCopia());
-        eliminarCopia.setOnAction(event -> eliminarCopia());
 
 
         //configura la tabla de libros
@@ -295,14 +289,11 @@ public class LibroControlador {
     private void eliminarLibro(){
         try{
             Libro libro = (Libro) tablelibro.getSelectionModel().getSelectedItem();
-//            libroservice.modifcarEstado(libro, EstadoLibro.PERDIDO);
+            libroservice.eliminarLibro(libro);
+            cargarLibros();
         }catch (Exception e){
             Ventana.error("Error", "Error al eliminar el libro:\n" + e.getMessage());
         }
-    }
-
-    private void modificarLibro(){
-
     }
 
     private void agregarCopia(){
@@ -311,22 +302,21 @@ public class LibroControlador {
             libroservice.guardarCopia(new CopiaLibro((TipoLibro) tipo.getValue(), libro, (EstadoLibro) estado.getValue(), Double.parseDouble(precio.getText()),
                     (Rack) choicerack.getValue(), referencia.getValue().equals("SI")), Integer.parseInt(cantidadCopias.getText()));
             cargarCopias(libro);
+            limpiarCamposCopia();
 
         }catch (Exception e){
             Ventana.error("Error", "Error al agregar la copia:\n" + e.getMessage());
         }
     }
-    private void eliminarCopia(){
-        Libro libro = (Libro) tablelibro.getSelectionModel().getSelectedItem();
 
-        cargarCopias(libro);
-    }
     private void modificarCopia(){
         Libro libro = (Libro) tablelibro.getSelectionModel().getSelectedItem();
         try{
             CopiaLibro copia = (CopiaLibro) tablecopia.getSelectionModel().getSelectedItem();
             libroservice.modifcarCopia(copia, (EstadoLibro) estado.getValue(), (Rack) choicerack.getValue(), Double.parseDouble(precio.getText()));
+            tablecopia.refresh();
             cargarCopias(libro);
+            limpiarCamposCopia();
         }catch (Exception e){
             Ventana.error("Error", "Error al modificar la copia:\n" + e.getMessage());
         }
