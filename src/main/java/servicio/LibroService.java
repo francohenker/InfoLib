@@ -123,8 +123,12 @@ public class LibroService {
 
     //busca libros que coincidan con el autor
     public List<Libro> buscarLibroPorAutor(String autor) {
-        TypedQuery<Libro> query = repositorio.getEntityManager().createQuery("SELECT l FROM Libro l WHERE :autor MEMBER OF l.autores", Libro.class);
-        query.setParameter("autor", autor);
+//        TypedQuery<Libro> query = repositorio.getEntityManager().createQuery("SELECT l FROM Libro l WHERE :autor MEMBER OF l.autores", Libro.class);
+        TypedQuery<Libro> query = repositorio.getEntityManager().createQuery("SELECT l FROM Libro l JOIN l.autores a WHERE LOWER(a) LIKE LOWER(CONCAT('%', :autor, '%'))", Libro.class);
+
+
+
+                query.setParameter("autor", autor);
         return query.getResultList();
 
     }

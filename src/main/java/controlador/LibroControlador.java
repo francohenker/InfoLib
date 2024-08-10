@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Set;
 
 public class LibroControlador {
-    private Repositorio repositorio;
     private LibroService libroservice;
     @FXML
     private Button buttonRack;
@@ -47,6 +46,8 @@ public class LibroControlador {
     @FXML
     private Button limpiarcopia;
     @FXML
+    private Button buscar;
+    @FXML
     private TextField precio;
     @FXML
     private TextField cantidadCopias;
@@ -62,6 +63,12 @@ public class LibroControlador {
     private TextField tematica;
     @FXML
     private TextField idioma;
+    @FXML
+    private TextField busquedatitulo;
+    @FXML
+    private TextField busquedatematica;
+    @FXML
+    private TextField busquedaautor;
     @FXML
     private TableView tablecopia;
     @FXML
@@ -102,15 +109,18 @@ public class LibroControlador {
 
     @FXML
     void initialize() {
-        this.repositorio = new Repositorio(Conexion.getEntityManagerFactory());
+        Repositorio repositorio = new Repositorio(Conexion.getEntityManagerFactory());
         this.libroservice = new LibroService(repositorio);
         RackService rackService = new RackService(repositorio);
 
         //configura la accion de los botones laterales
-        buttonRack.setOnAction(event -> ventanaRack(event));
-        buttonPagePrestamos.setOnAction(event -> ventanaPrestamo(event));
-        buttonPageLibros.setOnAction(event -> ventanaLibros(event));
-        buttonPageUsuarios.setOnAction(event -> ventanaUsuario(event));
+        buttonRack.setOnAction(this::ventanaRack);
+        buttonPagePrestamos.setOnAction(this::ventanaPrestamo);
+        buttonPageLibros.setOnAction(this::ventanaLibros);
+        buttonPageUsuarios.setOnAction(this::ventanaUsuario);
+
+        //configura el boton de buscar
+        buscar.setOnAction(event -> buscarLibro());
 
         //configura los botones del amb libro
         limpiarlibro.setOnAction(event -> limpiarCamposLibro());
@@ -160,6 +170,7 @@ public class LibroControlador {
             }
         });
 
+        //controla los campos de busqueda de libro para que se pueda
 
         // Configura el doble clic para cargar los campos textfield libro
         tablelibro.setRowFactory( tv -> {
@@ -188,6 +199,9 @@ public class LibroControlador {
             return row;
         });
 
+        agregarListeners(busquedaautor, busquedatematica, busquedatitulo);
+        agregarListeners(busquedatematica, busquedatitulo, busquedaautor);
+        agregarListeners(busquedatitulo, busquedaautor, busquedatematica);
 
 
         // carga la tabla de libros
@@ -204,6 +218,19 @@ public class LibroControlador {
     }
     public void ventanaRack(ActionEvent event) {
         Enrutador.redirigir(event, "/vista/rack.fxml");
+    }
+
+    private void agregarListeners(TextField principal, TextField... otros) {
+        principal.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.isEmpty()) {
+                    for (TextField textField : otros) {
+                        textField.clear();
+                    }
+                }
+            }
+        });
     }
 
     private void rellenarCampos(Libro libro){
@@ -238,6 +265,12 @@ public class LibroControlador {
 
         tablelibro.setItems(listaLibros);
     }
+    private void cargarLibros(List<Libro> libros){
+
+        ObservableList<Libro> listaLibros = FXCollections.observableArrayList(libros);
+
+        tablelibro.setItems(listaLibros);
+    }
 
     private void cargarCopias(Libro libro){
         List<CopiaLibro> copias = libroservice.buscarCopiasPorIsbn(libro);
@@ -263,7 +296,11 @@ public class LibroControlador {
         tematica.setDisable(false);
         idioma.setDisable(false);
         tablecopia.setItems(null);
+        busquedatitulo.clear();
+        busquedatematica.clear();
+        busquedaautor.clear();
         limpiarCamposCopia();
+        cargarLibros();
     }
     private void limpiarCamposCopia(){
         tipo.setValue(null);
@@ -322,19 +359,33 @@ public class LibroControlador {
         }
     }
 
+    private void buscarLibro(){
+        if(busquedaautor.getText().trim().isEmpty() && busquedatitulo.getText().trim().isEmpty() && busquedatematica.getText().trim().isEmpty()){
+            cargarLibros();
+            return;
+        }
+        try{
+            if(!busquedatitulo.getText().trim().isEmpty()){
+                List<Libro> libros = libroservice.buscarLibroPorTitulo(busquedatitulo.getText());
+                cargarLibros(libros);
+                return;
+            }
+            if(!busquedaautor.getText().trim().isEmpty()){
+                libroservice.buscarLibroPorAutor(busquedaautor.getText());
+                List<Libro> libros = libroservice.buscarLibroPorAutor(busquedaautor.getText());
+                cargarLibros(libros);
+                return;
+            }
+            if(!busquedatematica.getText().trim().isEmpty()){
+                libroservice.buscarLibroPorTematica(busquedatematica.getText());
+                List<Libro> libros = libroservice.buscarLibroPorTematica(busquedatematica.getText());
+                cargarLibros(libros);
+                return;
+            }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }catch (Exception e){
+            Ventana.error("Error", "Error al buscar el libro:\n" + e.getMessage());
+        }
+    }
 
 }

@@ -116,6 +116,14 @@
                                 <Insets top="10.0" />
                             </VBox.margin>
                         </ChoiceBox>
+                  <Button fx:id="prestar" mnemonicParsing="false" prefHeight="26.0" prefWidth="183.0" style="-fx-background-color: #0077bb;" text="Prestar">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Button>
                     </children>
                     <HBox.margin>
                         <Insets left="5.0" />
@@ -377,22 +385,22 @@
         </TableView>
       <HBox prefHeight="64.0" prefWidth="1080.0" style="-fx-background-color: #dee2e6;">
          <children>
-            <TextField alignment="CENTER" promptText="Titulo" style="-fx-background-color: white;">
+            <TextField fx:id="busquedatitulo" alignment="CENTER" promptText="Titulo" style="-fx-background-color: white;">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
             </TextField>
-            <TextField alignment="CENTER" promptText="Tematica" style="-fx-background-color: white;">
+            <TextField fx:id="busquedatematica" alignment="CENTER" promptText="Tematica" style="-fx-background-color: white;">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
             </TextField>
-            <TextField alignment="CENTER" promptText="Autor" style="-fx-background-color: white;">
+            <TextField fx:id="busquedaautor" alignment="CENTER" promptText="Autor" style="-fx-background-color: white;">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
             </TextField>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: #0077b6;" text="Buscar">
+            <Button fx:id="buscar" mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: #0077b6;" text="Buscar">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
