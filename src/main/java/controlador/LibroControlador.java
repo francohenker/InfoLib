@@ -54,6 +54,8 @@ public class LibroControlador {
     @FXML
     private Button buscar;
     @FXML
+    private Button prestar;
+    @FXML
     private TextField precio;
     @FXML
     private TextField cantidadCopias;
@@ -137,6 +139,10 @@ public class LibroControlador {
         limpiarcopia.setOnAction(event -> limpiarCamposCopia());
         agregarCopia.setOnAction(event -> agregarCopia());
         modificarCopia.setOnAction(event -> modificarCopia());
+        prestar.setOnAction(event -> {
+                CopiaLibro copiaSeleccionada = (CopiaLibro) tablecopia.getSelectionModel().getSelectedItem();
+                abrirPantallaPrestamos(event, copiaSeleccionada);
+        });
 
 
         //configura la tabla de libros
@@ -211,12 +217,12 @@ public class LibroControlador {
 
 
         //configura el doble click para realizar un prestamo
-        tablecopia.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2 && !tablecopia.getSelectionModel().isEmpty()) {
-                CopiaLibro copiaSeleccionada = (CopiaLibro) tablecopia.getSelectionModel().getSelectedItem();
-                abrirPantallaPrestamos(event, copiaSeleccionada);
-            }
-        });
+//        tablecopia.setOnMouseClicked(event -> {
+//            if (event.getClickCount() == 2 && !tablecopia.getSelectionModel().isEmpty()) {
+//                CopiaLibro copiaSeleccionada = (CopiaLibro) tablecopia.getSelectionModel().getSelectedItem();
+//                abrirPantallaPrestamos(event, copiaSeleccionada);
+//            }
+//        });
 
         // carga la tabla de libros
         cargarLibros();
@@ -397,12 +403,12 @@ public class LibroControlador {
                 return;
             }
 
-        }catch (Exception e){
+        }catch (Exception e) {
             Ventana.error("Error", "Error al buscar el libro:\n" + e.getMessage());
         }
     }
 
-    private void abrirPantallaPrestamos(MouseEvent event, CopiaLibro copiaSeleccionada) {
+    private void abrirPantallaPrestamos(ActionEvent event, CopiaLibro copiaSeleccionada) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/prestamo.fxml"));
             Parent root = loader.load();

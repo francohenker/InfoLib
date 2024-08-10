@@ -20,6 +20,22 @@ public class PrestamoService {
      **/
 
     public void guardarPrestamo(CopiaLibro copia, Usuario usuario) {
+        try{
+            validarPrestamo(copia, usuario);
+            Prestamo prestamo = new Prestamo(copia, usuario);
+            this.repositorio.iniciarTransaccion();
+            this.repositorio.insertar(prestamo);
+            this.repositorio.modificar(copia);
+            this.repositorio.confirmarTransaccion();
+        }catch (Exception e){
+            this.repositorio.descartarTransaccion();
+            throw new RuntimeException(e.getMessage());
+        }
+
+
+    }
+
+    private boolean validarPrestamo(CopiaLibro copia, Usuario usuario){
         if(usuario == null){
             throw new RuntimeException("No se encontro el usuario");
         }
@@ -41,15 +57,8 @@ public class PrestamoService {
         if(copia.getEstado() != EstadoLibro.DISPONIBLE){
             throw new RuntimeException("El libro no se encuentra disponible");
         }
-
-        Prestamo prestamo = new Prestamo(copia, usuario);
-        this.repositorio.iniciarTransaccion();
-        this.repositorio.insertar(prestamo);
-        this.repositorio.modificar(copia);
-        this.repositorio.confirmarTransaccion();
-
+        return true;
     }
-
 
     //CONTROLAR COMO MOSTRAR LA MULTA EN CASO DE HABER UNA
     // setea la fecha de devolucion del prestamo

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.PrestamoControlador">
+   <Label alignment="CENTER" layoutX="541.0" layoutY="4.0" prefHeight="18.0" prefWidth="110.0" text="Prestamos" AnchorPane.topAnchor="4.0">
+      <font>
+         <Font name="System Bold" size="14.0" />
+      </font>
+   </Label>
+   <VBox prefHeight="500.0" prefWidth="110.0" style="-fx-background-color: #dee2e6;" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Button id="buttonprestamos" fx:id="buttonPagePrestamos" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #0077b6;" text="Prestamos" VBox.vgrow="ALWAYS">
+         <VBox.margin>
+            <Insets left="5.0" right="5.0" top="90.0" />
+         </VBox.margin>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonrack" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #0077b6;" text="Rack">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets left="5.0" right="5.0" top="70.0" />
+         </VBox.margin>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button id="buttonusuarios" fx:id="buttonPageUsuarios" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #0077b6;" text="Usuarios" VBox.vgrow="ALWAYS">
+         <VBox.margin>
+            <Insets left="5.0" right="5.0" top="70.0" />
+         </VBox.margin>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button id="buttonlibros" fx:id="buttonPageLibros" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #0077b6;" text="Libros" VBox.vgrow="ALWAYS">
+         <VBox.margin>
+            <Insets left="5.0" right="5.0" top="70.0" />
+         </VBox.margin>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+   </VBox>
+   <HBox layoutY="620.0" prefHeight="223.0" prefWidth="1080.0" style="-fx-background-color: #dee2e6;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <VBox prefHeight="223.0" prefWidth="128.0">
+         <HBox.margin>
+            <Insets left="7.0" />
+         </HBox.margin>
+         <Label text="Datos Prestamo:">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+         </Label>
+         <Label text="Busqueda:">
+            <VBox.margin>
+               <Insets top="80.0" />
+            </VBox.margin>
+         </Label>
+      </VBox>
+      <VBox prefHeight="202.0" prefWidth="170.0">
+         <HBox.margin>
+            <Insets right="5.0" top="10.0" />
+         </HBox.margin>
+         <Label text="DNI">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+         </Label>
+         <TextField fx:id="dni" alignment="CENTER" promptText="11222333" style="-fx-background-color: white;">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+         </TextField>
+         <Label text="DNI de un Usuario:">
+            <VBox.margin>
+               <Insets top="70.0" />
+            </VBox.margin>
+         </Label>
+         <Label text="ID de una Copia:">
+            <VBox.margin>
+               <Insets top="10.0" />
+            </VBox.margin>
+         </Label>
+      </VBox>
+      <VBox prefHeight="202.0" prefWidth="170.0">
+         <HBox.margin>
+            <Insets right="5.0" top="10.0" />
+         </HBox.margin>
+         <Label text="Titulo">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+         </Label>
+         <TextField fx:id="titulo" alignment="CENTER" promptText="POO1" style="-fx-background-color: white;">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+         </TextField>
+         <TextField fx:id="busquedadni" alignment="CENTER" promptText="11222333" style="-fx-background-color: white;">
+            <VBox.margin>
+               <Insets top="70.0" />
+            </VBox.margin>
+         </TextField>
+         <TextField fx:id="busquedaid" alignment="CENTER" promptText="nose" style="-fx-background-color: white;">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+         </TextField>
+      </VBox>
+      <VBox prefHeight="213.0" prefWidth="189.0">
+         <HBox.margin>
+            <Insets right="5.0" top="10.0" />
+         </HBox.margin>
+         <Label text="Tipo">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+         </Label>
+         <ChoiceBox fx:id="tipo" prefHeight="26.0" prefWidth="173.0" style="-fx-background-color: white;">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+         </ChoiceBox>
+         <Button fx:id="buscardni" mnemonicParsing="false" prefHeight="24.0" prefWidth="166.0" style="-fx-background-color: #0077b6;" text="Buscar libros por usuario">
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font>
+            <VBox.margin>
+               <Insets top="70.0" />
+            </VBox.margin>
+         </Button>
+         <Button fx:id="buscarid" mnemonicParsing="false" prefHeight="24.0" prefWidth="166.0" style="-fx-background-color: #0077b6;" text="Buscar usuarios por libro">
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font>
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+         </Button>
+         <Button fx:id="limpiar" mnemonicParsing="false" prefHeight="24.0" prefWidth="166.0" style="-fx-background-color: #0077b6;" text="Limpiar">
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font>
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+         </Button>
+      </VBox>
+      <VBox prefHeight="202.0" prefWidth="170.0">
+         <HBox.margin>
+            <Insets right="5.0" top="10.0" />
+         </HBox.margin>
+         <Label text="Precio">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+         </Label>
+         <TextField fx:id="precio" alignment="CENTER" promptText="5000" style="-fx-background-color: white;">
+            <VBox.margin>
+               <Insets top="5.0" />
+            </VBox.margin>
+         </TextField>
+      </VBox>
+      <VBox prefHeight="202.0" prefWidth="170.0">
+         <HBox.margin>
+            <Insets right="5.0" top="10.0" />
+         </HBox.margin>
+         <Button fx:id="prestamo" mnemonicParsing="false" prefHeight="26.0" prefWidth="166.0" style="-fx-background-color: #0077b6;" text="Prestamo">
+            <VBox.margin>
+               <Insets top="27.0" />
+            </VBox.margin>
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font>
+         </Button>
+      </VBox>
+      <VBox prefHeight="202.0" prefWidth="170.0">
+         <HBox.margin>
+            <Insets right="10.0" top="10.0" />
+         </HBox.margin>
+         <Button fx:id="devolucion" mnemonicParsing="false" prefHeight="26.0" prefWidth="161.0" style="-fx-background-color: #0077b6;" text="Devolución">
+            <VBox.margin>
+               <Insets top="27.0" />
+            </VBox.margin>
+            <font>
+               <Font name="System Bold" size="12.0" />
+            </font>
+         </Button>
+      </VBox>
+   </HBox>
+   <TableView fx:id="tvprestamo" layoutX="111.0" layoutY="44.0" prefHeight="450.0" prefWidth="966.0" AnchorPane.bottomAnchor="226.0" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="44.0">
+      <columns>
+         <TableColumn fx:id="columnaid" prefWidth="55.0" text="ID " />
+         <TableColumn fx:id="columnadni" prefWidth="116.0" text="DNI " />
+         <TableColumn fx:id="columnatitulo" prefWidth="145.0" text="Título" />
+         <TableColumn fx:id="columnatipo" prefWidth="135.0" text="Tipo" />
+         <TableColumn fx:id="columnaprecio" prefWidth="112.0" text="Precio" />
+         <TableColumn fx:id="columnamulta" prefWidth="110.0" text="Multa" />
+         <TableColumn fx:id="columnainicio" prefWidth="151.0" text="Fecha Incio" />
+         <TableColumn fx:id="columnadevolucion" prefWidth="140.0" text="Fecha Devolución" />
+      </columns>
+   </TableView>
+</AnchorPane>
