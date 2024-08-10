@@ -19,7 +19,7 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <VBox layoutY="44.8" prefHeight="542.0" prefWidth="110.0" style="-fx-background-color: #dee2e6;" AnchorPane.bottomAnchor="133.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="45.0">
+        <VBox layoutY="51.0" prefHeight="536.0" prefWidth="110.0" style="-fx-background-color: #dee2e6;" AnchorPane.bottomAnchor="133.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="51.0">
             <children>
                 <Button id="buttonprestamos" fx:id="buttonPagePrestamos" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #0077b6;" text="Prestamos" VBox.vgrow="ALWAYS">
                     <VBox.margin>
@@ -123,7 +123,7 @@
                         </ChoiceBox>
                   <Button fx:id="limpiarcopia" mnemonicParsing="false" prefHeight="26.0" prefWidth="168.0" style="-fx-background-color: #0077bb;" text="Limpiar">
                      <VBox.margin>
-                        <Insets top="5.0" />
+                        <Insets top="10.0" />
                      </VBox.margin>
                      <font>
                         <Font name="System Bold" size="13.0" />
@@ -144,7 +144,7 @@
                                 <Insets top="10.0" />
                             </VBox.margin>
                         </Label>
-                        <TextField fx:id="precio" style="-fx-background-color: white;">
+                        <TextField fx:id="precio" alignment="CENTER" promptText="1000" style="-fx-background-color: white;">
                             <VBox.margin>
                                 <Insets top="10.0" />
                             </VBox.margin>
@@ -154,7 +154,7 @@
                                 <Font name="System Bold" size="12.0" />
                             </font>
                             <VBox.margin>
-                                <Insets top="6.0" />
+                                <Insets top="10.0" />
                             </VBox.margin>
                         </Button>
                     </children>
@@ -172,7 +172,7 @@
                                 <Insets top="10.0" />
                             </VBox.margin>
                         </Label>
-                        <TextField fx:id="cantidadCopias" style="-fx-background-color: white;">
+                        <TextField fx:id="cantidadCopias" alignment="CENTER" promptText="5" style="-fx-background-color: white;">
                             <VBox.margin>
                                 <Insets top="10.0" />
                             </VBox.margin>
@@ -182,7 +182,7 @@
                                 <Font name="System Bold" size="12.0" />
                             </font>
                             <VBox.margin>
-                                <Insets top="6.0" />
+                                <Insets top="10.0" />
                             </VBox.margin>
                         </Button>
                     </children>
@@ -207,7 +207,7 @@
                                 <Font name="System Bold" size="12.0" />
                             </font>
                      <VBox.margin>
-                        <Insets top="6.0" />
+                        <Insets top="10.0" />
                      </VBox.margin>
                         </Button>
                </children>
@@ -217,22 +217,51 @@
             </VBox>
             </children>
         </HBox>
-        <TableView fx:id="tablelibro" layoutX="110.0" layoutY="44.0" prefHeight="217.0" prefWidth="967.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="3.0">
+        <TableView fx:id="tablelibro" layoutX="110.0" layoutY="50.0" prefHeight="203.0" prefWidth="967.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="3.0">
             <columns>
                 <TableColumn fx:id="isbncolumn" prefWidth="128.79998475313187" text="ISBN" />
-                <TableColumn fx:id="titulocolumn" prefWidth="246.40003967285156" text="Título" />
-                <TableColumn fx:id="autorescolumn" prefWidth="206.39999389648438" text="Autores" />
+                <TableColumn fx:id="titulocolumn" prefWidth="188.0" text="Título" />
+                <TableColumn fx:id="autorescolumn" prefWidth="266.0" text="Autores" />
                 <TableColumn fx:id="editorialcolumn" prefWidth="157.5999755859375" text="Editorial" />
                 <TableColumn fx:id="tematicacolumn" prefWidth="128.0" text="Tematica" />
                 <TableColumn fx:id="idiomacolumn" prefWidth="97.0" text="Idioma" />
             </columns>
         </TableView>
-        <HBox alignment="CENTER" layoutX="110.0" layoutY="260.0" prefHeight="133.0" prefWidth="967.0" style="-fx-background-color: #dee2e6;" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="3.0">
+        <HBox alignment="CENTER" layoutX="110.0" layoutY="252.0" prefHeight="163.0" prefWidth="967.0" style="-fx-background-color: #dee2e6;" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="3.0">
             <children>
-                <VBox prefHeight="133.0" prefWidth="115.0">
+                <VBox prefHeight="126.0" prefWidth="150.0">
                     <children>
-                        <Label prefHeight="18.0" prefWidth="98.0" text="Datos Libros:" />
+                        <Label prefHeight="18.0" prefWidth="98.0" text="Busqueda">
+                     <VBox.margin>
+                        <Insets top="3.0" />
+                     </VBox.margin></Label>
+                  <TextField alignment="CENTER" promptText="Titulo" style="-fx-background-color: white;">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField alignment="CENTER" promptText="Tematica" style="-fx-background-color: white;">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <TextField alignment="CENTER" promptText="Autor" style="-fx-background-color: white;">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: #0077b6;" text="Buscar">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
                     </children>
+               <HBox.margin>
+                  <Insets left="3.0" />
+               </HBox.margin>
                 </VBox>
                 <VBox prefHeight="202.0" prefWidth="157.0">
                     <children>
@@ -244,7 +273,7 @@
                                 <Font size="13.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="isbn" style="-fx-background-color: white;">
+                        <TextField fx:id="isbn" alignment="CENTER" promptText="1234567890" style="-fx-background-color: white;">
                             <VBox.margin>
                                 <Insets top="15.0" />
                             </VBox.margin>
@@ -264,7 +293,7 @@
                                 <Font size="13.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="titulo" style="-fx-background-color: white;">
+                        <TextField fx:id="titulo" alignment="CENTER" promptText="POO1" style="-fx-background-color: white;">
                             <VBox.margin>
                                 <Insets top="15.0" />
                             </VBox.margin>
@@ -284,14 +313,14 @@
                                 <Font size="13.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="autores" style="-fx-background-color: white;">
+                        <TextField fx:id="autores" promptText="HENKER FRANCO" style="-fx-background-color: white;">
                             <VBox.margin>
                                 <Insets top="15.0" />
                             </VBox.margin>
                         </TextField>
                   <Button fx:id="limpiarlibro" mnemonicParsing="false" prefHeight="26.0" prefWidth="139.0" style="-fx-background-color: #0077b6;" text="Limpiar">
                      <VBox.margin>
-                        <Insets top="5.0" />
+                        <Insets top="10.0" />
                      </VBox.margin>
                       <font>
                         <Font name="System Bold" size="13.0" />
@@ -312,14 +341,14 @@
                                 <Font size="13.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="editorial" style="-fx-background-color: white;">
+                        <TextField fx:id="editorial" alignment="CENTER" promptText="Ninguna" style="-fx-background-color: white;">
                             <VBox.margin>
                                 <Insets top="15.0" />
                             </VBox.margin>
                         </TextField>
                         <Button fx:id="agregarLibro" mnemonicParsing="false" prefHeight="26.0" prefWidth="186.0" style="-fx-background-color: #0077b6;" text="Agregar">
                             <VBox.margin>
-                                <Insets top="5.0" />
+                                <Insets top="10.0" />
                             </VBox.margin>
                             <font>
                                 <Font name="System Bold" size="12.0" />
@@ -340,14 +369,14 @@
                                 <Font size="13.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="tematica" style="-fx-background-color: white;">
+                        <TextField fx:id="tematica" alignment="CENTER" promptText="PROGRAMACION" style="-fx-background-color: white;">
                             <VBox.margin>
                                 <Insets top="15.0" />
                             </VBox.margin>
                         </TextField>
                         <Button fx:id="eliminarLibro" mnemonicParsing="false" prefHeight="26.0" prefWidth="189.0" style="-fx-background-color: #0077b6;" text="Eliminar">
                             <VBox.margin>
-                                <Insets top="5.0" />
+                                <Insets top="10.0" />
                             </VBox.margin>
                             <font>
                                 <Font name="System Bold" size="12.0" />
@@ -368,14 +397,14 @@
                                 <Font size="13.0" />
                             </font>
                         </Label>
-                        <TextField fx:id="idioma" style="-fx-background-color: white;">
+                        <TextField fx:id="idioma" alignment="CENTER" promptText="ESPAÑOL" style="-fx-background-color: white;">
                             <VBox.margin>
                                 <Insets top="15.0" />
                             </VBox.margin>
                         </TextField>
                         <Button fx:id="modificarLibro" mnemonicParsing="false" prefHeight="26.0" prefWidth="189.0" style="-fx-background-color: #0077b6;" text="Modificar">
                             <VBox.margin>
-                                <Insets top="5.0" />
+                                <Insets top="10.0" />
                             </VBox.margin>
                             <font>
                                 <Font name="System Bold" size="12.0" />
@@ -383,12 +412,12 @@
                         </Button>
                     </children>
                     <HBox.margin>
-                        <Insets left="5.0" right="30.0" />
+                        <Insets left="5.0" right="7.0" />
                     </HBox.margin>
                 </VBox>
             </children>
         </HBox>
-        <TableView fx:id="tablecopia" layoutX="110.0" layoutY="393.0" prefHeight="194.0" prefWidth="967.0">
+        <TableView fx:id="tablecopia" layoutX="110.0" layoutY="413.0" prefHeight="174.0" prefWidth="967.0">
             <columns>
                 <TableColumn fx:id="titulocopia" prefWidth="231.0" text="Título" />
                 <TableColumn fx:id="tipocopia" prefWidth="159.0" text="Tipo" />

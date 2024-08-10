@@ -5,6 +5,7 @@ import jakarta.persistence.TypedQuery;
 import modelo.CopiaLibro;
 import modelo.EstadoLibro;
 import modelo.Libro;
+import modelo.Rack;
 
 import java.util.List;
 
@@ -49,6 +50,21 @@ public class LibroService {
         if (nCopias < 1) {
             throw new RuntimeException("Número de copias invalido");
         }
+        if(copia.getLibro() == null){
+            throw new RuntimeException("Debe indicar un libro");
+        }
+        if(copia.getTipo() == null){
+            throw new RuntimeException("Debe indicar un tipo");
+        }
+        if(copia.getEstado() == EstadoLibro.PERDIDO || copia.getEstado() == EstadoLibro.PRESTADO){
+            throw new RuntimeException("No se puede crear copias prestadas o perdidas");
+        }
+        if(copia.getPrecio() < 0){
+            throw new RuntimeException("El precio debe ser positivo");
+        }
+        if(copia.getRack() == null){
+            throw new RuntimeException("Debe indicar un rack");
+        }
 
         this.repositorio.iniciarTransaccion();
 
@@ -67,12 +83,16 @@ public class LibroService {
 
 
     //
-    public void modifcarEstado(CopiaLibro copia, EstadoLibro estado){
+    public void modifcarCopia(CopiaLibro copia, EstadoLibro estado, Rack rack, double precio){
         if(estado == EstadoLibro.PRESTADO){
             throw new RuntimeException("No se puede modificar el estado directamente a prestado");
         }
+        this.repositorio.iniciarTransaccion();
         copia.setEstado(estado);
+        copia.setRack(rack);
+        copia.updatePrecio(precio);
         this.repositorio.modificar(copia);
+        this.repositorio.confirmarTransaccion();
     }
 
     // busca libros que coincidan con el titulo
