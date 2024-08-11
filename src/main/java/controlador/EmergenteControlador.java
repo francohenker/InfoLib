@@ -6,6 +6,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import modelo.Prestamo;
 
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 public class EmergenteControlador {
     @FXML
     private TextField idprestamo;
@@ -65,8 +69,10 @@ public class EmergenteControlador {
 
     public void setDetallesPrestamo(Prestamo prestamo) {
         idprestamo.setText(String.valueOf(prestamo.getId()));
-        fechainicio.setText(prestamo.getFechaPrestamo().toString());
-        fechafin.setText(prestamo.getFechaDevolucion() == null ? "AUN EN PRESTAMO" : prestamo.getFechaDevolucion().toString());
+
+        fechainicio.setText(prestamo.getFechaPrestamo().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
+
+        fechafin.setText(prestamo.getFechaDevolucion() == null ? "AUN EN PRESTAMO" : prestamo.getFechaDevolucion().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")));
         multa.setText(String.valueOf(prestamo.getMulta()));
         titulo.setText(prestamo.getCopiaLibro().getLibro().getTitulo());
         autor.setText(prestamo.getCopiaLibro().getLibro().getAutores().toString());
