@@ -13,7 +13,6 @@ import servicio.UsuarioService;
 import servicio.Ventana;
 
 public class LoginControlador {
-    private Repositorio repositorio;
     private UsuarioService usuarioService;
 
     @FXML
@@ -25,7 +24,7 @@ public class LoginControlador {
 
     @FXML
     public void initialize(){
-        this.repositorio = new Repositorio(Conexion.getEntityManagerFactory());
+        Repositorio repositorio = new Repositorio(Conexion.getEntityManagerFactory());
         this.usuarioService = new UsuarioService(repositorio);
         botonIngresar.setOnAction(this::login);
     }
@@ -45,7 +44,6 @@ public class LoginControlador {
             }
         }catch (Exception e){
             Ventana.error("Error","Usuario y/o contraseña incorrectos");
-            e.printStackTrace();
         }
     }
 }
