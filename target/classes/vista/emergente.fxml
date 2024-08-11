@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,177 +10,225 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="423.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <HBox alignment="CENTER" prefHeight="18.0" prefWidth="350.0" style="-fx-background-color: #0077b6;">
-         <children>
-            <Label contentDisplay="CENTER" text="Detalles Prestamo">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-         </children>
-      </HBox>
-      <HBox layoutY="18.0" prefHeight="90.0" prefWidth="350.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Préstamo:">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Text>
-            <VBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID Préstamo:">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha Inicio:" wrappingWidth="64.833984375">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha Fin:">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Multa:">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Text>
-               </children>
-            </VBox>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="113.0" prefWidth="176.0">
-               <HBox.margin>
-                  <Insets left="5.0" />
-               </HBox.margin>
-               <children>
-                  <TextField fx:id="idprestamo">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <TextField fx:id="fechainicio" />
-                  <TextField fx:id="fechafin" />
-                  <TextField fx:id="multa" />
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-      <HBox layoutY="133.0" prefHeight="202.0" prefWidth="350.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Libro:">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Text>
-            <VBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="202.0" prefWidth="102.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Titulo:">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Editorial:">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Autor:">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Temática:">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Idioma:">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo:">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Precio:">
-                     <VBox.margin>
-                        <Insets top="5.0" />
-                     </VBox.margin>
-                  </Text>
-               </children>
-               <HBox.margin>
-                  <Insets left="24.0" />
-               </HBox.margin>
-            </VBox>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="161.0" prefWidth="173.0">
-               <HBox.margin>
-                  <Insets left="5.0" top="10.0" />
-               </HBox.margin>
-               <children>
-                  <TextField fx:id="titulo" />
-                  <TextField fx:id="editorial" />
-                  <TextField fx:id="autor" />
-                  <TextField fx:id="tematica" />
-                  <TextField fx:id="idioma" />
-                  <TextField fx:id="tipo" />
-                  <TextField fx:id="precio" />
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-      <HBox layoutY="334.0" prefHeight="87.0" prefWidth="350.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario:">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Text>
-            <VBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="126.0" prefWidth="113.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DNI:">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Apellido:">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:">
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Text>
-               </children>
-            </VBox>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="87.0" prefWidth="178.0">
-               <children>
-                  <TextField fx:id="dni">
-                     <VBox.margin>
-                        <Insets left="5.0" top="10.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <TextField fx:id="apellido">
-                     <VBox.margin>
-                        <Insets left="5.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <TextField fx:id="nombre">
-                     <VBox.margin>
-                        <Insets left="5.0" />
-                     </VBox.margin>
-                  </TextField>
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0"
+            prefWidth="1080.0" fx:controller="controlador.EmergenteControlador" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <HBox alignment="CENTER" prefHeight="18.0" prefWidth="1080.0" style="-fx-background-color: #0077b6;">
+      <Label contentDisplay="CENTER" text="Detalles Prestamo">
+         <font>
+            <Font name="System Bold" size="12.0"/>
+         </font>
+      </Label>
+   </HBox>
+   <HBox layoutY="18.0" prefHeight="164.0" prefWidth="679.0">
+      <padding>
+         <Insets top="20.0"/>
+      </padding>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Préstamo:">
+         <font>
+            <Font name="System Bold" size="12.0"/>
+         </font>
+         <HBox.margin>
+            <Insets left="20.0"/>
+         </HBox.margin>
+      </Text>
+      <VBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+            prefHeight="144.0" prefWidth="84.0">
+         <padding>
+            <Insets left="40.0"/>
+         </padding>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID Préstamo:">
+            <VBox.margin>
+               <Insets top="10.0"/>
+            </VBox.margin>
+         </Text>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha Inicio:" wrappingWidth="79.833984375">
+            <VBox.margin>
+               <Insets top="20.0"/>
+            </VBox.margin>
+         </Text>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha Fin:" wrappingWidth="77.64500427246094">
+            <VBox.margin>
+               <Insets top="20.0"/>
+            </VBox.margin>
+         </Text>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Multa:" wrappingWidth="78.64900207519531">
+            <VBox.margin>
+               <Insets top="20.0"/>
+            </VBox.margin>
+         </Text>
+      </VBox>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="144.0"
+            prefWidth="394.0">
+         <HBox.margin>
+            <Insets left="5.0"/>
+         </HBox.margin>
+         <TextField fx:id="idprestamo" prefHeight="26.0" prefWidth="542.0">
+            <VBox.margin>
+               <Insets top="10.0"/>
+            </VBox.margin>
+         </TextField>
+         <TextField fx:id="fechainicio">
+            <VBox.margin>
+               <Insets top="10.0"/>
+            </VBox.margin>
+         </TextField>
+         <TextField fx:id="fechafin">
+            <VBox.margin>
+               <Insets top="10.0"/>
+            </VBox.margin>
+         </TextField>
+         <TextField fx:id="multa">
+            <VBox.margin>
+               <Insets top="10.0"/>
+            </VBox.margin>
+         </TextField>
+      </VBox>
+   </HBox>
+   <HBox layoutY="224.0" prefHeight="249.0" prefWidth="672.0">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Libro:">
+         <font>
+            <Font name="System Bold" size="12.0"/>
+         </font>
+         <HBox.margin>
+            <Insets left="20.0"/>
+         </HBox.margin>
+      </Text>
+      <VBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+            prefHeight="249.0" prefWidth="48.0">
+         <HBox.margin>
+            <Insets left="64.0"/>
+         </HBox.margin>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Titulo:" wrappingWidth="62.012001037597656">
+            <VBox.margin>
+               <Insets top="10.0"/>
+            </VBox.margin>
+         </Text>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Editorial:" wrappingWidth="60.9890022277832">
+            <VBox.margin>
+               <Insets top="17.0"/>
+            </VBox.margin>
+         </Text>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Autor:" wrappingWidth="62.75200271606445">
+            <VBox.margin>
+               <Insets top="19.0"/>
+            </VBox.margin>
+         </Text>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Temática:" wrappingWidth="62.071998596191406">
+            <VBox.margin>
+               <Insets top="19.0"/>
+            </VBox.margin>
+         </Text>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Idioma:" wrappingWidth="63.553001403808594">
+            <VBox.margin>
+               <Insets top="20.0"/>
+            </VBox.margin>
+         </Text>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo:" wrappingWidth="63.92599868774414">
+            <VBox.margin>
+               <Insets top="15.0"/>
+            </VBox.margin>
+         </Text>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Precio:" wrappingWidth="62.50899887084961">
+            <VBox.margin>
+               <Insets top="19.0"/>
+            </VBox.margin>
+         </Text>
+      </VBox>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="249.0"
+            prefWidth="417.0">
+         <HBox.margin>
+            <Insets left="5.0"/>
+         </HBox.margin>
+         <TextField fx:id="titulo">
+            <VBox.margin>
+               <Insets left="21.0" top="7.0"/>
+            </VBox.margin>
+         </TextField>
+         <TextField fx:id="editorial">
+            <VBox.margin>
+               <Insets left="21.0" top="10.0"/>
+            </VBox.margin>
+         </TextField>
+         <TextField fx:id="autor">
+            <VBox.margin>
+               <Insets left="21.0" top="10.0"/>
+            </VBox.margin>
+         </TextField>
+         <TextField fx:id="tematica">
+            <VBox.margin>
+               <Insets left="21.0" top="10.0"/>
+            </VBox.margin>
+         </TextField>
+         <TextField fx:id="idioma">
+            <VBox.margin>
+               <Insets left="21.0" top="10.0"/>
+            </VBox.margin>
+         </TextField>
+         <TextField fx:id="tipo">
+            <VBox.margin>
+               <Insets left="21.0" top="10.0"/>
+            </VBox.margin>
+         </TextField>
+         <TextField fx:id="precio">
+            <VBox.margin>
+               <Insets left="21.0" top="10.0"/>
+            </VBox.margin>
+         </TextField>
+      </VBox>
+   </HBox>
+   <HBox layoutY="509.0" prefHeight="108.0" prefWidth="672.0">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario:">
+         <font>
+            <Font name="System Bold" size="12.0"/>
+         </font>
+         <HBox.margin>
+            <Insets left="20.0"/>
+         </HBox.margin>
+      </Text>
+      <VBox alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+            prefHeight="108.0" prefWidth="109.0">
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DNI:" wrappingWidth="54.2609977722168">
+            <VBox.margin>
+               <Insets top="15.0"/>
+            </VBox.margin>
+         </Text>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Apellido:">
+            <VBox.margin>
+               <Insets top="15.0"/>
+            </VBox.margin>
+         </Text>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre:">
+            <VBox.margin>
+               <Insets top="15.0"/>
+            </VBox.margin>
+         </Text>
+      </VBox>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="108.0"
+            prefWidth="427.0">
+         <HBox.margin>
+            <Insets/>
+         </HBox.margin>
+         <TextField fx:id="dni">
+            <VBox.margin>
+               <Insets left="27.0" top="10.0"/>
+            </VBox.margin>
+         </TextField>
+         <TextField fx:id="apellido">
+            <VBox.margin>
+               <Insets left="27.0" top="10.0"/>
+            </VBox.margin>
+         </TextField>
+         <TextField fx:id="nombre">
+            <VBox.margin>
+               <Insets left="27.0" top="10.0"/>
+            </VBox.margin>
+         </TextField>
+      </VBox>
+   </HBox>
+   <Button fx:id="cerrar" layoutX="946.0" layoutY="673.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="120.0"
+           style="-fx-background-color: #0077b6;" text="Cerrar">
+      <font>
+         <Font name="System Bold" size="13.0"/>
+      </font>
+   </Button>
 </AnchorPane>

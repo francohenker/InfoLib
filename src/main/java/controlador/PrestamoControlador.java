@@ -8,8 +8,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import modelo.*;
 import servicio.*;
 
@@ -31,6 +36,8 @@ public class PrestamoControlador {
     private Button buttonPageLibros;
     @FXML
     private Button buttonPageUsuarios;
+    @FXML
+    private Button verdetalle;
     @FXML
     private Button buscardni;
     @FXML
@@ -106,17 +113,51 @@ public class PrestamoControlador {
             return new SimpleStringProperty(date != null ? date.format(formatter) : "");
         });
 
-        //configura los botones de prestamo y busqueda
+        //configura los botones de prestamo, detalle y busqueda
         prestamo.setOnAction(event -> prestar());
         devolucion.setOnAction(event -> devolver());
         buscardni.setOnAction(event -> buscarDni());
         buscarid.setOnAction(event -> buscarId());
         limpiar.setOnAction(event -> limpiarCampos());
-
+        verdetalle.setOnAction(event -> verDetalles());
         // configura los valores de choicebox tipo de copia
         tipo.getItems().setAll(TipoLibro.values());
 
         cargarTabla();
+    }
+
+    @FXML
+    private void verDetalles(Prestamo prestamoo) {
+        try {
+            // Cargar el FXML de la ventana emergente
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/emergente.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el controlador de la ventana emergente
+            EmergenteControlador emergenteControlador = loader.getController();
+
+            // Pasar los datos al controlador de la ventana emergente
+            emergenteControlador.setDetallesPrestamo(prestamoo);  // Configura los detalles del préstamo aquí
+
+            // Crear una nueva ventana (Stage) para la ventana emergente
+            Stage stage = new Stage();
+            stage.setTitle("Detalles del Préstamo");
+            stage.initModality(Modality.APPLICATION_MODAL);  // Bloquea la ventana anterior hasta que esta se cierre
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void verDetalles(){
+        Prestamo prestamo = (Prestamo) tvprestamo.getSelectionModel().getSelectedItem();
+        if(prestamo == null){
+            Ventana.error("Error", "Debe seleccionar un prestamo");
+            return;
+        }
+        verDetalles(prestamo);
     }
 
     public void setCopia(CopiaLibro copiaLibro) {
@@ -222,7 +263,6 @@ public class PrestamoControlador {
             Ventana.error("Error al buscar prestamo", e.getMessage());
         }
     }
-
 
 
 

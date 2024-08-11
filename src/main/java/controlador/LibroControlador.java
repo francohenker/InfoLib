@@ -215,18 +215,13 @@ public class LibroControlador {
         agregarListeners(busquedatematica, busquedatitulo, busquedaautor);
         agregarListeners(busquedatitulo, busquedaautor, busquedatematica);
 
-
-        //configura el doble click para realizar un prestamo
-//        tablecopia.setOnMouseClicked(event -> {
-//            if (event.getClickCount() == 2 && !tablecopia.getSelectionModel().isEmpty()) {
-//                CopiaLibro copiaSeleccionada = (CopiaLibro) tablecopia.getSelectionModel().getSelectedItem();
-//                abrirPantallaPrestamos(event, copiaSeleccionada);
-//            }
-//        });
-
         // carga la tabla de libros
         cargarLibros();
     }
+
+
+
+
     private void ventanaPrestamo(ActionEvent event) {
         Enrutador.redirigir(event, "/vista/prestamo.fxml");
     }
@@ -240,6 +235,9 @@ public class LibroControlador {
         Enrutador.redirigir(event, "/vista/rack.fxml");
     }
 
+
+
+    //listener para asegurarse que solo se escriba en un textfield de busqueda
     private void agregarListeners(TextField principal, TextField... otros) {
         principal.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -273,10 +271,10 @@ public class LibroControlador {
         estado.setValue(copia.getEstado());
         precio.setText(String.valueOf(copia.getPrecio()));
         referencia.setValue(copia.isCopiaReferencia() ? "SI" : "NO");
-        cantidadCopias.setDisable(true);
         choicerack.setValue(copia.getRack());
     }
 
+    //carga todos los libros de la base de datos
     private void cargarLibros(){
 
         List<Libro> libros = libroservice.obtenerTodos();
@@ -285,6 +283,7 @@ public class LibroControlador {
 
         tablelibro.setItems(listaLibros);
     }
+    //carga los libros que coincidan con la busqueda realizada por autor, titulo o tematica
     private void cargarLibros(List<Libro> libros){
 
         ObservableList<Libro> listaLibros = FXCollections.observableArrayList(libros);
@@ -322,6 +321,7 @@ public class LibroControlador {
         limpiarCamposCopia();
         cargarLibros();
     }
+
     private void limpiarCamposCopia(){
         tipo.setValue(null);
         estado.setValue(null);

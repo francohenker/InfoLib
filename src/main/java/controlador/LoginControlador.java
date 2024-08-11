@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import modelo.App;
 import servicio.Enrutador;
 import servicio.UsuarioService;
 import servicio.Ventana;
@@ -25,7 +26,7 @@ public class LoginControlador {
     public void initialize(){
         this.repositorio = new Repositorio(Conexion.getEntityManagerFactory());
         this.usuarioService = new UsuarioService(repositorio);
-        botonIngresar.setOnAction(event -> login(event));
+        botonIngresar.setOnAction(this::login);
     }
 
     @FXML
@@ -34,9 +35,12 @@ public class LoginControlador {
         String contraseña = campoContraseña.getText();
         try{
             usuarioService.checkContraseña(contraseña, dniUsuario);
+            App.usuario = usuarioService.buscarPorDni(dniUsuario);
             Enrutador.redirigir(event, "/vista/libro.fxml");
+//            App.setRoot("/vista/libro");
         }catch (Exception e){
             Ventana.error("Error","Usuario y/o contraseña incorrectos");
+            e.printStackTrace();
         }
     }
 }

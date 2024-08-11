@@ -108,47 +108,47 @@ public class LibroService {
 
     // busca libros que coincidan con el titulo
     public List<Libro> buscarLibroPorTitulo(String titulo) {
-        TypedQuery<Libro> query = repositorio.getEntityManager().createQuery("FROM Libro libro WHERE libro.titulo LIKE :titulo", Libro.class);
+        TypedQuery<Libro> query = repositorio.getEntityManager().createQuery("FROM Libro l WHERE l.titulo LIKE :titulo", Libro.class);
         query.setParameter("titulo", "%" + titulo.toUpperCase() + "%");
         return query.getResultList();
     }
 
     //busca un libro por isbn, lo usa el metodo guardarLibro para saber si existe algun libro con este isbn en la base de datos
     public Libro buscarLibroPorIsbn(String isbn) {
-        TypedQuery<Libro> query = repositorio.getEntityManager().createQuery("FROM Libro libro WHERE libro.ISBN = :isbn", Libro.class);
+        TypedQuery<Libro> query = repositorio.getEntityManager().createQuery("FROM Libro l WHERE l.ISBN = :isbn", Libro.class);
         query.setParameter("isbn", isbn);
+
         // si la lista esta vacia devuelve null, de lo contrario devuelve el primer elemento (que deberia ser el unico)
         return query.getResultList().isEmpty() ? null : query.getResultList().get(0);
     }
 
     //busca libros que coincidan con el autor
     public List<Libro> buscarLibroPorAutor(String autor) {
-//        TypedQuery<Libro> query = repositorio.getEntityManager().createQuery("SELECT l FROM Libro l WHERE :autor MEMBER OF l.autores", Libro.class);
-        TypedQuery<Libro> query = repositorio.getEntityManager().createQuery("SELECT l FROM Libro l JOIN l.autores a WHERE LOWER(a) LIKE LOWER(CONCAT('%', :autor, '%'))", Libro.class);
-
-
-
-                query.setParameter("autor", autor);
+        TypedQuery<Libro> query = repositorio.getEntityManager()
+                .createQuery("SELECT l FROM Libro l JOIN l.autores a WHERE LOWER(a) LIKE LOWER(CONCAT('%', :autor, '%'))", Libro.class);
+        query.setParameter("autor", autor);
         return query.getResultList();
 
     }
 
     // busca libros que coincidan con la tematica
     public List<Libro> buscarLibroPorTematica(String tematica) {
-        TypedQuery<Libro> query = repositorio.getEntityManager().createQuery("FROM Libro libro WHERE libro.tematica LIKE :tematica", Libro.class);
+        TypedQuery<Libro> query = repositorio.getEntityManager()
+                .createQuery("FROM Libro libro WHERE libro.tematica LIKE :tematica", Libro.class);
         query.setParameter("tematica", "%" + tematica.toUpperCase() + "%");
         return query.getResultList();
     }
 
     // busca copias de un libro por isbn
     public List<CopiaLibro> buscarCopiasPorIsbn(Libro libro){
-        TypedQuery<CopiaLibro> query = repositorio.getEntityManager().createQuery("SELECT c FROM CopiaLibro c WHERE c.libro.ISBN = :isbn", CopiaLibro.class);
+        TypedQuery<CopiaLibro> query = repositorio.getEntityManager()
+                .createQuery("SELECT c FROM CopiaLibro c WHERE c.libro.ISBN = :isbn", CopiaLibro.class);
         query.setParameter("isbn", libro.getIsbn());
         return query.getResultList();
 
     }
 
-    private boolean contieneNumeros(String string){
+    protected boolean contieneNumeros(String string){
         return string.chars().anyMatch(Character::isDigit);
     }
 
