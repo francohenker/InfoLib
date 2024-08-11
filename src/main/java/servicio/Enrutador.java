@@ -11,10 +11,10 @@ import modelo.App;
 
 
 public class Enrutador {
+//    private Stage stage;
 
     public static void redirigir(ActionEvent event, String ruta) {
         try {
-//            App.setRoot(ruta);
             FXMLLoader loader = new FXMLLoader(App.class.getResource(ruta));
             AnchorPane root = loader.load();
             Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
@@ -22,8 +22,26 @@ public class Enrutador {
             stage.show();
         } catch (Exception e) {
             Ventana.error("No se pudo cargar la ventana", "Ocurrio un error al intentar cargar la ventana: " + ruta);
-            e.printStackTrace();
-
         }
     }
+
+//    public static void redirigir(String ruta){
+//
+//    try {
+//        // Cargar la nueva pantalla desde un archivo FXML
+//        FXMLLoader loader = new FXMLLoader(App.class.getResource(ruta));
+//        AnchorPane root = loader.load();
+//
+//        // Si tienes acceso al Stage actual
+//        if (stage == null) {
+//            stage = (Stage) algunaReferenciaDeEscenaActual.getScene().getWindow(); // Obtener Stage desde un nodo actual
+//        }
+//
+//        // Establecer el nuevo contenido de la escena
+//        stage.getScene().setRoot(root);
+//
+//    } catch (Exception e) {
+//        e.printStackTrace();
+//    }
+//    }
 }

@@ -1,10 +1,8 @@
 package modelo;
 
 import db.Conexion;
-import jakarta.persistence.EntityManagerFactory;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -12,13 +10,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class App extends Application {
-    private static EntityManagerFactory emf = null;
-
     //objeto temporal donde volcar el usuaio para controlar la sesion
     public static Usuario usuario = null;
-
-    private static Scene scene;
-
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -28,17 +21,6 @@ public class App extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-
-
-    }
-
-    public static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
-
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
     }
 
     @Override
@@ -49,9 +31,8 @@ public class App extends Application {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Conexion.crearEntityManagerFactory();
         launch();
     }
-
 }

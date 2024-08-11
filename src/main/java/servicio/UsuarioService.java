@@ -104,8 +104,12 @@ public class UsuarioService {
             throw new RuntimeException("Dni invalido");
         }
         var usuario = buscarPorDni(dni);
+
         if(usuario == null){
             throw new RuntimeException("Usuario no encontrado");
+        }
+        if(usuario.getEstado() == EstadoMiembro.BAJA){
+            throw new RuntimeException("Usuario dado de baja");
         }
 
         return usuario.checkContraseña(contraseña);
