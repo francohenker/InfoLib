@@ -95,18 +95,6 @@ public class UsuarioService {
         }
     }
 
-    public boolean esBibliotecario(Long usuarioId) {
-
-        try {
-            String hql = "SELECT COUNT(b) FROM Bibliotecario b WHERE b.id = :usuarioId";
-            Long count = this.repositorio.getEntityManager().createQuery(hql, Long.class)
-                    .setParameter("usuarioId", usuarioId)
-                    .getSingleResult();
-            return count > 0;
-        } finally {
-            this.repositorio.cerrar();
-        }
-    }
 
     public boolean checkContraseña(String contraseña, String dni){
         if(contraseña == null || contraseña.trim().isEmpty()){

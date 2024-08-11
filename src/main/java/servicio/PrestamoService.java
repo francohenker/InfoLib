@@ -13,12 +13,6 @@ public class PrestamoService {
         this.repositorio = repositorio;
     }
 
-    /**
-     * VERIFICAR
-     * no mas de 5 prestamos activos para un usuario
-     * no realizar el prestamo si se supero la fecha de entrega de un libro y este no se entrego
-     **/
-
     public void guardarPrestamo(CopiaLibro copia, Usuario usuario) {
         try{
             validarPrestamo(copia, usuario);
@@ -28,11 +22,8 @@ public class PrestamoService {
             this.repositorio.modificar(copia);
             this.repositorio.confirmarTransaccion();
         }catch (Exception e){
-            this.repositorio.descartarTransaccion();
             throw new RuntimeException(e.getMessage());
         }
-
-
     }
 
     private boolean validarPrestamo(CopiaLibro copia, Usuario usuario){
@@ -60,7 +51,6 @@ public class PrestamoService {
         return true;
     }
 
-    //CONTROLAR COMO MOSTRAR LA MULTA EN CASO DE HABER UNA
     // setea la fecha de devolucion del prestamo
     public void devolverPrestamo(Prestamo prestamo){
         if(prestamo.getCopiaLibro().getEstado() == EstadoLibro.PERDIDO){
@@ -77,6 +67,7 @@ public class PrestamoService {
         if(prestamo.getMulta() > 0){
             Ventana.confirmacion("Multas", String.format("El usuario tiene una multa de $%.2f", prestamo.getMulta()));
         }
+
         this.repositorio.confirmarTransaccion();
 
 
@@ -103,21 +94,24 @@ public class PrestamoService {
         return false;
     }
 
-
-
-
-
     public List<Prestamo> obtenerTodos(){
         return this.repositorio.obtenerTodos(Prestamo.class);
 
     }
 
-//        //IMPLEMENTAR
-//    public List<Usuario> getUsuariosPorLibro(Libro libro){
-//
-//    }
-//    //IMPLEMENTAR
-//    public List<Libro> getLibrosPorUsuario(Usuario usuario){
-//
-//    }
+    //IMPLEMENTAR
+    public List<Prestamo> getUsuariosPorLibro(Libro libro){
+        TypedQuery<Prestamo> query = repositorio.getEntityManager()
+                .createQuery("SELECT p FROM Prestamo p JOIN p.copiaLibro c WHERE c.libro = :libro", Prestamo.class);
+        query.setParameter("libro", libro);
+        return query.getResultList();
+    }
+
+    //IMPLEMENTAR
+    public List<Prestamo> getLibrosPorUsuario(Usuario usuario){
+        TypedQuery<Prestamo> query = repositorio.getEntityManager()
+                .createQuery("FROM Prestamo p WHERE p.usuario = :usuario", Prestamo.class);
+        query.setParameter("usuario", usuario);
+        return query.getResultList();
+    }
 }

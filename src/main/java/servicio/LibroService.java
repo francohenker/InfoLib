@@ -21,7 +21,7 @@ public class LibroService {
         if(libro.getIsbn().trim().isEmpty()){
             throw new RuntimeException("ISBN no válido");
         }
-        if (!buscarLibroPorIsbn(libro.getIsbn()).isEmpty()) {
+        if (buscarLibroPorIsbn(libro.getIsbn()) != null) {
             throw new RuntimeException("El libro se encuentra en la biblioteca");
         }
         if(libro.getAutores().isEmpty()){
@@ -114,11 +114,11 @@ public class LibroService {
     }
 
     //busca un libro por isbn, lo usa el metodo guardarLibro para saber si existe algun libro con este isbn en la base de datos
-    protected List<Libro> buscarLibroPorIsbn(String isbn) {
+    public Libro buscarLibroPorIsbn(String isbn) {
         TypedQuery<Libro> query = repositorio.getEntityManager().createQuery("FROM Libro libro WHERE libro.ISBN = :isbn", Libro.class);
         query.setParameter("isbn", isbn);
-        return query.getResultList();
-
+        // si la lista esta vacia devuelve null, de lo contrario devuelve el primer elemento (que deberia ser el unico)
+        return query.getResultList().isEmpty() ? null : query.getResultList().get(0);
     }
 
     //busca libros que coincidan con el autor

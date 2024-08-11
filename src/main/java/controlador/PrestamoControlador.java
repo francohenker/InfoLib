@@ -11,10 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import modelo.*;
-import servicio.Enrutador;
-import servicio.PrestamoService;
-import servicio.UsuarioService;
-import servicio.Ventana;
+import servicio.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,6 +21,7 @@ public class PrestamoControlador {
     private CopiaLibro copiaLibro;
     private PrestamoService prestamoservice;
     private UsuarioService usuarioService;
+    private LibroService libroService;
 
     @FXML
     private Button buttonrack;
@@ -79,6 +77,7 @@ public class PrestamoControlador {
         Repositorio repositorio = new Repositorio(Conexion.getEntityManagerFactory());
         this.prestamoservice = new PrestamoService(repositorio);
         this.usuarioService = new UsuarioService(repositorio);
+        this.libroService = new LibroService(repositorio);
 
 
         //configura la accion de los botones laterales
@@ -147,6 +146,12 @@ public class PrestamoControlador {
         tvprestamo.setItems(listaprestamo);
     }
 
+    private void cargarTabla(List<Prestamo> prestamos){
+        ObservableList<Prestamo> listaprestamo = FXCollections.observableArrayList(prestamos);
+
+        tvprestamo.setItems(listaprestamo);
+    }
+
     private void cargarCamposCopia(CopiaLibro copia){
         if(copia != null){
             tipo.setValue(copiaLibro.getTipo());
@@ -186,16 +191,36 @@ public class PrestamoControlador {
         }catch (Exception e){
             Ventana.error("Error al devolver libro", e.getMessage());
         }
+        tvprestamo.refresh();
         limpiarCampos();
         cargarTabla();
     }
     private void buscarDni(){
-//        List<Prestamo> listaprestamo = prestamoservice.getLibrosPorUsuario(usuarioService.buscarPorDni(busquedadni.getText()));
-//        cargarTabla(listaprestamo);
+        try{
+            if(busquedadni.getText().trim().isEmpty()){
+                cargarTabla();
+                return;
+            }
+            List<Prestamo> listaprestamo = prestamoservice.getLibrosPorUsuario(usuarioService.buscarPorDni(busquedadni.getText()));
+            tvprestamo.refresh();
+            cargarTabla(listaprestamo);
+        }catch (Exception e){
+            Ventana.error("Error al buscar prestamo", e.getMessage());
+        }
     }
     private void buscarId(){
-//        List<Prestamo> listaprestamo = prestamoservice.getUsuariosPorLibro();
-//        cargarTabla();
+        try{
+            if(busquedaid.getText().trim().isEmpty()){
+                cargarTabla();
+                return;
+            }
+            List<Prestamo> listaprestamo = prestamoservice.getUsuariosPorLibro(libroService.buscarLibroPorIsbn(busquedaid.getText()));
+
+            tvprestamo.refresh();
+            cargarTabla(listaprestamo);
+        }catch (Exception e){
+            Ventana.error("Error al buscar prestamo", e.getMessage());
+        }
     }
 
 
