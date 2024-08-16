@@ -47,4 +47,9 @@ public class Enrutador {
             Ventana.error("No se pudo cargar la ventana", "Ocurrio un error al intentar cargar la ventana: " + ruta);
         }
     }
+
+    public static void salir(ActionEvent event){
+        App.usuario = null;
+        redirigir(event, "/vista/login.fxml");
+    }
 }

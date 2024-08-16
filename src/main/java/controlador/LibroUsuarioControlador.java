@@ -7,7 +7,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import modelo.*;
@@ -21,6 +20,8 @@ import java.util.List;
 public class LibroUsuarioControlador {
     private LibroService libroservice;
 
+    @FXML
+    private Button salir;
     @FXML
     private Button buscar;
     @FXML
@@ -55,6 +56,10 @@ public class LibroUsuarioControlador {
 
         //configura el boton de buscar
         buscar.setOnAction(event -> buscarLibro());
+
+        //configura el boton de deslogeo
+        salir.setOnAction(Enrutador::salir);
+
 
         //configura la tabla de libros
         isbncolumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIsbn()));

@@ -242,5 +242,10 @@
             <TableColumn fx:id="rolcolumna" prefWidth="240.0" text="Rol" />
         </columns>
       </TableView>
+      <Button fx:id="salir" layoutX="990.0" layoutY="11.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="68.0" style="-fx-background-color: #0077b6;" text="Salir">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -8,15 +8,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import modelo.*;
 import servicio.Enrutador;
 import servicio.LibroService;
@@ -38,7 +32,8 @@ public class LibroControlador {
     private Button buttonPageLibros;
     @FXML
     private Button buttonPageUsuarios;
-
+    @FXML
+    private Button salir;
     @FXML
     private Button agregarCopia;
     @FXML
@@ -127,6 +122,9 @@ public class LibroControlador {
         buttonPageLibros.setOnAction(this::ventanaLibros);
         buttonPageUsuarios.setOnAction(this::ventanaUsuario);
 
+        //configura el boton de deslogeo
+        salir.setOnAction(Enrutador::salir);
+
         //configura el boton de buscar
         buscar.setOnAction(event -> buscarLibro());
 
@@ -212,8 +210,8 @@ public class LibroControlador {
         });
 
         agregarListeners(busquedaautor, busquedatematica, busquedatitulo);
-        agregarListeners(busquedatematica, busquedatitulo, busquedaautor);
         agregarListeners(busquedatitulo, busquedaautor, busquedatematica);
+        agregarListeners(busquedatematica, busquedatitulo, busquedaautor);
 
         // carga la tabla de libros
         cargarLibros();
@@ -268,9 +266,11 @@ public class LibroControlador {
 
     private void rellenarCampos(CopiaLibro copia){
         tipo.setValue(copia.getTipo());
+        tipo.setDisable(true);
         estado.setValue(copia.getEstado());
         precio.setText(String.valueOf(copia.getPrecio()));
         referencia.setValue(copia.isCopiaReferencia() ? "SI" : "NO");
+        referencia.setDisable(true);
         choicerack.setValue(copia.getRack());
     }
 
@@ -329,6 +329,8 @@ public class LibroControlador {
         referencia.setValue(null);
         choicerack.setValue(null);
         cantidadCopias.setDisable(false);
+        referencia.setDisable(false);
+        tipo.setDisable(false);
     }
 
     private void agregarLibro(){
@@ -410,16 +412,7 @@ public class LibroControlador {
 
     private void abrirPantallaPrestamos(ActionEvent event, CopiaLibro copiaSeleccionada) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/prestamo.fxml"));
-            Parent root = loader.load();
-
-            // Obtener el controlador de la pantalla de préstamos
-            PrestamoControlador prestamoControlador = loader.getController();
-            prestamoControlador.setCopia(copiaSeleccionada);
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+            Enrutador.redirigir(event, "/vista/prestamo.fxml", copiaSeleccionada);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -410,5 +410,10 @@
             <Insets left="110.0" top="20.0" />
          </padding>
       </HBox>
+      <Button fx:id="salir" layoutX="995.0" layoutY="24.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="68.0" style="-fx-background-color: #0077b6;" text="Salir">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

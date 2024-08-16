@@ -25,6 +25,8 @@ public class UsuarioControlador {
     private UsuarioService usuarioService;
 
     @FXML
+    private Button salir;
+    @FXML
     private Button buttonPagePrestamos;
     @FXML
     private Button buttonPageUsuarios;
@@ -73,6 +75,10 @@ public class UsuarioControlador {
         buttonPagePrestamos.setOnAction(this::ventanaPrestamo);
         buttonPageLibros.setOnAction(this::ventanaLibros);
         buttonPageUsuarios.setOnAction(this::ventanaUsuario);
+
+        //configura el boton de deslogeo
+        salir.setOnAction(Enrutador::salir);
+
 
         //configura los botones del abm
         buttonAgregarUsuario.setOnAction(event -> agregarUsuario());

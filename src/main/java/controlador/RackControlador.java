@@ -20,6 +20,8 @@ public class RackControlador {
     private Enrutador en;
 
     @FXML
+    private Button salir;
+    @FXML
     private Button buttonPagePrestamos;
     @FXML
     private Button buttonPageUsuarios;
@@ -55,6 +57,10 @@ public class RackControlador {
         buttonPagePrestamos.setOnAction(this::ventanaPrestamo);
         buttonPageLibros.setOnAction(this::ventanaLibros);
         buttonPageUsuarios.setOnAction(this::ventanaUsuario);
+
+        //configura el boton de deslogeo
+        salir.setOnAction(Enrutador::salir);
+
 
         //configura los botones del abm
         agregarrack.setOnAction(event -> agregar());

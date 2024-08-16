@@ -29,6 +29,8 @@ public class PrestamoControlador {
     private LibroService libroService;
 
     @FXML
+    private Button salir;
+    @FXML
     private Button buttonrack;
     @FXML
     private Button buttonPagePrestamos;
@@ -92,6 +94,9 @@ public class PrestamoControlador {
         buttonPagePrestamos.setOnAction(this::ventanaPrestamo);
         buttonPageLibros.setOnAction(this::ventanaLibros);
         buttonPageUsuarios.setOnAction(this::ventanaUsuario);
+
+        //configura el boton de deslogeo
+        salir.setOnAction(Enrutador::salir);
 
 
         //configura la tabla prestamos

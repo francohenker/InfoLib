@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-//add relationship
 
 @Entity
 @Table(name = "prestamo")
